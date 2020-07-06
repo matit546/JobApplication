@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JobApplication</title>
+    <title>@ViewData["Title"] - Workinthewest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -30,10 +30,13 @@
             </div>
         </nav>
     </header>
+    @if (Context.Request.Path == "/Identity/Account/Register")
+    {
+        <img class="backgound-image-register" />
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            @Context.Request.Path
         </main>
     </div>
 
