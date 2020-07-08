@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using JobApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplication.Controllers
 {
@@ -22,7 +23,7 @@ namespace JobApplication.Controllers
         {
             return View();
         }
-
+        [Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult Privacy()
         {
             return View();

@@ -67,6 +67,13 @@ namespace JobApplication
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole",
+                     policy => policy.RequireRole("Admin"));
+            });
+
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.ConfigureApplicationCookie(options =>
             {

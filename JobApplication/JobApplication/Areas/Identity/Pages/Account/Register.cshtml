@@ -11,12 +11,14 @@
     <div class="menu">
         <div class="menu-item current-menu-item button1 button-active">
             <h6>Kandydat</h6>
-            <div class="wee"></div>
+            <span class="wee" style="width: auto; height: 42px; left: 3px; top: 3px; background-color:red; opacity:.5"></span>
         </div>
         <div class="menu-item button2">
             <h6>Pracodawca</h6>
+
         </div>
     </div>
+
 
 
     <div>
@@ -99,6 +101,7 @@
             $(".firma").hide("fast");
             $(".button1").click(function () {
                 $(".firma").hide("fast");
+
             });
             $(".button2").click(function () {
                 $(".firma").show("fast");
@@ -117,7 +120,8 @@
                 }
             });
         });
-        $(window).on('load resize', function () {
+        
+        $(window).on('load resize', function  () {
             var $thisnav = $('.current-menu-item').offset().left;
             $('.menu-item').hover(function () {
                 var $left = $(this).offset().left - $thisnav;
