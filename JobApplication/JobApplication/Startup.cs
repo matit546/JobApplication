@@ -31,16 +31,16 @@ namespace JobApplication
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders().AddDefaultUI();
+
 
 
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddRazorPages().AddRazorRuntimeCompilation();
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
