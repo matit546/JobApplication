@@ -30,7 +30,7 @@
             </div>
         </nav>
     </header>
-    @if (Context.Request.Path == "/Identity/Account/Register")
+    @if (Context.Request.Path == "/Identity/Account/Register" || Context.Request.Path == "/Identity/Account/Login")
     {
         <img class="backgound-image-register" />
     }
