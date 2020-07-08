@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using JobApplication.Areas.Identity.Data;
 using JobApplication.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -20,14 +21,14 @@ namespace JobApplication.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager)
@@ -48,6 +49,8 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -61,10 +64,10 @@ namespace JobApplication.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            //[DataType(DataType.Password)]
+            //[Display(Name = "Confirm password")]
+            //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            //public string ConfirmPassword { get; set; }
 
 
         }
@@ -83,8 +86,26 @@ namespace JobApplication.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
 
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                
+
+                var user = new AppUser 
+                { 
+                    UserName = Input.Username, 
+                    CompanyName=Input.companyName,
+                    Email = Input.Email 
+                };
+
+               
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                if (String.IsNullOrWhiteSpace(Input.companyName))
+                {
+                    await _userManager.AddToRoleAsync(user, SD.CandidateRole);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, SD.EmployerRole);
+                }
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

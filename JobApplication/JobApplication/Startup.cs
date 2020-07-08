@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
+using JobApplication.Areas.Identity.Data;
 
 namespace JobApplication
 {
@@ -33,7 +34,7 @@ namespace JobApplication
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI();
 
