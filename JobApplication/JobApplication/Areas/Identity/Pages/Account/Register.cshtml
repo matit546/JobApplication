@@ -6,7 +6,19 @@
 
 <h1>@ViewData["Rejestracja"]</h1>
 
-<div class="container justify-content-sm-center rounded" style="background-color:white">
+<div class="container login-Containter">
+
+    <div class="menu">
+        <div class="menu-item current-menu-item button1 button-active">
+            <h6>Kandydat</h6>
+            <div class="wee"></div>
+        </div>
+        <div class="menu-item button2">
+            <h6>Pracodawca</h6>
+        </div>
+    </div>
+
+
     <div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
@@ -22,6 +34,10 @@
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+            <div class="form-group firma">
+                <label>Firma</label>
+                <input />
+            </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
@@ -31,37 +47,72 @@
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
-            <section>
-                <h4>Use another service to register.</h4>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
+        <section>
+            <h4>Use another service to register.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
                             <p>
-                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                                for details on setting up this ASP.NET application to support logging in via external services.
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
                             </p>
                         </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
+                    </form>
                 }
-            </section>
-        </div>
+            }
+        </section>
+    </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $(".button1").click(function () {
+                $(".firma").hide("fast");
+            });
+            $(".button2").click(function () {
+                $(".firma").show("fast");
+            });
+            $("button").on({
+                click: function () {
+                    $(this).prop("disabled", true)
+                    if ($(this).hasClass("button1")) {
+                        $(".button2").prop("disabled", false)
+                        $(this).toggleClass("current-menu-item");
+                    }
+                    else {
+                        $(".button1").prop("disabled", false)
+                        $(this).toggleClass("current-menu-item");
+                    }
+                }
+            });
+        });
+        $(window).on('load resize', function () {
+            var $thisnav = $('.current-menu-item').offset().left;
+            $('.menu-item').hover(function () {
+                var $left = $(this).offset().left - $thisnav;
+                var $width = $(this).outerWidth();
+                var $start = 0;
+                $('.wee').css({ 'left': $left, 'width': $width });
+            }, function () {
+                var $initwidth = $('.current-menu-item').width();
+                $('.wee').css({ 'left': '0', 'width': $initwidth });
+            });
+        });
+    </script>
 }
