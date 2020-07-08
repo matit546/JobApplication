@@ -8,20 +8,25 @@ namespace JobApplication.Areas.Identity.Data
 {
     public class AppUser: IdentityUser
     {
-        [PersonalData]
         public string CompanyName { get; set; }
-        [PersonalData]
         public string Headline { get; set; }
-        [PersonalData]
         public string Website { get; set; }
-        [PersonalData]
         public DateTime FoundingDate { get; set; }
-        [PersonalData]
         public CompanySize CompanySize { get; set; }
-        [PersonalData]
         public string ShortDescription { get; set; }
-        [PersonalData]
         public string Descrption { get; set; }
+        public string Categories { get; set; }
+        public string Address { get; set; }
+        public string VideoUrl { get; set; }
+        public string BackgroundImage { get; set; }
+        public string Gallery { get; set; }
+        public string FacebookProfile { get; set; }
+        public string TwitterProfile { get; set; }
+        public string YoutubeProfile { get; set; }
+        public string vimeoProfile { get; set; }
+        public string LinkedinProfile { get; set; }
+
+
 
 
     }
