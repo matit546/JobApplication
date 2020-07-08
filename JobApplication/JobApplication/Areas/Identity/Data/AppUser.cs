@@ -23,11 +23,8 @@ namespace JobApplication.Areas.Identity.Data
         public string FacebookProfile { get; set; }
         public string TwitterProfile { get; set; }
         public string YoutubeProfile { get; set; }
-        public string vimeoProfile { get; set; }
+        public string VimeoProfile { get; set; }
         public string LinkedinProfile { get; set; }
-
-
-
 
     }
     public enum CompanySize
