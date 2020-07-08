@@ -79,3 +79,22 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.login-Containter {
+    background-color: white;
+    padding: 70px;
+}
+
+.form-containter {
+    padding: 14px 28px 14px 28px;
+}
+
+.login-label {
+    color: royalblue;
+    margin-bottom: 6px;
+}
+
+.borderless-form {
+    width: 100%;
+    border: hidden;
+}
