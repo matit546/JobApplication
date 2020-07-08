@@ -12,6 +12,7 @@ using JobApplication.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace JobApplication
 {
@@ -35,7 +36,14 @@ namespace JobApplication
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI();
 
-
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddControllersWithViews();
@@ -88,6 +96,8 @@ namespace JobApplication
             dbInitializer.Initialize();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
