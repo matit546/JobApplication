@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">JobApplication</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -32,7 +32,10 @@
     </header>
     @if (Context.Request.Path == "/Identity/Account/Register" || Context.Request.Path == "/Identity/Account/Login")
     {
-        <img class="backgound-image-register" />
+    <figure>
+        <img class="backgound-image-register"  />
+        <figcaption>    @ViewData["Title"]</figcaption>
+    </figure>
     }
 <div class="container">
     <partial name="_CookieConsentPartial" />
