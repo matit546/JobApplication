@@ -191,7 +191,6 @@ figcaption {
     0% {
         transform: scaleY(0)
     }
-
     80% {
         transform: scaleY(1.1)
     }
