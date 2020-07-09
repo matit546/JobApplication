@@ -99,23 +99,18 @@ body {
     border: hidden;
 }
 
-.button-active{
-    background-color:white;
-}
-
-.button-notactive{
-    background-color:cornflowerblue;
-}
-
 .firma{
     display:none
 }
 
-.button1{
+.button1 {
+    padding: 10px 25px 10px 20px;
+    color: white;
 }
 
-.button2{
-
+.button2 {
+    padding: 10px 20px 10px 10px;
+    color: white;
 }
 
 .menu {
@@ -123,38 +118,37 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color:dodgerblue;
+    border-radius:20px;
 }
 
-    .menu .menu-item {
-        position: relative;
-        cursor: pointer;
-    }
+.menu .menu-item {
+    position: relative;
+    cursor: pointer;
+}
 
-        .menu .menu-item .wee {
-            height: 2px;
-            width: 100%;
-            background-color: #002b75;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            transition: 0.75s;
-        }
+.menu .menu-item .wee {
+    height:90%;
+    width: 90%;
+    background-color:white;
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    transition: 0.2s;
+    border-radius:20px;
+}
 
-        .menu .menu-item h6 {
-            margin: 0;
-            padding: 0 1rem 1.5rem;
-            font-size: 1rem;
-            color: #232323;
-            transition: 0.75s;
-        }
+.menu .menu-item h6 {
+    margin: 0;
+    padding: 0 1rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    transition: 0.75s;
+}
 
-        .menu .menu-item:hover h6 {
-            color: #002b75;
-        }
-
-    .menu .current-menu-item h6 {
-        color: #002b75;
-    }
+.menu .current-menu-item{
+    color: black;
+}
 
 figure {
     position: relative
@@ -170,4 +164,7 @@ figcaption {
     color: white;
     font-weight: bold;
     font-size:36px;
+}
+
+.disabled {
 }

@@ -6,16 +6,15 @@
 
 <h1>@ViewData["Rejestracja"]</h1>
 
-<div class="container login-Containter">
+<div class="container login-Containter col-9" style="z-index:1">
 
-    <div class="menu">
-        <div class="menu-item current-menu-item button1 button-active">
-            <h6>Kandydat</h6>
-            <span class="wee" style="width: auto; height: 42px; left: 3px; top: 3px; background-color:red; opacity:.5"></span>
+    <div class="menu col-4" style="z-index:-1">
+        <div class="menu-item disabled" style="z-index:0">
+            <div class="button1 current-menu-item disabled " style="z-index:0">Kandydat</div>
+            <div class="wee text-decoration-none" style="z-index:-1"></div>
         </div>
-        <div class="menu-item button2">
-            <h6>Pracodawca</h6>
-
+        <div class="menu-item" style="z-index:0">
+            <div class="button2" style="z-index:0">Pracodawca</div>
         </div>
     </div>
 
@@ -23,13 +22,11 @@
 
     <div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group border">
                 @*<label asp-for="Input.Email"></label>*@
                 <div class="form-containter">
-                    <label style="color:royalblue">Nazwa użytkownika lub email</label>
+                    <label style="color:royalblue">Email</label>
                     <div style=" padding-left:40px">
                         <img />
                         <input asp-for="Input.Email" class="borderless-form" placeholder="Wprowadź nazwę użytkownika lub email" />
@@ -41,7 +38,7 @@
             <div class="form-group border">
                 @*<label asp-for="Input.Email"></label>*@
                 <div class="form-containter">
-                    <label style="color:royalblue">Nazwa użytkownika lub email</label>
+                    <label style="color:royalblue">Nazwa użytkownika</label>
                     <div style=" padding-left:40px">
                         <img />
                         <input asp-for="Input.Username" class="borderless-form" placeholder="Wprowadź nazwę użytkownika lub email" />
@@ -56,7 +53,7 @@
                     <label style="color:royalblue">Firma</label>
                     <div style=" padding-left:40px">
                         <img />
-                        <input asp-for="Input.companyName" class="borderless-form" placeholder="Wpisz nazwę firmy" />
+                        <input id="NazwaFirmy" asp-for="Input.companyName" class="borderless-form" placeholder="Wpisz nazwę firmy"/>
                         <span asp-validation-for="Input.companyName" class="text-danger"></span>
                     </div>
                 </div>
@@ -73,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary" style="margin: 15px 0px 15px 0px; width: 100%">Zarejestruj się</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
@@ -111,41 +108,6 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        $(document).ready(function () {
-            $(".firma").hide("fast");
-            $(".button1").click(function () {
-                $(".firma").hide("fast");
 
-            });
-            $(".button2").click(function () {
-                $(".firma").show("fast");
-            });
-            $(".menu-item").on({
-                click: function () {
-                    $(this).prop("disabled", true)
-                    if ($(this).hasClass("button1")) {
-                        $(".button2").prop("disabled", false)
-                        $(this).toggleClass("current-menu-item");
-                    }
-                    else {
-                        $(".button1").prop("disabled", false)
-                        $(this).toggleClass("current-menu-item");
-                    }
-                }
-            });
-        });
-        
-        $(window).on('load resize', function  () {
-            var $thisnav = $('.current-menu-item').offset().left;
-            $('.menu-item').hover(function () {
-                var $left = $(this).offset().left - $thisnav;
-                var $width = $(this).outerWidth();
-                var $start = 0;
-                $('.wee').css({ 'left': $left, 'width': $width });
-            }, function () {
-                var $initwidth = $('.current-menu-item').width();
-                $('.wee').css({ 'left': '0', 'width': $initwidth });
-            });
-        });
     </script>
 }
