@@ -37,6 +37,7 @@ namespace JobApplication.Data
             {
                 Console.WriteLine(ex.Message);
             }
+
             if (_db.Roles.Any(r => r.Name == SD.AdminRole)) 
             {
                 return;
