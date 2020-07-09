@@ -46,9 +46,11 @@ namespace JobApplication.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        public class InputModel
+        
+    public class InputModel
         {
+            [Required]
+            [Display(Name = "Nazwa użytkownika")]
             public string Username { get; set; }
 
             [Required]
