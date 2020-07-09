@@ -104,26 +104,23 @@ body {
 }
 
 .button1 {
-    padding: 10px 18px 10px 20px;
     color: white;
 }
 
 .button2 {
-    padding: 10px 17px 10px 20px;
     color: white;
 }
 
 .menu {
-    width: 100%;
-    display: flex;
-    align-items: center;
+    width:400px;
+    display: inline-block;
     justify-content: center;
-    background-color:dodgerblue;
-    border-radius:20px;
+    background-color: dodgerblue;
+    border-radius: 20px;
 }
 
 .menu .menu-item {
-    position: relative;
+    padding: 10px 17px 10px 20px;
     cursor: pointer;
 }
 
@@ -138,16 +135,8 @@ body {
     border-radius:20px;
 }
 
-.menu .menu-item h6 {
-    margin: 0;
-    padding: 0 1rem 1.5rem;
-    font-size: 1rem;
-    color: white;
-    transition: 0.75s;
-}
-
 .menu .current-menu-item{
-    color: black;
+
 }
 
 figure {
@@ -167,4 +156,5 @@ figcaption {
 }
 
 .disabled {
+    color: black;
 }

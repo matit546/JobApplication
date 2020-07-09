@@ -9,12 +9,8 @@ $(document).ready(function () {
 
         }
         else {
-            $(".firma").hide("fast");
-            $(this).addClass('disabled');
-            $(".button2").removeClass('disabled');
-            $(".button1").toggleClass("current-menu-item");
-            $(".button2").toggleClass("current-menu-item");
-            $("#NazwaFirmy").val("");
+            HideCompany();
+            ToggleCurrMenuItem(this, ".button2");
         }
     });
     $(".button2").click(function () {
@@ -22,20 +18,36 @@ $(document).ready(function () {
 
         }
         else {
-            $(".firma").show("fast");
-            $(this).addClass('disabled');
-            $(".button1").removeClass('disabled');
-            $(".button1").toggleClass("current-menu-item");
-            $(".button2").toggleClass("current-menu-item");
+            ShowCompany();
+            ToggleCurrMenuItem(this, ".button1");
         }
     });
-});
-
-$(document).ready(function () {
-    var $thisnav = $('.current-menu-item').offset().left;
     $('.menu-item').click(function () {
+        var $thisnav = $('.current-menu-item').offset().left;
         var $left = $(this).offset().left - $thisnav;
         var $width = $(this).outerWidth();
         $('.wee').css({ 'left': $left, 'width': $width });
     });
+
+});
+
+function ShowCompany() {
+    $(".firma").show("fast");
+}
+
+function HideCompany() {
+    $(".firma").hide("fast");
+    $("#NazwaFirmy").val("");
+}
+
+function ToggleCurrMenuItem(button1, button2) {
+    $(button1).addClass('disabled');
+    $(button2).removeClass('disabled');
+}
+
+$(window).on('load resize', function () {
+    var $thisnav = $('.current-menu-item').offset().left;
+    var $left = $(this).offset().left - $thisnav;
+    var $width = $(this).outerWidth();
+    $('.wee').css({ 'left': $left, 'width': $width });
 });
