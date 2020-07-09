@@ -49,6 +49,8 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Nazwa użytkownika")]
             public string Username { get; set; }
 
             [Required]
