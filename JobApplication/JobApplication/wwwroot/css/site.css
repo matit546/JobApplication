@@ -190,6 +190,11 @@ figcaption {
     .dropdown-menu a {
         color: #FFFFFF !important;
     }
+
+.container .dropdown .dropdown-menu a:hover {
+    color: #1d448c !important;
+    background-color: #3b6ad1;
+}
 .dropdown:hover > .dropdown-menu {
     display: block;
     background-color: #3b6ad1;
@@ -210,10 +215,7 @@ figcaption {
     }
 }
 
-.container .dropdown .dropdown-menu a:hover {
-    color: #3a6cd6;
-    background-color: #3b6ad1;
-}
 .dropdown > .dropdown-toggle:active {
     pointer-events: none;
 }
+
