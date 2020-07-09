@@ -15,5 +15,10 @@ namespace JobApplication.Data
         {
         }
         public DbSet<JobOffer> JobOffers { get; set; }
+        public DbSet<AppUserEmployeeExtension> AppUserEmployeeExtensions { get; set; }
+        public DbSet<AwardsEmployee> AwardsEmployees { get; set; }
+        public DbSet<EducationEmployee> EducationEmployees { get; set; }
+        public DbSet<ExperiencesEmployee> ExperiencesEmployees { get; set; }
+        public DbSet<SkillsEmployee> SkillsEmployees { get; set; }
     }
 }
