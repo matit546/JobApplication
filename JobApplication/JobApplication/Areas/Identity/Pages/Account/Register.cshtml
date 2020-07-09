@@ -7,18 +7,16 @@
 <h1>@ViewData["Rejestracja"]</h1>
 
 <div class="container login-Containter col-9" style="z-index:1">
-
+     
     <div class="menu col-4" style="z-index:-1">
         <div class="menu-item disabled" style="z-index:0">
             <div class="button1 current-menu-item disabled " style="z-index:0">Kandydat</div>
-            <div class="wee text-decoration-none" style="z-index:-1"></div>
+            <div class="wee text-decoration-none disabled" style="z-index:-1"></div>
         </div>
         <div class="menu-item" style="z-index:0">
             <div class="button2" style="z-index:0">Pracodawca</div>
         </div>
     </div>
-
-
 
     <div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">

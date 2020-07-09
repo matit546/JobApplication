@@ -5,7 +5,7 @@
 
 $(document).ready(function () {
     $(".button1").click(function () {
-        if ($(this).hasClass('.disabled')) {
+        if ($(this).hasClass('disabled')) {
 
         }
         else {
