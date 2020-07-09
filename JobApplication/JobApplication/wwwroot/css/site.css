@@ -51,6 +51,9 @@ button.accept-policy {
   line-height: inherit;
 }
 
+.nav-background {
+    background: #3b6ad1;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -170,4 +173,47 @@ figcaption {
     color: white;
     font-weight: bold;
     font-size:36px;
+}
+
+
+.dropdown {
+    list-style: none;
+    background: #3b6ad1;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+    .dropdown-menu a {
+        color: #FFFFFF !important;
+    }
+.dropdown:hover > .dropdown-menu {
+    display: block;
+    background-color: #3b6ad1;
+    animation: animation 300ms ease-in-out forwards;
+    transform-origin: top center;
+}
+@keyframes animation {
+    0% {
+        transform: scaleY(0)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(1)
+    }
+}
+
+.container .dropdown .dropdown-menu a:hover {
+    color: #3a6cd6;
+    background-color: #3b6ad1;
+}
+.dropdown > .dropdown-toggle:active {
+    pointer-events: none;
 }
