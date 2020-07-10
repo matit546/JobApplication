@@ -120,10 +120,21 @@ namespace JobApplication
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                name: "myAreaCandidate",
+                areaName: "Candidate",
+                pattern: "Pracownik/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                name: "myAreaEmployer",
+                areaName: "Employer",
+                pattern: "Pracodawca/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
             });
         }
     }
