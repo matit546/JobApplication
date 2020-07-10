@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -63,6 +64,7 @@ namespace JobApplication.Areas.Identity.Pages.Account
             public string Role { get; set; }
 
             [Required]
+
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -88,6 +90,7 @@ namespace JobApplication.Areas.Identity.Pages.Account
             {
                 return Page();
             }
+            //if(Input.Role.C)
             if((Input.Role==SD.EmployerRole) && (String.IsNullOrWhiteSpace(Input.companyName)))
             {
                 return Page();
@@ -108,18 +111,19 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
                
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                if (Input.Role == SD.CandidateRole)
-                {
-                    await _userManager.AddToRoleAsync(user, SD.CandidateRole);
-                }
-                if (Input.Role == SD.EmployerRole)
-                {
-                    await _userManager.AddToRoleAsync(user,SD.EmployerRole);
-                }
+
 
 
                 if (result.Succeeded)
                 {
+                    if (Input.Role == SD.CandidateRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.CandidateRole);
+                    }
+                    if (Input.Role == SD.EmployerRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.EmployerRole);
+                    }
                     _logger.LogInformation("User created a new account with password.");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

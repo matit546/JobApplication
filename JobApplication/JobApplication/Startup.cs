@@ -35,7 +35,7 @@ namespace JobApplication
             options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders().AddDefaultUI();
 
             services.Configure<CookiePolicyOptions>(options =>
