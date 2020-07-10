@@ -7,6 +7,9 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar a {
+    color: white !important;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -161,7 +164,6 @@ figcaption {
 
 .dropdown {
     list-style: none;
-    background: #3b6ad1;
     display: inline-block;
 }
 
@@ -207,3 +209,4 @@ figcaption {
 .nav-background {
     background-color: #3b6ad1 !important;
 }
+
