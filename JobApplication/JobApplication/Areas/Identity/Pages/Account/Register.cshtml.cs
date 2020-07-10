@@ -88,6 +88,10 @@ namespace JobApplication.Areas.Identity.Pages.Account
             {
                 return Page();
             }
+            if((Input.Role==SD.EmployerRole) && (String.IsNullOrWhiteSpace(Input.companyName)))
+            {
+                return Page();
+            }
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -104,9 +108,15 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
                
                 var result = await _userManager.CreateAsync(user, Input.Password);
-              
-                    await _userManager.AddToRoleAsync(user, Input.Role);
-                
+                if (Input.Role == SD.CandidateRole)
+                {
+                    await _userManager.AddToRoleAsync(user, SD.CandidateRole);
+                }
+                if (Input.Role == SD.EmployerRole)
+                {
+                    await _userManager.AddToRoleAsync(user,SD.EmployerRole);
+                }
+
 
                 if (result.Succeeded)
                 {
