@@ -5,8 +5,8 @@
 
 $(document).ready(function () {
     $(".button1").click(function () {
+        $("#Role").val("Candidate");
         if ($(this).hasClass('disabled')) {
-
         }
         else {
             HideCompany();
@@ -14,8 +14,9 @@ $(document).ready(function () {
         }
     });
     $(".button2").click(function () {
+        $("#Role").val("Employer");
         if ($(this).hasClass('disabled')) {
-
+            
         }
         else {
             ShowCompany();
@@ -50,4 +51,16 @@ $(window).on('load resize', function () {
     var $left = $(this).offset().left - $thisnav;
     var $width = $(this).outerWidth();
     $('.wee').css({ 'left': $left, 'width': $width });
+});
+
+$("#NazwaFirmy").change(function () {
+    if ($('#NazwaFirmy').val() == '')
+    {
+        document.getElementById("companyNameRequired").innerHTML = "Nazwa firmy jest wymagana";
+    } else
+    {
+        document.getElementById("companyNameRequired").innerHTML = "";  
+    }
+
+   
 });

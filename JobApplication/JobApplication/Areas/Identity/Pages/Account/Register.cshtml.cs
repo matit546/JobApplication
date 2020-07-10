@@ -60,6 +60,8 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
             public string companyName { get; set; }
 
+            public string Role { get; set; }
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -82,13 +84,16 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            if((Input.Role != SD.CandidateRole) && (Input.Role != SD.EmployerRole))
+            {
+                return Page();
+            }
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
 
-                
 
                 var user = new AppUser 
                 { 
@@ -99,14 +104,9 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
                
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                if (String.IsNullOrWhiteSpace(Input.companyName))
-                {
-                    await _userManager.AddToRoleAsync(user, SD.CandidateRole);
-                }
-                else
-                {
-                    await _userManager.AddToRoleAsync(user, SD.EmployerRole);
-                }
+              
+                    await _userManager.AddToRoleAsync(user, Input.Role);
+                
 
                 if (result.Succeeded)
                 {
