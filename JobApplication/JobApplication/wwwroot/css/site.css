@@ -12,6 +12,7 @@ a.navbar-brand {
 
 .navbar a {
     color: white !important;
+    font-size: 12px;
 }
 /* Provide sufficient contrast against white background */
 a {
