@@ -191,7 +191,6 @@ figcaption {
     0% {
         transform: scaleY(0)
     }
-
     80% {
         transform: scaleY(1.1)
     }
@@ -203,4 +202,8 @@ figcaption {
 
 .dropdown > .dropdown-toggle:active {
     pointer-events: none;
+}
+
+.nav-background {
+    background-color: #3b6ad1 !important;
 }
