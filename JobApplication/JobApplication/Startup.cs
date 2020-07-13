@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
 using JobApplication.Areas.Identity.Data;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace JobApplication
 {
@@ -45,6 +46,12 @@ namespace JobApplication
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
             });
 
             services.AddScoped<IDbInitializer, DbInitializer>();
@@ -114,6 +121,8 @@ namespace JobApplication
             app.UseCookiePolicy();
             app.UseSession();
             app.UseRouting();
+
+            app.UseResponseCompression();
 
             app.UseAuthentication();
             app.UseAuthorization();
