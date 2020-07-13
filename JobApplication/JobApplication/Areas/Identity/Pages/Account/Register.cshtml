@@ -7,7 +7,8 @@
 <h1>@ViewData["Rejestracja"]</h1>
 
 <div class="container login-Containter col-lg-8 col-md-10 col-sm-12">
-    @if (Request.QueryString.Value.Substring(Request.QueryString.Value.IndexOf("=") + 1) != "Pracodawca")
+    @{string urlParam = Request.QueryString.Value.Substring(Request.QueryString.Value.IndexOf("=") + 1);}
+    @if (urlParam != "Pracodawca" || urlParam != "Kandydat")
     {
         <div class="text-center">
             <div class="menu">
@@ -148,6 +149,7 @@
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
             if (edited == "Pracodawca")
             {
+                ShowCompany();
                 $("#Role").val("Employer");
             } else
             {
