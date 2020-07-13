@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
 using JobApplication.Areas.Identity.Data;
 using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 namespace JobApplication
 {
@@ -48,10 +49,15 @@ namespace JobApplication
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+
             services.AddResponseCompression(options =>
             {
+                options.EnableForHttps = true;
                 options.Providers.Add<BrotliCompressionProvider>();
-                options.Providers.Add<GzipCompressionProvider>();
             });
 
             services.AddScoped<IDbInitializer, DbInitializer>();
