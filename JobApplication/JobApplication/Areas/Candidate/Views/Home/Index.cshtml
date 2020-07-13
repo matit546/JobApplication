@@ -8,11 +8,20 @@
 
 <form asp-area="Identity" asp-page="/Account/Register" method="get">
     <p>
-        Title: <input type="text" name="RejestrujJako" value="Kandydat">
-        <input type="submit" value="Candidate" />
+        Title: <input type="text"  id="RejestrujJako"  name="RejestrujJako" value="Kandydat">
+        <input type="submit"  onclick=" CLick()" />
     </p>
 </form>
 <a class="nav-link text-dark btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
 
 
 <a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function CLick() {
+            $("#RejestrujJako").val("Kandydat");
+        }
+    </script>
+}
