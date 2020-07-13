@@ -4,6 +4,8 @@
 // Write your JavaScript code.
 
 $(document).ready(function () {
+    var pageURL = $(location).attr("href");
+    var edited = pageURL.substr(pageURL.indexOf("?") + 1);
     $(".button1").click(function () {
         $("#Role").val("Candidate");
         if ($(this).hasClass('disabled')) {
@@ -46,12 +48,12 @@ function ToggleCurrMenuItem(button1, button2) {
     $(button2).removeClass('disabled');
 }
 
-$(window).on('load resize', function () {
-    var $thisnav = $('.current-menu-item').offset().left;
-    var $left = $(this).offset().left - $thisnav + 2;
-    var $width = $(this).outerWidth() - 4;
-    $('.wee').css({ 'left': $left, 'width': $width });
-});
+//$(window).on('load resize', function () {
+//    var $thisnav = $('.current-menu-item').offset().left;
+//    var $left = $(this).offset().left - $thisnav + 2;
+//    var $width = $(this).outerWidth() - 4;
+//    $('.wee').css({ 'left': $left, 'width': $width });
+//});
 
 $("#NazwaFirmy").change(function () {
     if ($('#NazwaFirmy').val() == '')
@@ -63,4 +65,17 @@ $("#NazwaFirmy").change(function () {
     }
 
    
+});
+
+
+$(document).ready(function () {
+
+
+    var pageURL = $(location).attr("href");
+    var edited = pageURL.substr(pageURL.indexOf("?") + 1);
+
+    alert(edited);
+
+
+
 });
