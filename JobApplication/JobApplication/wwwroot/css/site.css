@@ -133,13 +133,17 @@ body {
 
 .menu .menu-item .wee {
     height:90%;
-    width: 100%;
+    width: 98%;
     background-color:white;
     position: absolute;
-    left: 0;
+    left: 2px;
     bottom: 2px;
     transition: 0.2s;
     border-radius:20px;
+}
+
+.menu .row {
+    margin: 0px;
 }
 
 .menu .current-menu-item{
