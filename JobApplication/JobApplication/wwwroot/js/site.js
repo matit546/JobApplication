@@ -25,8 +25,8 @@ $(document).ready(function () {
     });
     $('.menu-item').click(function () {
         var $thisnav = $('.current-menu-item').offset().left;
-        var $left = $(this).offset().left - $thisnav;
-        var $width = $(this).outerWidth();
+        var $left = $(this).offset().left - $thisnav + 2;
+        var $width = $(this).outerWidth() - 4;
         $('.wee').css({ 'left': $left, 'width': $width });
     });
 
@@ -48,8 +48,8 @@ function ToggleCurrMenuItem(button1, button2) {
 
 $(window).on('load resize', function () {
     var $thisnav = $('.current-menu-item').offset().left;
-    var $left = $(this).offset().left - $thisnav;
-    var $width = $(this).outerWidth();
+    var $left = $(this).offset().left - $thisnav + 2;
+    var $width = $(this).outerWidth() - 4;
     $('.wee').css({ 'left': $left, 'width': $width });
 });
 
