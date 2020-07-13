@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JobApplication.Areas.Identity.Data;
 using JobApplication.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             _context = context;
             _userManager = userManager;
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -29,5 +31,8 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
             return View(user);
         }
+
+
     }
+
 }

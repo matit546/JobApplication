@@ -122,7 +122,8 @@
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
             if (edited == "Pracodawca") {
                 $("#Role").val("Employer");
-            } else {
+            }if (edited == "Kandydat")
+            {
                 $("#Role").val("Candidate");
             }
         if (document.getElementById("Role").value == "@JobApplication.Models.SD.CandidateRole")
