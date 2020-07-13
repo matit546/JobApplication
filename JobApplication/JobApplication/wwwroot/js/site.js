@@ -67,6 +67,9 @@ $("#NazwaFirmy").change(function () {
    
 });
 
+$(window).on("load", function () {
+    $(".lds-ellipsis-wrapper").fadeOut("slow");
+});
 
 //$(document).ready(function () {
 
