@@ -78,7 +78,7 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null, string RejestrujJako = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -90,7 +90,7 @@ namespace JobApplication.Areas.Identity.Pages.Account
             {
                 return Page();
             }
-            //if(Input.Role.C)
+
             if((Input.Role==SD.EmployerRole) && (String.IsNullOrWhiteSpace(Input.companyName)))
             {
                 return Page();
@@ -98,10 +98,9 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
-
-
                 var user = new AppUser 
                 { 
                     UserName = Input.Username, 
