@@ -6,7 +6,13 @@
 <h1>KANDYDAT</h1>
 
 
-    <a class="nav-link text-dark btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+<form asp-area="Identity" asp-page="/Account/Register" method="get">
+    <p>
+        Title: <input type="text" name="RejestrujJako" value="Kandydat">
+        <input type="submit" value="Candidate" />
+    </p>
+</form>
+<a class="nav-link text-dark btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
 
 
-    <a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
+<a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>

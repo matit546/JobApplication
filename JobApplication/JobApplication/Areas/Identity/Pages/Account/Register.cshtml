@@ -9,22 +9,22 @@
 <div class="container login-Containter col-lg-8 col-md-10 col-sm-12">
     @if (Request.QueryString.Value.Substring(Request.QueryString.Value.IndexOf("=") + 1) != "Pracodawca")
     {
-    <div class="text-center">
-        <div class="menu">
-            <div class="row">
-                <div class="menu-item disabled col-6 button1 current-menu-item disabled" style="z-index:0">
-                    <div style="z-index:0; text-align:center;">Kandydat </div>
-                    <div class="wee disabled" style="z-index:-1"></div>
-                </div>
-                <div class="menu-item col-6 button2" style="z-index:0">
-                    <div style="z-index:0; text-align:center;">Pracodawca</div>
+        <div class="text-center">
+            <div class="menu">
+                <div class="row">
+                    <div class="menu-item disabled col-6 button1 current-menu-item disabled" style="z-index:0">
+                        <div style="z-index:0; text-align:center;">Kandydat </div>
+                        <div class="wee disabled" style="z-index:-1"></div>
+                    </div>
+                    <div class="menu-item col-6 button2" style="z-index:0">
+                        <div style="z-index:0; text-align:center;">Pracodawca</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     }
     <div>
-        @Request.QueryString.Value.Substring(Request.QueryString.Value.IndexOf("=") + 1)
+
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group border">
@@ -112,11 +112,18 @@
         </section>
     </div>
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-       function validateInput() {
+        function validateInput()
+        {
+            var pageURL = $(location).attr("href");
+            var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+            if (edited == "Pracodawca") {
+                $("#Role").val("Employer");
+            } else {
+                $("#Role").val("Candidate");
+            }
         if (document.getElementById("Role").value == "@JobApplication.Models.SD.CandidateRole")
         {
             return true;
@@ -133,7 +140,22 @@
             return false;
         }
 
-    }   
+        }
+
+        $(document).ready(function () {
+
+            var pageURL = $(location).attr("href");
+            var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+            if (edited == "Pracodawca")
+            {
+                $("#Role").val("Employer");
+            } else
+            {
+                $("#Role").val("Candidate");
+            }
+            alert(edited);
+
+        });
 
     </script>
 }

@@ -68,14 +68,13 @@ $("#NazwaFirmy").change(function () {
 });
 
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
 
-    var pageURL = $(location).attr("href");
-    var edited = pageURL.substr(pageURL.indexOf("?") + 1);
-
-    alert(edited);
-
+//    var pageURL = $(location).attr("href");
+//    var edited = pageURL.substr(pageURL.indexOf("?") + 1);
+//    alert(edited);
 
 
-});
+
+//});
