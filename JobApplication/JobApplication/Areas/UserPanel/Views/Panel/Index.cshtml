@@ -4,48 +4,193 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
-<h4>AppUserEmployeeExtension</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            @*<div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CVFile" class="control-label"></label>
-                <input asp-for="CVFile" class="form-control" />
-                <span asp-validation-for="CVFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Languages" class="control-label"></label>
-                <input asp-for="Languages" class="form-control" />
-                <span asp-validation-for="Languages" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>*@
-        </form>
+    <h4>AppUserEmployeeExtension</h4>
+    <hr />*@
+
+    <div class="tab">
+        <div class="displayImage">
+            <img alt="zdjecie" />
+            <label>Witaj @User.Identity.Name!</label>
+        </div>
+        <button class="tablinks" onclick="openCity(event, 'Employer1')">1</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer2')">2</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer3')">3</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer4')">4</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer5')">5</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer6')">6</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer7')">7</button>
     </div>
+
+<div class="userPanelPadding">
+    <main role="main" class="pb-3">
+        <div class="login-Containter">
+            <div id="Employer1" class="tabcontent" style=" display:block">
+
+                <div class="row" style="padding:15px">
+                    <div class="col-6" style="background-color:sandybrown">
+                        <div class="row">
+                            <div class="col-3">
+                                <img alt="Zdjoncie" />
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    @User.Identity.Name
+                                </div>
+                                <div class="row">
+                                    Nagłówek
+                                </div>
+                                <div class="row">
+                                    <input type="button" value="Edytuj" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding:15px">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="userblock">
+                                <div style="background-color:sandybrown;">
+                                    cos tu
+                                </div>
+                            </div>
+                            <div class="userblock">
+                                <div class="box" style="background-color:darkseagreen;">
+                                    cos tutaj
+                                </div>
+                            </div>
+                            <div class="userblock">
+                                <div style="background-color:cadetblue;     border-radius:2px;">
+                                    cos tutaj tez
+                                </div>
+                            </div>
+                            <div class="userblock">
+                                <div style="background-color:blanchedalmond;     border-radius:2px;">
+                                    cos tutaj tez dac
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-3">
+                                <img alt="Zdjoncie" />
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    @User.Identity.Name
+                                </div>
+                                <div class="row">
+                                    Nagłówek
+                                </div>
+                                <div class="row">
+                                    <input type="button" value="Edytuj" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="Employer2" class="tabcontent" style=" display:none">
+                <h3>2</h3>
+                <p>2 div info</p>
+            </div>
+
+            <div id="Employer3" class="tabcontent" style=" display:none">
+                <h3>3</h3>
+                <p>3 div info</p>
+            </div>
+
+            <div id="Employer4" class="tabcontent" style=" display:none">
+                <h3>4</h3>
+                <p>4 div info</p>
+            </div>
+
+            <div id="Employer5" class="tabcontent" style=" display:none">
+                <h3>5</h3>
+                <p>5 div info</p>
+            </div>
+
+            <div id="Employer6" class="tabcontent" style=" display:none">
+                <h3>6</h3>
+                <p>6 div info</p>
+            </div>
+
+            <div id="Employer7" class="tabcontent" style=" display:none">
+                <h3>7</h3>
+                <p>7 div info</p>
+            </div>
+        </div>
+    </main>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+            @*<div>
+                <a asp-action="Index">Back to List</a>
+            </div>*@
+
+
+
+            @*<div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Index">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CVFile" class="control-label"></label>
+                                <input asp-for="CVFile" class="form-control" />
+                                <span asp-validation-for="CVFile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Languages" class="control-label"></label>
+                                <input asp-for="Languages" class="form-control" />
+                                <span asp-validation-for="Languages" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="UserId" class="control-label"></label>
+                                <input asp-for="UserId" class="form-control" />
+                                <span asp-validation-for="UserId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+
+                    </form>
+                </div>
+            </div>*@
+
+            <script>
+
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+            </script>
 
