@@ -152,7 +152,6 @@ body {
 
 figure {
     text-align: center;
-    position:relative;
 }
 
 figcaption {
@@ -399,10 +398,9 @@ figcaption {
     font-size:56px;
 }
 
-.text-box input{
+.text-box input {
     position: center;
-    height:30px;
+    height: 30px;
     width: 150px;
     margin: 40px;
 }
-
