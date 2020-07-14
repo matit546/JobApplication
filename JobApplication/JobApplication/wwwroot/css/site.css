@@ -151,19 +151,24 @@ body {
 }
 
 figure {
-    position: relative
+    position: relative;
+    text-align: center;
 }
 
 figcaption {
     position: absolute;
     width: 200px;
-    line-height: 150px;
     text-align: center;
-    left: 200px;
     top: 100px;
+    left: 200px;
     color: white;
     font-weight: bold;
     font-size:36px;
+}
+.main-settings figcaption {
+    width: 100%;
+    left: 0px;
+    line-height: 50px;
 }
 
 .disabled {
@@ -371,4 +376,27 @@ figcaption {
     text-align:center;
 
 }
+
+.background-main-image {
+    background-image: url(../images/banner-1020369_1920222-1.png);
+    background-size: cover;
+    width: 100%;
+    min-height: 30em;
+    background-position: center;
+    background-repeat: repeat-x;
+    animation: main-image-animation 50s linear infinite;
+}
+
+@keyframes main-image-animation {
+    100% {
+        background-position: 2000px 0px;
+    }
+}
+
+.main-text {
+    color: #dbab27;
+    text-shadow: 3px 1px 11px rgba(0,0,0,0.89);
+    font-size:56px;
+}
+
 
