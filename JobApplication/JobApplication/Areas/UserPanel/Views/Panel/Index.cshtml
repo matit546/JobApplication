@@ -14,13 +14,14 @@
             <img alt="zdjecie" />
             <label>Witaj @User.Identity.Name!</label>
         </div>
-        <button class="tablinks" onclick="openCity(event, 'Employer1')">1</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer2')">2</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer3')">3</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer4')">4</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer5')">5</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer6')">6</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer7')">7</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer1')">Panel użytkownika</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer2')">Dodaj ofertę pracy</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer3')">Wszystkie oferty pracy</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer4')">Aplikacje</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer5')">Pakiety</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer6')">Zapisane cv</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer7')">Opinie</button>
+        <button class="tablinks" onclick="openCity(event, 'Employer7')">Wyloguj!</button>
     </div>
 
 <div class="userPanelPadding">
@@ -29,20 +30,26 @@
             <div id="Employer1" class="tabcontent" style=" display:block">
 
                 <div class="row" style="padding:15px">
-                    <div class="col-6" style="background-color:sandybrown">
-                        <div class="row">
-                            <div class="col-3">
-                                <img alt="Zdjoncie" />
-                            </div>
-                            <div class="col-9">
-                                <div class="row">
-                                    @User.Identity.Name
+                    <div class="userblock-6">
+                        <div class="box" style=" background-color:sandybrown">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="boxitem">
+                                        <img alt="Zdjoncie" />
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    Nagłówek
-                                </div>
-                                <div class="row">
-                                    <input type="button" value="Edytuj" />
+                                <div class="col-9">
+                                    <div class="boxitem">
+                                        <div class="row">
+                                            @User.Identity.Name
+                                        </div>
+                                        <div class="row">
+                                            Nagłówek
+                                        </div>
+                                        <div class="row">
+                                            <input type="button" value="Edytuj" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -52,45 +59,54 @@
                 <div class="row" style="padding:15px">
                     <div class="col-12">
                         <div class="row">
-                            <div class="userblock">
-                                <div style="background-color:sandybrown;">
-                                    cos tu
+                            <div class="userblock-3">
+                                <div class="box" style="background-color:sandybrown">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
                                 </div>
                             </div>
-                            <div class="userblock">
-                                <div class="box" style="background-color:darkseagreen;">
-                                    cos tutaj
+                            <div class="userblock-3">
+                                <div class="box" style="background-color:darkseagreen">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
                                 </div>
                             </div>
-                            <div class="userblock">
-                                <div style="background-color:cadetblue;     border-radius:2px;">
-                                    cos tutaj tez
+                            <div class="userblock-3">
+                                <div class="box" style="background-color:cadetblue">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
                                 </div>
                             </div>
-                            <div class="userblock">
-                                <div style="background-color:blanchedalmond;     border-radius:2px;">
-                                    cos tutaj tez dac
+                            <div class="userblock-3">
+                                <div class="box" style="background-color:blanchedalmond">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-6">
+
+                <div class="row" style="padding:15px">
+                    <div class="col-12">
                         <div class="row">
-                            <div class="col-3">
-                                <img alt="Zdjoncie" />
+                            <div class="userblock-6">
+                                <div class="box" style="background-color:slategray">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-9">
-                                <div class="row">
-                                    @User.Identity.Name
-                                </div>
-                                <div class="row">
-                                    Nagłówek
-                                </div>
-                                <div class="row">
-                                    <input type="button" value="Edytuj" />
+                            <div class="userblock-6">
+                                <div class="box" style="background-color:slategray">
+                                    <div class="boxitem">
+                                        cos tu
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,8 +116,96 @@
             </div>
 
             <div id="Employer2" class="tabcontent" style=" display:none">
-                <h3>2</h3>
-                <p>2 div info</p>
+
+                <div class="row">
+                    obrazek
+                </div>
+
+                <div>
+                    <div class="row">
+                        <b>TYTUŁ*</b>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <b>OPIS*</b>
+                    </div>
+                    <div class="row">
+                        <textarea placeholder="LOREM GIPSUM DOLORES AREAS MATERES" style="width:100%">
+
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <b>KATEGORIA OFERTY PRACY*</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <b>WYMIAR PRACY*</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <b>POZIOM STANOWISKA*</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <b>WYNAGRODZENIE OD</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <b>WYNAGRODZENIE DO</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <b>WALUTA</b>
+                        <select>
+                            <option value="PLN">PLN</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <b>JĘZYKI</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <b>PŁEĆ</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <b>USTAWIENIA APLIKACJI</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <b>WYMAGANE UMIEJĘTNOŚCI</b>
+                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <b>LOKALIZACJA I MAPA</b>
+                        Mapa fajna
+                    </div>
+                </div>
             </div>
 
             <div id="Employer3" class="tabcontent" style=" display:none">
