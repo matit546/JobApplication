@@ -2,7 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-
+<figure>
+    <img class="background-main-image" />
+    <div class="main-settings">
+        <figcaption><div class="main-text">ZNAJDŹ PRACĘ</div></figcaption>
+        <figcaption><div style="font-size: 16px;"><br />Wyszukaj naszą bazę ofert, by odkryć coś dla siebie!</div></figcaption>
+    </div>
+</figure>
 <div class="container">
     <main role="main" class="pb-3">
         <div class="text-center">
@@ -19,7 +25,19 @@
         {
             <p>kandydat</p>
         }
-
+        <div class="text-center">
+            <div class="menu">
+                <div class="row">
+                    <div class="menu-item disabled col-6 button1 current-menu-item disabled" style="z-index:0">
+                        <div style="z-index:0; text-align:center;">NAJNOWSZE OFERTY</div>
+                        <div class="wee disabled" style="z-index:-1"></div>
+                    </div>
+                    <div class="menu-item col-6 button2" style="z-index:0">
+                        <div style="z-index:0; text-align:center;">WYRÓŻNIONE OFERTY</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="lds-ellipsis-wrapper">
             <div class="lds-ellipsis" id="Loader"><div></div><div></div><div></div><div></div></div>
         </div>
