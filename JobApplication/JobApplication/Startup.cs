@@ -137,6 +137,11 @@ namespace JobApplication
             {
 
                 endpoints.MapAreaControllerRoute(
+            name: "myAreaJobs",
+            areaName: "Jobs",
+            pattern: "Jobs/{controller=Jobs}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
               name: "myAreaUserPanel",
               areaName: "UserPanel",
               pattern: "panel-uzytkownika/{controller=Panel}/{action=Index}/{id?}");

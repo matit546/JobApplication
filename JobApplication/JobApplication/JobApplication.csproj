@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\UserPanel\Data\**" />
+    <Compile Remove="Areas\UserPanel\Models\**" />
+    <Content Remove="Areas\UserPanel\Data\**" />
+    <Content Remove="Areas\UserPanel\Models\**" />
+    <EmbeddedResource Remove="Areas\UserPanel\Data\**" />
+    <EmbeddedResource Remove="Areas\UserPanel\Models\**" />
+    <None Remove="Areas\UserPanel\Data\**" />
+    <None Remove="Areas\UserPanel\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
@@ -19,8 +30,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="Areas\UserPanel\Data\" />
-    <Folder Include="Areas\UserPanel\Models\" />
   </ItemGroup>
 
 </Project>
