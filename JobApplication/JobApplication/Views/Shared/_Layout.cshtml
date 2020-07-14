@@ -51,7 +51,7 @@
                             }
                             else if (User.IsInRole(SD.EmployerRole))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">OFERTY PRACY</a>
+                                <a class="nav-link text-dark" asp-area="Jobs" asp-controller="Jobs" asp-action="">OFERTY PRACY</a>
                             }
                             else
                             {
@@ -76,7 +76,7 @@
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">OFERTY PRACY</a>
+                                <a class="nav-link text-dark" asp-area="Jobs" asp-controller="Jobs" asp-action="">OFERTY PRACY</a>
                             }
                         </li>
 
@@ -89,11 +89,11 @@
         </nav>
     </header>
     @*@if (Context.Request.Path == "/Identity/Account/Register" || Context.Request.Path == "/Identity/Account/Login")
-    {
+        {
 
-    }*@
-        <partial name="_CookieConsentPartial" />
-            @RenderBody()
+        }*@
+    <partial name="_CookieConsentPartial" />
+    @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">

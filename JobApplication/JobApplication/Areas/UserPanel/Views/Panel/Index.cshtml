@@ -1,5 +1,4 @@
-﻿@model JobApplication.Areas.Identity.Data.AppUser
-
+﻿@model JobApplication.Areas.Identity.Data.ViewModels.UserAndOffers
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,20 +8,20 @@
     <h4>AppUserEmployeeExtension</h4>
     <hr />*@
 
-    <div class="tab">
-        <div class="displayImage">
-            <img alt="zdjecie" />
-            <label>Witaj @User.Identity.Name!</label>
-        </div>
-        <button class="tablinks" onclick="openCity(event, 'Employer1')">Panel użytkownika</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer2')">Dodaj ofertę pracy</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer3')">Wszystkie oferty pracy</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer4')">Aplikacje</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer5')">Pakiety</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer6')">Zapisane cv</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer7')">Opinie</button>
-        <button class="tablinks" onclick="openCity(event, 'Employer7')">Wyloguj!</button>
+<div class="tab">
+    <div class="displayImage">
+        <img alt="zdjecie" />
+        <label>Witaj @User.Identity.Name!</label>
     </div>
+    <button class="tablinks" onclick="openCity(event, 'Employer1')">Panel użytkownika</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer2')">Dodaj ofertę pracy</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer3')">Wszystkie oferty pracy</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer4')">Aplikacje</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer5')">Pakiety</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer6')">Zapisane cv</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer7')">Opinie</button>
+    <button class="tablinks" onclick="openCity(event, 'Employer7')">Wyloguj!</button>
+</div>
 
 <div class="userPanelPadding">
     <main role="main" class="pb-3">
@@ -114,98 +113,191 @@
                 </div>
 
             </div>
-
+            @*<form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="jobOffer.Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfJob" class="control-label"></label>
+                <input asp-for="TypeOfJob" class="form-control" />
+                <span asp-validation-for="TypeOfJob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMin" class="control-label"></label>
+                <input asp-for="PaymentMin" class="form-control" />
+                <span asp-validation-for="PaymentMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMax" class="control-label"></label>
+                <input asp-for="PaymentMax" class="form-control" />
+                <span asp-validation-for="PaymentMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublicationTime" class="control-label"></label>
+                <input asp-for="PublicationTime" class="form-control" />
+                <span asp-validation-for="PublicationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Skills" class="control-label"></label>
+                <input asp-for="Skills" class="form-control" />
+                <span asp-validation-for="Skills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChooseTheCurrency" class="control-label"></label>
+                <input asp-for="ChooseTheCurrency" class="form-control" />
+                <span asp-validation-for="ChooseTheCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>*@
             <div id="Employer2" class="tabcontent" style=" display:none">
 
                 <div class="row">
                     obrazek
                 </div>
+                <form asp-action="CreateNewJobOffer" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div>
+                        <div class="row">
+                            <b>TYTUŁ*</b>
+                        </div>
+                        <div class="row">
 
-                <div>
+                            <input asp-for="jobOffer.Title" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <b>OPIS*</b>
+                        </div>
+                        <div class="row">
+                            @*<textarea placeholder="LOREM GIPSUM DOLORES AREAS MATERES" style="width:100%">                   </textarea>*@
+                            <textarea asp-for="jobOffer.Description" class="form-control" placeholder="Wprowadz tytuł" style="width:100%"> </textarea>
+
+                            <span asp-validation-for="jobOffer.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
                     <div class="row">
-                        <b>TYTUŁ*</b>
+                        <div class="col-lg-4 col-md-12">
+                            <b>KATEGORIA OFERTY PRACY*</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.Category" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.Category" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <b>WYMIAR PRACY*</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.TypeOfJob" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <b>POZIOM STANOWISKA*</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.TypeOfJob" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <b>WYNAGRODZENIE OD</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.PaymentMin" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.PaymentMin" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <b>WYNAGRODZENIE DO</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.PaymentMax" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.PaymentMax" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <b>WALUTA</b>
+                            <select asp-for="jobOffer.ChooseTheCurrency">
+                                <option value="PLN">PLN</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <b>JĘZYKI</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <b>PŁEĆ</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <b>Deadline</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.Deadline" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <b>WYMAGANE UMIEJĘTNOŚCI</b>
+                            <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <input asp-for="jobOffer.Skills" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.Skills" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <b>LOKALIZACJA I MAPA</b>
+                            Mapa fajna
+                            <input asp-for="jobOffer.Location" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="row">
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                </div>
+                        <div class="col-12">
+                            <b>PublicationTIme</b>
 
-                <div>
-                    <div class="row">
-                        <b>OPIS*</b>
+                            <input asp-for="jobOffer.PublicationTime" class="form-control" placeholder="Wprowadz tytuł" style="width:100%" />
+                            <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="row">
-                        <textarea placeholder="LOREM GIPSUM DOLORES AREAS MATERES" style="width:100%">
-
-                        </textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <b>KATEGORIA OFERTY PRACY*</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <b>WYMIAR PRACY*</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <b>POZIOM STANOWISKA*</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <b>WYNAGRODZENIE OD</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <b>WYNAGRODZENIE DO</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <b>WALUTA</b>
-                        <select>
-                            <option value="PLN">PLN</option>
-                            <option value="EUR">EUR</option>
-                            <option value="GBP">GBP</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <b>JĘZYKI</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <b>PŁEĆ</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <b>USTAWIENIA APLIKACJI</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <b>WYMAGANE UMIEJĘTNOŚCI</b>
-                        <input type="text" placeholder="Wprowadz tytuł" style="width:100%" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <b>LOKALIZACJA I MAPA</b>
-                        Mapa fajna
-                    </div>
-                </div>
+                    <input type="submit" />
+                </form>
             </div>
 
             <div id="Employer3" class="tabcontent" style=" display:none">
@@ -237,64 +329,63 @@
 </div>
 
 
-            @*<div>
-                <a asp-action="Index">Back to List</a>
-            </div>*@
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
 
 
 
-            @*<div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Index">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
-                        <div class="form-group">
-                            <label asp-for="UserName" class="control-label"></label>
-                            <input asp-for="UserName" class="form-control" />
-                            <span asp-validation-for="UserName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CVFile" class="control-label"></label>
-                                <input asp-for="CVFile" class="form-control" />
-                                <span asp-validation-for="CVFile" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Languages" class="control-label"></label>
-                                <input asp-for="Languages" class="form-control" />
-                                <span asp-validation-for="Languages" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="UserId" class="control-label"></label>
-                                <input asp-for="UserId" class="form-control" />
-                                <span asp-validation-for="UserId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Save" class="btn btn-primary" />
-                            </div>
-
-                    </form>
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
-            </div>*@
+                <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CVFile" class="control-label"></label>
+                        <input asp-for="CVFile" class="form-control" />
+                        <span asp-validation-for="CVFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Languages" class="control-label"></label>
+                        <input asp-for="Languages" class="form-control" />
+                        <span asp-validation-for="Languages" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserId" class="control-label"></label>
+                        <input asp-for="UserId" class="form-control" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
 
-            <script>
+            </form>
+        </div>
+    </div>*@
 
-                function openCity(evt, cityName) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("tabcontent");
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
-                    tablinks = document.getElementsByClassName("tablinks");
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    document.getElementById(cityName).style.display = "block";
-                    evt.currentTarget.className += " active";
-                }
-            </script>
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
 
