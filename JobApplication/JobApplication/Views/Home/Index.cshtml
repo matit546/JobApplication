@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model IEnumerable<JobApplication.Models.JobOffer>; 
+@{
     ViewData["Title"] = "Home Page";
 }
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
@@ -66,5 +68,25 @@
         </div>
 
     </main>
+    <div class="row">
+        @if(Model==null)
+        {
+            <h1>Brak ofert</h1>
+        }
+        else
+        @foreach (var item in Model)
+        {
+            <div class="container col-sm-6 col-md-4">
+                <div class="col-sm-12 col-md-10 offset-1">
+                    <div class="card-body">
+                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <h5>@Html.DisplayFor(modelItem => item.PaymentMax)</h5>
+                        <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
+                    </div>
+                </div>
+                <div><br /><br /></div>
+            </div>
+        }
+    </div>
 </div>
 
