@@ -139,7 +139,7 @@ namespace JobApplication
                 endpoints.MapAreaControllerRoute(
             name: "myAreaJobs",
             areaName: "Jobs",
-            pattern: "Jobs/{controller=Jobs}/{action=Index}/{id?}");
+            pattern: "{controller=Home}/{action=Index}/{id?}/{name?}");
 
                 endpoints.MapAreaControllerRoute(
               name: "myAreaUserPanel",
@@ -158,7 +158,7 @@ namespace JobApplication
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}");
                 endpoints.MapRazorPages();
 
             });
