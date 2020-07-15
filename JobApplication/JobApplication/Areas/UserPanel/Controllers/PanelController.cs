@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using JobApplication.Areas.Identity.Data.ViewModels;
+using Newtonsoft.Json;
+
 namespace JobApplication.Areas.UserPanel.Controllers
 {
     [Area("UserPanel")]
@@ -23,22 +25,32 @@ namespace JobApplication.Areas.UserPanel.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-      
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            UserAndOffers userAndOffers = new UserAndOffers()
-            {
-                jobOffer = null,
-                appUser = await _userManager.GetUserAsync(HttpContext.User)
-        };
+            return View();
+        }
+
        
+        //Get User Data
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound();
             }
+            var json = JsonConvert.SerializeObject(user);
+            return Json(json);
 
-            return View();
+        }
+  
+        public  async Task<PartialViewResult> GetPartialView()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return PartialView("_PartialView",user);
+
         }
 
         [HttpPost]

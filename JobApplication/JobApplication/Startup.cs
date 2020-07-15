@@ -36,10 +36,9 @@ namespace JobApplication
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders().AddDefaultUI();
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential 
@@ -144,7 +143,7 @@ namespace JobApplication
                 endpoints.MapAreaControllerRoute(
               name: "myAreaUserPanel",
               areaName: "UserPanel",
-              pattern: "panel-uzytkownika/{controller=Panel}/{action=Index}/{id?}");
+              pattern: "{controller=Home}/{action=Index}");
 
                 endpoints.MapAreaControllerRoute(
                 name: "myAreaCandidate",
