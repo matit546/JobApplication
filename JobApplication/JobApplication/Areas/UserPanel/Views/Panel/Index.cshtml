@@ -8,22 +8,22 @@
     <h4>AppUserEmployeeExtension</h4>
     <hr />*@
 
-    <div class="tab">
-        <div class="displayImage">
-            <img alt="zdjecie" />
-            <label>Witaj @User.Identity.Name!</label>
-        </div>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
-        <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button class="tablinks" type="submit">Wyloguj!</button>
-        </form>
+<div class="tab">
+    <div class="displayImage">
+        <img alt="zdjecie" />
+        <label>Witaj @User.Identity.Name!</label>
     </div>
+    <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
+    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button class="tablinks" type="submit">Wyloguj!</button>
+    </form>
+</div>
 
 @*<div class="userPanelPadding">
     <main role="main" class="pb-3">
@@ -238,8 +238,8 @@
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <b>WALUTA</b>
-                            <select asp-for="jobOffer.ChooseTheCurrency">
-                                <option value="" class="form-input" disabled selected>Wybierz walutę</option>
+                            <select asp-for="jobOffer.ChooseTheCurrency" class="form-input">
+                                <option disabled selected>Wybierz walutę</option>
                                 <option value="PLN">PLN</option>
                                 <option value="EUR">EUR</option>
                                 <option value="GBP">GBP</option>
@@ -444,57 +444,67 @@
             </div>
         </main>
     </div>
-        @*</div>
-                </main>
-            </div>*@
+    @*</div>
+            </main>
+        </div>*@
 
 
-        @*<div>
-                <a asp-action="Index">Back to List</a>
-            </div>*@
+    @*<div>
+            <a asp-action="Index">Back to List</a>
+        </div>*@
 
 
 
-        @*<div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Index">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
-                        <div class="form-group">
-                            <label asp-for="UserName" class="control-label"></label>
-                            <input asp-for="UserName" class="form-control" />
-                            <span asp-validation-for="UserName" class="text-danger"></span>
+    @*<div class="row">
+            <div class="col-md-4">
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
+                            </label>
                         </div>
-                        <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CVFile" class="control-label"></label>
-                                <input asp-for="CVFile" class="form-control" />
-                                <span asp-validation-for="CVFile" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Languages" class="control-label"></label>
-                                <input asp-for="Languages" class="form-control" />
-                                <span asp-validation-for="Languages" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="UserId" class="control-label"></label>
-                                <input asp-for="UserId" class="form-control" />
-                                <span asp-validation-for="UserId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Save" class="btn btn-primary" />
-                            </div>
+                        <div class="form-group">
+                            <label asp-for="CVFile" class="control-label"></label>
+                            <input asp-for="CVFile" class="form-control" />
+                            <span asp-validation-for="CVFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Languages" class="control-label"></label>
+                            <input asp-for="Languages" class="form-control" />
+                            <span asp-validation-for="Languages" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserId" class="control-label"></label>
+                            <input asp-for="UserId" class="form-control" />
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
 
-                    </form>
-                </div>
-            </div>*@
-    </div>
+                </form>
+            </div>
+        </div>*@
+</div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+        $(document).ready(function () {
+            $(".tablinks").click(function () {
+                var id = $(this).attr("id");
+                var url = "Areas/UserPanel/Views/Panel?iID=" + id;
+                window.location.href = url;
+            });
+        });
+
         function OpenNavbarItem(evt, itemNumber) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -508,8 +518,6 @@
             document.getElementById(itemNumber).style.display = "block";
             evt.currentTarget.className += " active";
         }
-    </script>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+    </script>
+}
