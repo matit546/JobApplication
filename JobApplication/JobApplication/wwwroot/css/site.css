@@ -404,3 +404,7 @@ figcaption {
     width: 150px;
     margin: 40px;
 }
+
+.form-input{
+    width:100%;
+}
