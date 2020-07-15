@@ -22,5 +22,23 @@ namespace JobApplication.Areas.Jobs.Controllers
         {
             return View(await _context.JobOffers.ToListAsync());
         }
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobOffer = await _context.JobOffers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (jobOffer == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobOffer);
+        }
     }
 }
