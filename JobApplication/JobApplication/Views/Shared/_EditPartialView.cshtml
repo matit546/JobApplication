@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-2">
                 <div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
                     </div>
-                    @*<img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
+                    <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
                 </div>
             </div>
             <div class="col-10">
@@ -23,10 +23,13 @@
                 </div>
             </div>
         </div>
-        <form asp-action="ProfilePost" method="post">
+        <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
             <input type="hidden" id="ID" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div class="form-group">
+                <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+            </div>
+            <img ID="impPrev" class="img-fluid rounded BackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@/>
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>NAZWA FIRMY*</b>

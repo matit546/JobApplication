@@ -39,11 +39,10 @@ namespace JobApplication.Areas.UserPanel.Controllers
        
         //Get User Data
         [HttpGet]
-        public async Task<IActionResult> EditProfile(IFormFile file, AppUser appUser)
+        public async Task<IActionResult> EditProfile(AppUser appUser)
         {
  
             var user = await _userManager.GetUserAsync(HttpContext.User);
-
             if (user == null)
             {
                 return NotFound();
@@ -66,9 +65,10 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
             if (file != null)
             {
-                if (appUser.BackgroundImage != null)
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user.BackgroundImage != null)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", appUser.BackgroundImage);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", user.BackgroundImage);
                     if (System.IO.File.Exists(path))
                     {
                         System.IO.File.Delete(path);
