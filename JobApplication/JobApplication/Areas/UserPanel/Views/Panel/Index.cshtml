@@ -318,14 +318,14 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="row">
-                            <div class="col-9 nopadding">
+                            <div class="col-9 px-0">
                                 <div>
                                     <select class="form-input">
                                         <option>1</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3 nopadding">
+                            <div class="col-3 px-0">
                                 <button>
                                     🔍
                                 </button>
@@ -373,14 +373,14 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="row">
-                            <div class="col-9 nopadding">
+                            <div class="col-9 px-0">
                                 <div>
                                     <select class="form-input">
                                         <option>1</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3 nopadding">
+                            <div class="col-3 px-0">
                                 <button>
                                     🔍
                                 </button>
@@ -401,14 +401,14 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="row">
-                            <div class="col-9 nopadding">
+                            <div class="col-9 px-0">
                                 <div>
                                     <select class="form-input">
                                         <option>1</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-3 nopadding">
+                            <div class="col-3 px-0">
                                 <button>
                                     🔍
                                 </button>
@@ -471,22 +471,6 @@
             </div>
         </div>*@
 </div>
-<div class="p-4 border rounded">
-
-    <input id="CompanyName" />
-    <div>
-        <input id="VideoUrl" />
-        <input id="Email" asp-for="appUser.Email" />
-        <input id="Website" />
-        <input id="FoundingDate" />
-        <input id="CompanySize" />
-        <input id="ShortDescription" />
-        <input id="Descrption" />
-        <input id="Categories" />
-        <input id="Address" />
-    </div>
-</div>
-<button type="button" id="button1">Load Partial View</button>
 
 
 @section Scripts {
@@ -500,16 +484,31 @@
                 success: function (data) {
                //     alert(data);
                     // if data is in string format
+                    alert(data);
                     var Data = $.parseJSON(data);
+                    $("#ID").val(Data.Id);
                     $("#CompanyName").val(Data.CompanyName);
                     $("#Email").val(Data.Email);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#CompanyName").val(Data.CompanyName);
+                    $("#VideoUrl").val(Data.VideoUrl);
+                    $("#Website").val(Data.Website);
+                    $("#FoundingDate").val(Data.FoundingDate);
+                    $("#ShortDescription").val(Data.ShortDescription);
+                    $("#Descrption").val(Data.Descrption);
+                    $("#Categories").val(Data.Categories);
 
+                    $("#Address").val(Data.Address);
+                    $("#PhoneNumber").val(Data.PhoneNumber);
+                    $("#BackgroundImage").val(Data.BackgroundImage);
+                    $("#FacebookProfile").val(Data.FacebookProfile);
+                    $("#Gallery").val(Data.Gallery);
+                    $("#Headline").val(Data.Headline);
+                    $("#LinkedinProfile").val(Data.LinkedinProfile);
+                    $("#TwitterProfile").val(Data.TwitterProfile);
+
+                    $("#VideoUrl").val(Data.VideoUrl);
+                    $("#VimeoProfile").val(Data.VimeoProfile);
+                    $("#YoutubeProfile").val(Data.YoutubeProfile);
+                   
                 }
             });
         });
@@ -524,9 +523,7 @@
 
         $(document).ready(function () {
 
-            $("#oferta").click(function () {
-                $("#Employer3").load("/Panel/GetPartialView");
-            });
+
 
             $("#editProfile").click(function () {
                 $("#Employer1").load("/Panel/GetEditPartialView");
