@@ -36,43 +36,45 @@ namespace JobApplication.Areas.UserPanel.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
-            var user =  _userManager.GetUserId(HttpContext.User);
-            var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
-            if (userExtensionExists == null)
+ 
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
             {
-                var userApp = await _userManager.GetUserAsync(HttpContext.User);
-                //DT(
-                var json = JsonConvert.SerializeObject(userApp);
-                return Json(json);
+                return NotFound();
             }
-            else
-            {
-                var userExtension =  _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
-                var  json = JsonConvert.SerializeObject(userExtension);
-                return Json(json);
-            }
+
+            var  json = JsonConvert.SerializeObject(user);
+            return Json(json);
+            
 
 
         }
 
+        //Edit User Profile
         [HttpPost]
+        [Authorize(Roles = SD.EmployerRole)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostProfile()
+        public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,UserName,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile")] AppUser appUser)
         {
-            var user = _userManager.GetUserId(HttpContext.User);
-            var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
-            if (userExtensionExists == null)
+    
+
+            if (ModelState.IsValid)
             {
-                var userApp = await _userManager.GetUserAsync(HttpContext.User);
-                var json = JsonConvert.SerializeObject(userApp);
-                return Json(json);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                user.Descrption = appUser.Descrption;
+                user.FacebookProfile = appUser.FacebookProfile;
+                user.Address = appUser.Address;
+                user.BackgroundImage = appUser.BackgroundImage;
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            else
-            {
-                var userExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
-                var json = JsonConvert.SerializeObject(userExtension);
-                return Json(json);
-            }
+            return RedirectToAction(nameof(Index));
 
 
         }
@@ -81,12 +83,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             return PartialView("_EditPartialView");
 
         }
-        public  async Task<PartialViewResult> GetPartialView()
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            return PartialView("_PartialView",user);
-
-        }
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,7 +95,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             {
                 _context.Add(jobOffer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return RedirectToAction(nameof(Index));
         }
