@@ -45,7 +45,14 @@ namespace JobApplication.Areas.UserPanel.Controllers
             return Json(json);
 
         }
-  
+
+        public async Task<PartialViewResult> GetEditPartialView()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return PartialView("_EditPartialView", user);
+
+        }
+
         public  async Task<PartialViewResult> GetPartialView()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
