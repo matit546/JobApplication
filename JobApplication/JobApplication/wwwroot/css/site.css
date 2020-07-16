@@ -131,23 +131,24 @@ body {
     cursor: pointer;
 }
 
-.menu .menu-item .wee {
-    height:90%;
-    width: 98%;
-    background-color:white;
-    position: absolute;
-    left: 2px;
-    bottom: 2px;
-    transition: 0.2s;
-    border-radius:20px;
-}
+    .menu .menu-item .wee {
+        height: 90%;
+        width: 98%;
+        background-color: white;
+        position: absolute;
+        left: 2px;
+        bottom: 2px;
+        transition: 0.2s;
+        border-radius: 20px;
+        z-index: -1;
+    }
 
 .menu .row {
     margin: 0px;
 }
 
 .menu .current-menu-item{
-
+    z-index:0;
 }
 
 figure {
@@ -337,6 +338,7 @@ figcaption {
     padding: 0px 12px;
     width: 100%;
     border-left: none;
+    display: block
 }
 
 .userPanelPadding {
@@ -370,10 +372,29 @@ figcaption {
     border-radius: 5px;
 }
 
-.box .boxitem{
-    padding:15px;
-    text-align:center;
+.sandybrown {
+    background-color: sandybrown
+}
 
+.darkseagreen {
+    background-color: darkseagreen
+}
+
+.cadetblue {
+    background-color: cadetblue
+}
+
+.blanchedalmond {
+    background-color: blanchedalmond
+}
+
+.slategray {
+    background-color: slategray
+}
+
+.boxitem {
+    padding: 15px;
+    text-align: center;
 }
 
 .background-main-image {
