@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using JobApplication.Areas.Identity.Data.ViewModels;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace JobApplication.Areas.UserPanel.Controllers
 {
@@ -21,10 +24,12 @@ namespace JobApplication.Areas.UserPanel.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager)
+        private readonly IWebHostEnvironment _iWebHost;
+        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost)
         {
             _context = context;
             _userManager = userManager;
+            _iWebHost = webHost;
         }
         public IActionResult Index()
         {
@@ -34,7 +39,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
        
         //Get User Data
         [HttpGet]
-        public async Task<IActionResult> EditProfile()
+        public async Task<IActionResult> EditProfile(IFormFile file, AppUser appUser)
         {
  
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -56,9 +61,43 @@ namespace JobApplication.Areas.UserPanel.Controllers
         [Authorize(Roles = SD.EmployerRole)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,UserName,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
-            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile")] AppUser appUser)
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile")] AppUser appUser, IFormFile file)
         {
-    
+
+            if (file != null)
+            {
+                if (appUser.BackgroundImage != null)
+                {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", appUser.BackgroundImage);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
+                if (file != null && file.Length > 0)
+                {
+                    var imagePath = @"\images\";
+                    var uploadPath = _iWebHost.WebRootPath + imagePath;
+
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+
+                    var newFileName = Guid.NewGuid().ToString();
+                    var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
+                    string fullPath = uploadPath + fileName;
+                    imagePath = imagePath + @"\";
+                    var filePath = @".." + Path.Combine(imagePath, fileName);
+                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    appUser.BackgroundImage= fileName;
+                    //_context.Update(appUser);
+                    await _userManager.UpdateAsync(appUser);
+                }
+            }
 
             if (ModelState.IsValid)
             {
