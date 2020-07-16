@@ -24,16 +24,19 @@ namespace JobApplication.Models
         [Range(1, 200000, ErrorMessage = "Wypłata musi mieć wartość przynajmniej 1")]
         [DataType(DataType.Currency)]
         public decimal PaymentMax { get; set; }
-        [Required]
         public DateTime PublicationTime { get; set; }
         [Required]
         public string Category { get; set; }
         [Required]
         public string Skills { get; set; }
-        [Required]
         public DateTime Deadline { get; set; }
         [Required]
         public string Description { get; set; }
         public string ChooseTheCurrency { get; set; }
+        public string Email { get; set; }
+        public string Languages { get; set; }
+        public string CompanyNameOffer { get; set; }
+        public string WorkingTime { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }
