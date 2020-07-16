@@ -316,16 +316,20 @@
         <main role="main" class="pb-3">
             <div class="login-Containter">
                 <div class="row">
-                    <div class="col-3">
-                        <div>
-                            <select class="form-input">
-                                <option>1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <div>
-                            Tutaj obrazek lupy
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-9 nopadding">
+                                <div>
+                                    <select class="form-input">
+                                        <option>1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3 nopadding">
+                                <button>
+                                    🔍
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-3">
@@ -368,15 +372,19 @@
             <div class="login-Containter">
                 <div class="row">
                     <div class="col-3">
-                        <div>
-                            <select class="form-input">
-                                <option>1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <div>
-                            Tutaj obrazek lupy
+                        <div class="row">
+                            <div class="col-9 nopadding">
+                                <div>
+                                    <select class="form-input">
+                                        <option>1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3 nopadding">
+                                <button>
+                                    🔍
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -392,15 +400,19 @@
             <div class="login-Containter">
                 <div class="row">
                     <div class="col-3">
-                        <div>
-                            <select class="form-input">
-                                <option>1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <div>
-                            Tutaj obrazek lupy
+                        <div class="row">
+                            <div class="col-9 nopadding">
+                                <div>
+                                    <select class="form-input">
+                                        <option>1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3 nopadding">
+                                <button>
+                                    🔍
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -514,6 +526,10 @@
 
             $("#oferta").click(function () {
                 $("#Employer3").load("/Panel/GetPartialView");
+            });
+
+            $("#editProfile").click(function () {
+                $("#Employer1").load("/Panel/GetEditPartialView");
             });
 
         });

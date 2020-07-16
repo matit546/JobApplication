@@ -470,3 +470,7 @@ figcaption {
     .joboffer-main:hover {
         box-shadow: 0px 0px 48px -7px rgba(153,194,240,1);
     }
+
+nopadding{
+    padding: 0px 0px 0px 0px;
+}
