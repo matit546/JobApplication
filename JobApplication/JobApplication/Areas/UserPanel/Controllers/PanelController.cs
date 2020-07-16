@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using JobApplication.Areas.Identity.Data.ViewModels;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobApplication.Areas.UserPanel.Controllers
 {
@@ -29,23 +30,53 @@ namespace JobApplication.Areas.UserPanel.Controllers
         {
             return View();
         }
-
+        
        
         //Get User Data
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
-
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            if (user == null)
+            var user =  _userManager.GetUserId(HttpContext.User);
+            var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
+            if (userExtensionExists == null)
             {
-                return NotFound();
+                var userApp = await _userManager.GetUserAsync(HttpContext.User);
+                //DT(
+                var json = JsonConvert.SerializeObject(userApp);
+                return Json(json);
             }
-            var json = JsonConvert.SerializeObject(user);
-            return Json(json);
+            else
+            {
+                var userExtension =  _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
+                var  json = JsonConvert.SerializeObject(userExtension);
+                return Json(json);
+            }
+
 
         }
-  
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostProfile()
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+            var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
+            if (userExtensionExists == null)
+            {
+                var userApp = await _userManager.GetUserAsync(HttpContext.User);
+                var json = JsonConvert.SerializeObject(userApp);
+                return Json(json);
+            }
+            else
+            {
+                var userExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
+                var json = JsonConvert.SerializeObject(userExtension);
+                return Json(json);
+            }
+
+
+        }
+
         public  async Task<PartialViewResult> GetPartialView()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
