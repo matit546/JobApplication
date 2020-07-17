@@ -41,7 +41,6 @@ namespace JobApplication.Areas.UserPanel.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProfile(AppUser appUser)
         {
- 
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
@@ -50,9 +49,20 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
             var  json = JsonConvert.SerializeObject(user);
             return Json(json);
-            
+        }
 
+        //Get User Data
+        [HttpGet]
+        public async Task<IActionResult> GetJobOffers()
+        {
+            var jobOffers = await _context.JobOffers.ToListAsync();
+            if (jobOffers == null)
+            {
+                return NotFound();
+            }
 
+            var json = JsonConvert.SerializeObject(jobOffers);
+            return Json(json);
         }
 
         //Edit User Profile
