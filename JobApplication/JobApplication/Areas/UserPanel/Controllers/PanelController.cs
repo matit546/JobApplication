@@ -157,6 +157,9 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
 
         }
+
+
+
         public  PartialViewResult GetEditPartialView()
         {
             return PartialView("_EditPartialView");
@@ -178,6 +181,9 @@ namespace JobApplication.Areas.UserPanel.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+
+
 
 
     }
