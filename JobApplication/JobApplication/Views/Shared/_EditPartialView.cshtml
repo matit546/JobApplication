@@ -1,13 +1,13 @@
-﻿@model JobApplication.Areas.Identity.Data.AppUser
+﻿@model JobApplication.Areas.Identity.Data.DTO.AppUserDto
 <main role="main" class="pb-3">
     <div class="login-Containter">
         <div class="row">
             <div class="col-2">
                 <div>
                     @*<div class="form-group">
-                        <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
-                    </div>
-                    <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
+                            <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+                        </div>
+                        <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
                 </div>
             </div>
             <div class="col-10">
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
             </div>
-            <img ID="impPrev" class="img-fluid rounded BackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@/>
+            <img ID="impPrev" class="img-fluid rounded BackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>NAZWA FIRMY*</b>
@@ -193,31 +193,32 @@
 
     </div>
 </main>
-@*<form asp-action="ProfilePost" method="post">
-        <input type="hidden" id="ID" asp-for="Id" />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input id="CompanyName" asp-for="CompanyName" />
-        <input id="VideoUrl" asp-for="VideoUrl" />
-        <input id="Email" asp-for="Email" />
-        <input id="Website" asp-for="Website" />
-        <input id="FoundingDate" asp-for="FoundingDate" />
-        <select asp-for="CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
-        <input id="ShortDescription" asp-for="ShortDescription" />
-        <input id="Descrption" asp-for="Descrption" />
-        <input id="Categories" asp-for="Categories" />
-        <input id="Address" asp-for="Address" />
+
+    @*<form asp-action="ProfilePost" method="post">
+            <input type="hidden" id="ID" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input id="CompanyName" asp-for="CompanyName" />
+            <input id="VideoUrl" asp-for="VideoUrl" />
+            <input id="Email" asp-for="Email" />
+            <input id="Website" asp-for="Website" />
+            <input id="FoundingDate" asp-for="FoundingDate" />
+            <select asp-for="CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
+            <input id="ShortDescription" asp-for="ShortDescription" />
+            <input id="Descrption" asp-for="Descrption" />
+            <input id="Categories" asp-for="Categories" />
+            <input id="Address" asp-for="Address" />
 
 
-        <input id="UserName" asp-for="UserName" />
-        <input id="PhoneNumber" asp-for="PhoneNumber" />
-        <img id="BackgroundImage" alt="brak" />
-        <input id="FacebookProfile" asp-for="FacebookProfile" />
-        <input id="Gallery" asp-for="Gallery" />
-        <input id="Headline" asp-for="Headline" />
-        <input id="LinkedinProfile" asp-for="LinkedinProfile" />
-        <input id="TwitterProfile" asp-for="TwitterProfile" />
-        <input id="VideoUrl" asp-for="VideoUrl" />
-        <input id="VimeoProfile" asp-for="VimeoProfile" />
-        <input id="YoutubeProfile" asp-for="YoutubeProfile" />
-        <input type="submit" value="Edit" class="btn btn-primary" />
-    </form>*@
+            <input id="UserName" asp-for="UserName" />
+            <input id="PhoneNumber" asp-for="PhoneNumber" />
+            <img id="BackgroundImage" alt="brak" />
+            <input id="FacebookProfile" asp-for="FacebookProfile" />
+            <input id="Gallery" asp-for="Gallery" />
+            <input id="Headline" asp-for="Headline" />
+            <input id="LinkedinProfile" asp-for="LinkedinProfile" />
+            <input id="TwitterProfile" asp-for="TwitterProfile" />
+            <input id="VideoUrl" asp-for="VideoUrl" />
+            <input id="VimeoProfile" asp-for="VimeoProfile" />
+            <input id="YoutubeProfile" asp-for="YoutubeProfile" />
+            <input type="submit" value="Edit" class="btn btn-primary" />
+        </form>*@

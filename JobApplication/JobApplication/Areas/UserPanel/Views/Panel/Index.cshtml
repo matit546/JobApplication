@@ -1,4 +1,4 @@
-﻿@model JobApplication.Areas.Identity.Data.ViewModels.UserAndOffers
+﻿@model JobApplication.Models.JobOffer
 @{
     ViewData["Title"] = "Index";
 }
@@ -191,8 +191,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <b>TYTUŁ*</b>
-                                <input asp-for="jobOffer.Title" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                                <span asp-validation-for="jobOffer.Title" class="text-danger"></span>
+                                <input asp-for="Title" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -201,8 +201,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <b>OPIS*</b>
-                                <textarea asp-for="jobOffer.Description" class="form-control form-input" placeholder="Wprowadz opis"> </textarea>
-                                <span asp-validation-for="jobOffer.Description" class="text-danger"></span>
+                                <textarea asp-for="Description" class="form-control form-input" placeholder="Wprowadz opis"> </textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -210,35 +210,35 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-12">
                             <b>KATEGORIA OFERTY PRACY*</b>
-                            <input asp-for="jobOffer.Category" class="form-control form-input" placeholder="Wybierz kategorię" />
-                            <span asp-validation-for="jobOffer.Category" class="text-danger"></span>
+                            <input asp-for="Category" class="form-control form-input" placeholder="Wybierz kategorię" />
+                            <span asp-validation-for="Category" class="text-danger"></span>
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <b>WYMIAR PRACY*</b>
-                            <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz wymiar pracy" />
-                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                            <input asp-for="TypeOfJob" class="form-control form-input" placeholder="Wybierz wymiar pracy" />
+                            <span asp-validation-for="TypeOfJob" class="text-danger"></span>
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <b>POZIOM STANOWISKA*</b>
-                            <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
-                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                            <input asp-for="TypeOfJob" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
+                            <span asp-validation-for="TypeOfJob" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-4 col-md-12">
                             <b>WYNAGRODZENIE OD</b>
-                            <input asp-for="jobOffer.PaymentMin" class="form-control form-input" placeholder="Wprowadz wynagrodzenie od" />
-                            <span asp-validation-for="jobOffer.PaymentMin" class="text-danger"></span>
+                            <input asp-for="PaymentMin" class="form-control form-input" placeholder="Wprowadz wynagrodzenie od" />
+                            <span asp-validation-for="PaymentMin" class="text-danger"></span>
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <b>WYNAGRODZENIE DO</b>
-                            <input asp-for="jobOffer.PaymentMax" class="form-control form-input" placeholder="Wprowadz wynagrodzenie do" />
-                            <span asp-validation-for="jobOffer.PaymentMax" class="text-danger"></span>
+                            <input asp-for="PaymentMax" class="form-control form-input" placeholder="Wprowadz wynagrodzenie do" />
+                            <span asp-validation-for="PaymentMax" class="text-danger"></span>
                         </div>
                         <div class="col-lg-4 col-md-12">
                             <b>WALUTA</b>
-                            <select asp-for="jobOffer.ChooseTheCurrency" class="form-input">
+                            <select asp-for="ChooseTheCurrency" class="form-input">
                                 <option disabled selected>Wybierz walutę</option>
                                 <option value="PLN">PLN</option>
                                 <option value="EUR">EUR</option>
@@ -266,13 +266,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <b>TERMIN SKŁADANIA APLIKACJI</b>
-                                    <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                    <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                    <input asp-for="Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
+                                    <span asp-validation-for="Deadline" class="text-danger"></span>
                                 </div>
                                 <div class="col-6">
                                     <b>E-MAIL DO SKŁADANIA APLIKACJI</b>
-                                    <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                    <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                    <input asp-for="Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
+                                    <span asp-validation-for="Deadline" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -282,8 +282,8 @@
                     <div class="row">
                         <div class="col-12">
                             <b>WYMAGANE UMIEJĘTNOŚCI</b>
-                            <input asp-for="jobOffer.Skills" class="form-control form-input" placeholder="Wprowadz wymagane umiejętności" />
-                            <span asp-validation-for="jobOffer.Skills" class="text-danger"></span>
+                            <input asp-for="Skills" class="form-control form-input" placeholder="Wprowadz wymagane umiejętności" />
+                            <span asp-validation-for="Skills" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -291,15 +291,15 @@
                         <div class="col-12">
                             <b>LOKALIZACJA I MAPA</b>
                             Mapa fajna
-                            <input asp-for="jobOffer.Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                            <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
+                            <input asp-for="Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <b>PublicationTIme</b>
-                            <input asp-for="jobOffer.PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                            <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
+                            <input asp-for="PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                            <span asp-validation-for="PublicationTime" class="text-danger"></span>
                         </div>
                     </div>
                     <input type="submit" />
@@ -495,6 +495,7 @@
                     $("#ShortDescription").val(Data.ShortDescription);
                     $("#Descrption").val(Data.Descrption);
                     $("#Categories").val(Data.Categories);
+
 
                     $("#Address").val(Data.Address);
                     $("#PhoneNumber").val(Data.PhoneNumber);
