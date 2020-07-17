@@ -1,4 +1,6 @@
-﻿@model JobApplication.Areas.Identity.Data.DTO.AppUserDto
+﻿@model JobApplication.Areas.Identity.Data.ViewModels.UserAndOffers
+
+
 
 <main role="main" class="pb-3">
     <div class="login-Containter">
@@ -26,7 +28,7 @@
         </div>
         <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" id="ID" asp-for="Id" />
+            <input type="hidden" id="ID" asp-for="AppUserDto.Id" />
             <div class="form-group">
                 <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
             </div>
@@ -34,62 +36,62 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>NAZWA FIRMY*</b>
-                    <input id="CompanyName" class="form-control form-input" asp-for="CompanyName" placeholder="Wprowadz nazwę firmy" />
-                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    <input id="CompanyName" class="form-control form-input" asp-for="AppUserDto.CompanyName" placeholder="Wprowadz nazwę firmy" />
+                    <span asp-validation-for="AppUserDto.CompanyName" class="text-danger"></span>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <b>EMAI*L</b>
-                    <input id="Email" class="form-control form-input" asp-for="Email" placeholder="Wprowadz email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <input id="Email" class="form-control form-input" asp-for="AppUserDto.Email" placeholder="Wprowadz email" />
+                    <span asp-validation-for="AppUserDto.Email" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>NAGŁÓWEK*</b>
-                    <input id="Headline" class="form-control form-input" asp-for="Headline" placeholder="Wprowadz nagłówek" />
-                    <span asp-validation-for="Headline" class="text-danger"></span>
+                    <input id="Headline" class="form-control form-input" asp-for="AppUserDto.Headline" placeholder="Wprowadz nagłówek" />
+                    <span asp-validation-for="AppUserDto.Headline" class="text-danger"></span>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <b>TELEFON</b>
-                    <input id="PhoneNumber" class="form-control form-input" asp-for="PhoneNumber" placeholder="Wprowadz email" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    <input id="PhoneNumber" class="form-control form-input" asp-for="AppUserDto.PhoneNumber" placeholder="Wprowadz email" />
+                    <span asp-validation-for="AppUserDto.PhoneNumber" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>STRONA WWW</b>
-                    <input id="Website" class="form-control form-input" asp-for="Website" placeholder="Wprowadz stronę internetową" />
-                    <span asp-validation-for="Website" class="text-danger"></span>
+                    <input id="Website" class="form-control form-input" asp-for="AppUserDto.Website" placeholder="Wprowadz stronę internetową" />
+                    <span asp-validation-for="AppUserDto.Website" class="text-danger"></span>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <b>DATA ZAŁOŻENIA=</b>
-                    <input id="FoundingDate" class="form-control form-input" asp-for="FoundingDate" placeholder="Wprowadz datę założenia" />
-                    <span asp-validation-for="FoundingDate" class="text-danger"></span>
+                    <input id="FoundingDate" class="form-control form-input" asp-for="AppUserDto.FoundingDate" placeholder="Wprowadz datę założenia" />
+                    <span asp-validation-for="AppUserDto.FoundingDate" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <b>ROZMIAR FIRMY*</b>
-                    <select asp-for="CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
+                    <select asp-for="AppUserDto.CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12">
                     <b>KRÓTKI OPIS*</b>
-                    <textarea asp-for="ShortDescription" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                    <textarea asp-for="AppUserDto.ShortDescription" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                    <span asp-validation-for="AppUserDto.ShortDescription" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12">
                     <b>OPIS</b>
-                    <textarea asp-for="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                    <span asp-validation-for="Descrption" class="text-danger"></span>
+                    <textarea asp-for="AppUserDto.Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                    <span asp-validation-for="AppUserDto.Descrption" class="text-danger"></span>
                 </div>
             </div>
 
@@ -99,7 +101,7 @@
                     <div class="row">
                         <div class="col-12">
                             <b>KATEGORIE=</b>
-                            <input asp-for="Categories" class="form-control form-input" placeholder="Nie wybrano" />
+                            <input asp-for="AppUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
                         </div>
                     </div>
                 </div>
@@ -121,7 +123,7 @@
                     <b>ADRES PLIKU WIDEO</b>
                     <div class="row">
                         <div class="col-12">
-                            <input asp-for="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                            <input asp-for="AppUserDto.VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
                         </div>
                     </div>
                 </div>
@@ -135,7 +137,7 @@
                             zdjecie
                         </div>
                         <div class="col-10">
-                            <input type="button" asp-for="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                            <input type="button" asp-for="AppUserDto.VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
                         </div>
                     </div>
                 </div>
@@ -156,27 +158,27 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <b>FACEBOOK</b>
-                            <input id="FacebookProfile" class="form-control form-input" asp-for="FacebookProfile" placeholder="Wprowadz profil facebooka" />
+                            <input id="FacebookProfile" class="form-control form-input" asp-for="AppUserDto.FacebookProfile" placeholder="Wprowadz profil facebooka" />
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <b>TWITTER</b>
-                            <input id="TwitterProfile" class="form-control form-input" asp-for="TwitterProfile" placeholder="Wprowadz profil twittera" />
+                            <input id="TwitterProfile" class="form-control form-input" asp-for="AppUserDto.TwitterProfile" placeholder="Wprowadz profil twittera" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <b>YOUTUBE</b>
-                            <input id="YoutubeProfile" class="form-control form-input" asp-for="YoutubeProfile" placeholder="Wprowadz profil youtube" />
+                            <input id="YoutubeProfile" class="form-control form-input" asp-for="AppUserDto.YoutubeProfile" placeholder="Wprowadz profil youtube" />
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <b>VIMEO</b>
-                            <input id="VimeoProfile" class="form-control form-input" asp-for="VimeoProfile" placeholder="Wprowadz profil vimeo" />
+                            <input id="VimeoProfile" class="form-control form-input" asp-for="AppUserDto.VimeoProfile" placeholder="Wprowadz profil vimeo" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <b>LINKEDIN</b>
-                            <input id="LinkedinProfile" class="form-control form-input" asp-for="LinkedinProfile" placeholder="Wprowadz profil linkedin" />
+                            <input id="LinkedinProfile" class="form-control form-input" asp-for="AppUserDto.LinkedinProfile" placeholder="Wprowadz profil linkedin" />
                         </div>
                     </div>
                 </div>
@@ -186,37 +188,61 @@
     </div>
 
 
-    <a asp-controller="ResetPassword" class="btn btn-secondary" asp-action="Index" >Zmień hasło</a>
+    <a asp-controller="ResetPassword" class="btn btn-secondary" asp-action="Index">Zmień hasło</a>
 
     @*<div class="row">
-        <div class="col-md-4">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input asp-for="Input.Code" type="hidden" />
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Reset</button>
-            </form>
-        </div>
-    </div>*@
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Input.Code" type="hidden" />
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Reset</button>
+                </form>
+            </div>
+        </div>*@
 
 
 </main>
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@*<script>
+    function validateInput()
+    {
+        var input
+        $("input").isEmptyOrSpaces()
+        var str = document.getElementById("NazwaFirmy").value;
+        if (str === null || str.match(/\S/))
+        {
+            return true;
+        }
+        else
+        {
+            document.getElementById("companyNameRequired").innerHTML = "Nazwa firmy jest wymagana";
+            return false;
+        }
+    }
+
+
+    function isEmptyOrSpaces(str) {
+        return str === null || str.match(/^ *$/) !== null;
+    }
+</script>*@
+
+
 }
 
 
