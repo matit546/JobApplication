@@ -86,6 +86,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
         public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
             ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile")] AppUserDto appUserDto, IFormFile file)
         {
+
             if (file != null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
