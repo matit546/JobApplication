@@ -202,6 +202,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> ResetPassword()
         {
 
