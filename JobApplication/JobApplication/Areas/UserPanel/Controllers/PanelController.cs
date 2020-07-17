@@ -36,8 +36,23 @@ namespace JobApplication.Areas.UserPanel.Controllers
         {
             return View();
         }
-        
-       
+
+
+        //Get User Data
+        [HttpGet]
+        public async Task<IActionResult> GetJobOffers()
+        {
+            var jobOffers = await _context.JobOffers.ToListAsync();
+            if (jobOffers == null)
+            {
+                return NotFound();
+            }
+
+            var json = JsonConvert.SerializeObject(jobOffers);
+            return Json(json);
+        }
+
+
         //Get User Data
         [HttpGet]
         public async Task<IActionResult> EditProfile()

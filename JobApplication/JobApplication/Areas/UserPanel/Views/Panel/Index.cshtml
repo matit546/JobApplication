@@ -308,8 +308,63 @@
         </main>
     </div>
 
-    <div id="Employer3"  class="tabcontent" style=" display:none">
-       
+    <div id="Employer3" class="tabcontent" style=" display:none">
+        <div id="Employer3" class="tabcontent" style=" display:none">
+            <main role="main" class="pb-3">
+                <div class="login-Containter">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-9 px-0">
+                                    <div>
+                                        <select class="form-input">
+                                            <option>1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3 px-0">
+                                    <button>
+                                        🔍
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-input">
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-input">
+                                    <option>1</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-sm table-striped table-bordered m-2">
+                            <thead>
+                                <tr>
+                                    <th>TYTYŁ</th>
+                                    <th>APLIKACJE</th>
+                                    <th>UTWORZONO</th>
+                                    <th>PRZEDAWNIONY</th>
+                                    <th>PODGLĄD</th>
+                                    <th>STATUS</th>
+                                    <th>WYRÓŻNIONE</th>
+                                    <th>AKCJA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablebody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <div id="Employer4" class="tabcontent" style=" display:none">
@@ -531,7 +586,35 @@
                 $("#Employer1").load("/Panel/GetEditPartialView");
             });
 
+            $("#oferta").click(function () {
+                $("#tablebody tr").remove();
+                $.ajax({
+                    url: "/Panel/GetJobOffers",
+                    type: "get",
+                    success: function (data) {
+                        var Data = $.parseJSON(data);
+                        $.each(Data, function (value) {
+                            $("tbody").append($("<tr>"));
+                            appendElement = $("tbody tr").last();
+                            appendElement.append($("<td>").html(Data[value]["Title"]));
+                            appendElement.append($("<td>").html(Data[value]["TypeOfJob"]));
+                            appendElement.append($("<td>").html(Data[value]["PublicationTime"]));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr)
+                    }
+                });
+            });
+
         });
+
+
 
         function OpenNavbarItem(evt, itemNumber) {
             var i, tabcontent, tablinks;
