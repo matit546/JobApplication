@@ -80,9 +80,16 @@
         {
             <div class="container col-sm-6">
                 <div class="joboffer-main">
-                    <div class="card-body">
-                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                        <h5>@Html.DisplayFor(modelItem => item.PaymentMax)</h5>
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main"/>
+                            <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
+                            <div class="joboffer-button">
+                                <a>@Html.DisplayFor(modelItem => item.WorkingTime)</a>
+                            </div>
+                        </div>
+                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
                         <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
                     </div>
                 </div>

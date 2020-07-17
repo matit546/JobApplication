@@ -1,4 +1,5 @@
-﻿using JobApplication.Models;
+﻿using JobApplication.Areas.Identity.Data.DTO;
+using JobApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,7 @@ namespace JobApplication.Areas.Identity.Data.ViewModels
 {
     public class UserAndOffers
     {
-        public AppUser appUser {get;set;}
+        public AppUserDto AppUserDto { get;set;}
         public JobOffer jobOffer { get; set; }
-
     }
 }
