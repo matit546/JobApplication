@@ -34,29 +34,8 @@ namespace JobApplication.Controllers
             return View(await _context.JobOffers.ToListAsync());
         }
         [Authorize(Policy = "RequireAdministratorRole")]
-        public async Task <IActionResult> Privacy(IFormFile file, AppUser appUser)
+        public IActionResult Privacy()
         {
-            if (file != null && file.Length > 0)
-            {
-                var imagePath = @"\img\images\";
-                var uploadPath = _iWebHost.WebRootPath + imagePath;
-
-                if (!Directory.Exists(uploadPath))
-                {
-                    Directory.CreateDirectory(uploadPath);
-                }
-
-                var newFileName = Guid.NewGuid().ToString();
-                var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
-                string fullPath = uploadPath + fileName;
-                imagePath = imagePath + @"\";
-                var filePath = @".." + Path.Combine(imagePath, fileName);
-                using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
-                appUser.BackgroundImage = fileName;
-            }
             return View();
         }
 
