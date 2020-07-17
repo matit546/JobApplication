@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using JobApplication.Areas.Identity.Data.DTO;
+using Microsoft.Extensions.Logging;
 
 namespace JobApplication.Areas.UserPanel.Controllers
 {
@@ -26,11 +27,15 @@ namespace JobApplication.Areas.UserPanel.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IWebHostEnvironment _iWebHost;
-        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILogger<PanelController> _logger;
+        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost, ILogger<PanelController> logger, SignInManager<AppUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _iWebHost = webHost;
+            _signInManager = signInManager;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -197,9 +202,48 @@ namespace JobApplication.Areas.UserPanel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> ResetPassword()
+        {
 
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel Input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+
+            await _signInManager.RefreshSignInAsync(user);
+            _logger.LogInformation("User changed their password successfully.");
+            Input.StatusMessage = "Your password has been changed.";
+
+            return View();
+        }
 
     }
 

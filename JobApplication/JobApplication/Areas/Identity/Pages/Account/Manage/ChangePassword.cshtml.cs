@@ -27,10 +27,11 @@ namespace JobApplication.Areas.Identity.Pages.Account.Manage
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public Data.ResetPasswordModel Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
+
 
         public class InputModel
         {
