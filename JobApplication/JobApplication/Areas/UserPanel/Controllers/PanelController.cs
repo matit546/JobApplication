@@ -86,54 +86,48 @@ namespace JobApplication.Areas.UserPanel.Controllers
         public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
             ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile")] AppUserDto appUserDto, IFormFile file)
         {
-
-            if (file != null)
-            {
-                var user = await _userManager.GetUserAsync(HttpContext.User);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-                if (user.BackgroundImage != null)
-                {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", user.BackgroundImage);
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-                }
-                if (file != null && file.Length > 0)
-                {
-                    var imagePath = @"\images\";
-                    var uploadPath = _iWebHost.WebRootPath + imagePath;
-
-                    if (!Directory.Exists(uploadPath))
-                    {
-                        Directory.CreateDirectory(uploadPath);
-                    }
-
-                    var newFileName = Guid.NewGuid().ToString();
-                    var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
-                    string fullPath = uploadPath + fileName;
-                    imagePath = imagePath + @"\";
-                    var filePath = @".." + Path.Combine(imagePath, fileName);
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    user.BackgroundImage= fileName;
-                    //_context.Update(appUser);
-                    await _userManager.UpdateAsync(user);
-                }
-            }
-
             if (ModelState.IsValid)
             {
                 var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+                if (file != null)
+                {
+                    if (updateUser == null)
+                    {
+                        return NotFound();
+                    }
+                    if (updateUser.BackgroundImage != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", updateUser.BackgroundImage);
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                    }
+                    if (file != null && file.Length > 0)
+                    {
+                        var imagePath = @"\images\";
+                        var uploadPath = _iWebHost.WebRootPath + imagePath;
 
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        var newFileName = Guid.NewGuid().ToString();
+                        var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
+                        string fullPath = uploadPath + fileName;
+                        imagePath = imagePath + @"\";
+                        var filePath = @".." + Path.Combine(imagePath, fileName);
+                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+                        updateUser.BackgroundImage = fileName;
+                    }
+                }
                 updateUser.PhoneNumber = appUserDto.PhoneNumber;
                 updateUser.Address = appUserDto.Address;
-                updateUser.BackgroundImage = appUserDto.BackgroundImage;
+                //updateUser.BackgroundImage = appUserDto.BackgroundImage;
                 updateUser.Categories = appUserDto.Categories;
                 updateUser.CompanyName = appUserDto.CompanyName;
                 updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;

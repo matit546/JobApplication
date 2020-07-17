@@ -20,15 +20,12 @@ namespace JobApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _iWebHost;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IWebHostEnvironment webHost)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
-            _iWebHost = webHost;
         }
-
         public async Task<IActionResult> Index()
         {
             return View(await _context.JobOffers.ToListAsync());
