@@ -8,13 +8,13 @@
         <img alt="zdjecie" />
         <label>Witaj @User.Identity.Name!</label>
     </div>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
+    <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
+    <button class="tablinks" id="DodajPrace" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
     <button class="tablinks" id="ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
-    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
+    <button class="tablinks" id="Aplikacje" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
+    <button class="tablinks" id="Pakiety" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
+    <button class="tablinks" id="ZapisaneCV" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
+    <button class="tablinks" id="Opinie" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button class="tablinks" type="submit">Wyloguj!</button>
     </form>
@@ -24,7 +24,7 @@
     <main role="main" class="pb-3">
         <div class="login-Containter">*@
 <div class="userPanelPadding">
-    <div id="Employer1" class="tabcontent">
+    <div id="Employer1" class="tabcontent" style=" display:none">
         <main role="main" class="pb-3">
             <div class="login-Containter">
                 <div class="row">
@@ -757,7 +757,7 @@
                 method: "GET",
                 url: "/EmployerPanel/EditProfile",
                 success: function (data) {
-                       alert(data);
+                    alert(data);
                     // if data is in string format
                     var Data = $.parseJSON(data);
                     $("#ID").val(Data.Id);
@@ -800,6 +800,7 @@
 
         $(document).ready(function () {
 
+            LoadTabindex();
             $("#ofertypracy").click(function () {
                 $("#tablebody tr").remove();
                 $.ajax({
@@ -830,6 +831,32 @@
 
 
 
+        function LoadTabindex() {
+            var pageURL = $(location).attr("href");
+            var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+            if (edited == "Panel") {
+                OpenNavbarItemOnLoad('Employer1');
+            }
+            if (edited == "DodajOferte") {
+                OpenNavbarItemOnLoad('Employer2');
+            }
+            if (edited == "MojeOferty") {
+                OpenNavbarItemOnLoad('Employer3');
+            }
+            if (edited == "OfertyAplikacyjne") {
+                OpenNavbarItemOnLoad('Employer4');
+            }
+            if (edited == "PakietyOfert") {
+                OpenNavbarItemOnLoad('Employer5');
+            }
+            if (edited == "PakietyKandydatow") {
+                OpenNavbarItemOnLoad('Employer6');
+            }
+            if (edited == "PrzegladaneZyciorysy") {
+                OpenNavbarItemOnLoad('Employer7');
+            }
+        }
+
         function OpenNavbarItem(evt, itemNumber) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -842,6 +869,52 @@
             }
             document.getElementById(itemNumber).style.display = "block";
             evt.currentTarget.className += " active";
+
+            if (itemNumber == "Employer1") {
+                changeurl('Panel');
+            }
+            if (itemNumber == "Employer2") {
+                changeurl('DodajOferte');
+            }
+            if (itemNumber == "Employer3") {
+                changeurl('MojeOferty');
+            }
+            if (itemNumber == "Employer4") {
+                changeurl('OfertyAplikacyjne');
+            }
+            if (itemNumber == "Employer5") {
+                changeurl('PakietyOfert');
+            }
+            if (itemNumber == "Employer6") {
+                changeurl('PakietyKandydatow');
+            }
+            if (itemNumber == "Employer7") {
+                changeurl('PrzegladaneZyciorysy');
+            }
+        }
+
+
+        function OpenNavbarItemOnLoad(itemNumber) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(itemNumber).style.display = "block";
+
+
+
+        }
+
+
+        function changeurl(url) {
+            var new_url = "/EmployerPanel?name=" + url;
+            window.history.pushState("data", "Title", new_url);
+            document.title = url;
         }
 
     </script>

@@ -173,8 +173,8 @@ namespace JobApplication.Areas.Employer.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
-                    }
+                    return RedirectToAction(nameof(Index));
+                }
 
                 }
                 return RedirectToAction(nameof(Index));

@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobApplication.Areas.Employer.Controllers
 {
     [Area("Employer")]
-    public class HomeController : Controller
+
+    public class EmployerController : Controller
     {
         public IActionResult Index()
         {

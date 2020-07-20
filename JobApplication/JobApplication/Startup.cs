@@ -156,14 +156,15 @@ namespace JobApplication
                 areaName: "Candidate",
                 pattern: "Pracownik/{controller=Home}/{action=Index}/{id?}");
 
+
                 endpoints.MapAreaControllerRoute(
                 name: "myAreaEmployer",
                 areaName: "Employer",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=None}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                name: "default",
+                 pattern: "{controller=Home}/{action=Index}");
                 endpoints.MapRazorPages();
 
             });
