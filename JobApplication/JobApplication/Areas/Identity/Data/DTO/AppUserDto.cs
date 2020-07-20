@@ -13,6 +13,7 @@ namespace JobApplication.Areas.Identity.Data.DTO
         public string Id { get; set; }
         public string PhoneNumber { get; set; }
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
