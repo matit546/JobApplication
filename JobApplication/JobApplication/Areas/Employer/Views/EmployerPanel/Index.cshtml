@@ -273,8 +273,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-bottom-left-padding bolded">E-MAIL DO SKŁADANIA APLIKACJI</div>
-                                        <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                        <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                        <input asp-for="jobOffer.Email" class="form-control form-input" placeholder="Wprowadz email" />
+                                        <span asp-validation-for="jobOffer.Email" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -298,16 +298,6 @@
                                 Mapa fajna
                                 <input asp-for="jobOffer.Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
                                 <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container-padding">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">PublicationTIme</div>
-                                <input asp-for="jobOffer.PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                                <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -837,23 +827,27 @@
             if (edited == "Panel") {
                 OpenNavbarItemOnLoad('Employer1');
             }
-            if (edited == "DodajOferte") {
+            else if (edited == "DodajOferte") {
                 OpenNavbarItemOnLoad('Employer2');
             }
-            if (edited == "MojeOferty") {
+            else if (edited == "MojeOferty") {
                 OpenNavbarItemOnLoad('Employer3');
             }
-            if (edited == "OfertyAplikacyjne") {
+            else if (edited == "OfertyAplikacyjne") {
                 OpenNavbarItemOnLoad('Employer4');
             }
-            if (edited == "PakietyOfert") {
+            else if (edited == "PakietyOfert") {
                 OpenNavbarItemOnLoad('Employer5');
             }
-            if (edited == "PakietyKandydatow") {
+            else if (edited == "PakietyKandydatow") {
                 OpenNavbarItemOnLoad('Employer6');
             }
-            if (edited == "PrzegladaneZyciorysy") {
+            else if (edited == "PrzegladaneZyciorysy") {
                 OpenNavbarItemOnLoad('Employer7');
+            }
+            else {
+                OpenNavbarItemOnLoad("Employer1");
+                changeurl('Panel');
             }
         }
 
@@ -873,23 +867,26 @@
             if (itemNumber == "Employer1") {
                 changeurl('Panel');
             }
-            if (itemNumber == "Employer2") {
+            else if (itemNumber == "Employer2") {
                 changeurl('DodajOferte');
             }
-            if (itemNumber == "Employer3") {
+            else if (itemNumber == "Employer3") {
                 changeurl('MojeOferty');
             }
-            if (itemNumber == "Employer4") {
+            else if (itemNumber == "Employer4") {
                 changeurl('OfertyAplikacyjne');
             }
-            if (itemNumber == "Employer5") {
+            else if (itemNumber == "Employer5") {
                 changeurl('PakietyOfert');
             }
-            if (itemNumber == "Employer6") {
+            else if (itemNumber == "Employer6") {
                 changeurl('PakietyKandydatow');
             }
-            if (itemNumber == "Employer7") {
+            else if (itemNumber == "Employer7") {
                 changeurl('PrzegladaneZyciorysy');
+            }
+            else {
+                changeurl('Panel');
             }
         }
 
@@ -914,7 +911,7 @@
         function changeurl(url) {
             var new_url = "/EmployerPanel?name=" + url;
             window.history.pushState("data", "Title", new_url);
-            document.title = url;
+            //document.title = url;
         }
 
     </script>

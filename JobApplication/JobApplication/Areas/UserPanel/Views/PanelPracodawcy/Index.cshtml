@@ -826,7 +826,6 @@
                     }
                 });
             });
-
         });
 
 
@@ -834,6 +833,7 @@
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+            alert(edited);
             if (edited == "Panel") {
                 OpenNavbarItemOnLoad('Employer1');
             }
@@ -916,6 +916,10 @@
             window.history.pushState("data", "Title", new_url);
             document.title = url;
         }
+
+
+
+
 
     </script>
 }
