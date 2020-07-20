@@ -31,8 +31,9 @@ namespace JobApplication.Areas.UserPanel.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<PanelController> _logger;
         private readonly IMapper _mapper;
+
         public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
-            , ILogger<PanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)
+            , ILogger<PanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)                        
         {
             _context = context;
             _userManager = userManager;
@@ -41,15 +42,20 @@ namespace JobApplication.Areas.UserPanel.Controllers
             _logger = logger;
             _mapper = mapper;
         }
-        public IActionResult Index()
+
+        public IActionResult Index()            //Default VIew
         {
             return View();
         }
 
+        public IActionResult CandidateProfile()            //Default VIew
+        {
+            return View();
+        }
 
         //Get User Data
         [HttpGet]
-        public async Task<IActionResult> GetJobOffers()
+        public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User
         {
             var jobOffers = await _context.JobOffers.ToListAsync();
             if (jobOffers == null)
@@ -64,9 +70,8 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
         //Get User Data
         [HttpGet]
-        public async Task<IActionResult> EditProfile()
+        public async Task<IActionResult> EditProfile()      // Get current User data
         {
- 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
             if (user == null)
@@ -103,12 +108,12 @@ namespace JobApplication.Areas.UserPanel.Controllers
             
         }
 
-        //Edit User Profile
+        //Post User changes in data
         [HttpPost]
         [Authorize(Roles = SD.EmployerRole)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
-            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserDto appUserDto, IFormFile file)
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserDto appUserDto, IFormFile file)  
         {
             if (ModelState.IsValid)
             {
@@ -190,7 +195,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             return PartialView("_EditPartialView");
 
         }
-      
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -206,6 +211,11 @@ namespace JobApplication.Areas.UserPanel.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> ResetPassword()
@@ -246,8 +256,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            Input.StatusMessage = "Your password has been changed.";
-
+            TempData["ReturnUrl"] = "Hasło zostało zmienione";
             return View();
         }
 
