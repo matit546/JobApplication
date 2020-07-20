@@ -520,3 +520,16 @@ figcaption {
     width:130px;
     border-radius:4px;
 }
+
+.container-padding{
+    padding: 10px 0px 10px 0px;
+}
+
+.text-bottom-left-padding {
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+
+.bolded{
+    font-weight:bold;
+}

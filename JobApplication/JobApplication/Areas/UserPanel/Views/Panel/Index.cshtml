@@ -3,23 +3,18 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h1>Index</h1>
-
-    <h4>AppUserEmployeeExtension</h4>
-    <hr />*@
-
 <div class="tab">
     <div class="displayImage">
         <img alt="zdjecie" />
         <label>Witaj @User.Identity.Name!</label>
     </div>
-    <button class="tablinks" id="Panel"  onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
-    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
-    <button class="tablinks" id="oferta" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
-    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
-    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
-    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
-    <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
+    <button class="tablinks" id="ofertypracy"  onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
+    <button class="tablinks" onclick="OpenNavbarItem(event, 'Employer7')">Opinie</button>
     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button class="tablinks" type="submit">Wyloguj!</button>
     </form>
@@ -50,7 +45,7 @@
                                             Nagłówek
                                         </div>
                                         <div class="row">
-                                            <input type="button" id="editProfile" asp-route-name="?ProfileEdit" value="Edytuj" />
+                                            <input type="button" class="tablinks" id="Edytuj" value="Edytuj" onclick="OpenNavbarItem(event, 'Employer8')" />
                                         </div>
                                     </div>
                                 </div>
@@ -187,121 +182,136 @@
                 </div>
                 <form asp-action="CreateNewJobOffer" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div>
+                    <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <b>TYTUŁ*</b>
+                                <div class="text-bottom-left-padding bolded">TYTUŁ*</div>
                                 <input asp-for="jobOffer.Title" class="form-control form-input" placeholder="Wprowadz tytuł" />
                                 <span asp-validation-for="jobOffer.Title" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <div>
+                    <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <b>OPIS*</b>
+                                <div class="text-bottom-left-padding bolded">OPIS*</div>
                                 <textarea asp-for="jobOffer.Description" class="form-control form-input" placeholder="Wprowadz opis"> </textarea>
                                 <span asp-validation-for="jobOffer.Description" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <b>KATEGORIA OFERTY PRACY*</b>
-                            <input asp-for="jobOffer.Category" class="form-control form-input" placeholder="Wybierz kategorię" />
-                            <span asp-validation-for="jobOffer.Category" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <b>WYMIAR PRACY*</b>
-                            <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz wymiar pracy" />
-                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <b>POZIOM STANOWISKA*</b>
-                            <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
-                            <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <b>WYNAGRODZENIE OD</b>
-                            <input asp-for="jobOffer.PaymentMin" class="form-control form-input" placeholder="Wprowadz wynagrodzenie od" />
-                            <span asp-validation-for="jobOffer.PaymentMin" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <b>WYNAGRODZENIE DO</b>
-                            <input asp-for="jobOffer.PaymentMax" class="form-control form-input" placeholder="Wprowadz wynagrodzenie do" />
-                            <span asp-validation-for="jobOffer.PaymentMax" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <b>WALUTA</b>
-                            <select asp-for="jobOffer.ChooseTheCurrency" class="form-input">
-                                <option disabled selected>Wybierz walutę</option>
-                                <option value="PLN">PLN</option>
-                                <option value="EUR">EUR</option>
-                                <option value="GBP">GBP</option>
-                            </select>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">KATEGORIA OFERTY PRACY*</div>
+                                <input asp-for="jobOffer.Category" class="form-control form-input" placeholder="Wybierz kategorię" />
+                                <span asp-validation-for="jobOffer.Category" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYMIAR PRACY*</div>
+                                <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz wymiar pracy" />
+                                <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">POZIOM STANOWISKA*</div>
+                                <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
+                                <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <b>JĘZYKI</b>
-                            <input type="text" placeholder="Wybierz język" class="w-100" />
-
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <b>PŁEĆ</b>
-                            <input type="text" placeholder="Wprowadz płeć" class="w-100" />
-
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD</div>
+                                <input asp-for="jobOffer.PaymentMin" class="form-control form-input" placeholder="Wprowadz wynagrodzenie od" />
+                                <span asp-validation-for="jobOffer.PaymentMin" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYNAGRODZENIE DO</div>
+                                <input asp-for="jobOffer.PaymentMax" class="form-control form-input" placeholder="Wprowadz wynagrodzenie do" />
+                                <span asp-validation-for="jobOffer.PaymentMax" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WALUTA</div>
+                                <select asp-for="jobOffer.ChooseTheCurrency" class="form-input">
+                                    <option disabled selected>Wybierz walutę</option>
+                                    <option value="PLN">PLN</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <b>USTAWIENIA APLIKACJI</b>
-                            <div class="row">
-                                <div class="col-6">
-                                    <b>TERMIN SKŁADANIA APLIKACJI</b>
-                                    <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                    <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
-                                </div>
-                                <div class="col-6">
-                                    <b>E-MAIL DO SKŁADANIA APLIKACJI</b>
-                                    <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                    <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">JĘZYKI</div>
+                                <input type="text" placeholder="Wybierz język" class="w-100" />
+
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">PŁEĆ</div>
+                                <input type="text" placeholder="Wprowadz płeć" class="w-100" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">USTAWIENIA APLIKACJI</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="text-bottom-left-padding bolded">TERMIN SKŁADANIA APLIKACJI</div>
+                                        <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
+                                        <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-bottom-left-padding bolded">E-MAIL DO SKŁADANIA APLIKACJI</div>
+                                        <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
+                                        <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <b>WYMAGANE UMIEJĘTNOŚCI</b>
-                            <input asp-for="jobOffer.Skills" class="form-control form-input" placeholder="Wprowadz wymagane umiejętności" />
-                            <span asp-validation-for="jobOffer.Skills" class="text-danger"></span>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">WYMAGANE UMIEJĘTNOŚCI</div>
+                                <input asp-for="jobOffer.Skills" class="form-control form-input" placeholder="Wprowadz wymagane umiejętności" />
+                                <span asp-validation-for="jobOffer.Skills" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <b>LOKALIZACJA I MAPA</b>
-                            Mapa fajna
-                            <input asp-for="jobOffer.Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                            <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
+                                Mapa fajna
+                                <input asp-for="jobOffer.Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                                <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <b>PublicationTIme</b>
-                            <input asp-for="jobOffer.PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                            <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">PublicationTIme</div>
+                                <input asp-for="jobOffer.PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                                <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
+
                     <input type="submit" />
                 </form>
             </div>
@@ -309,62 +319,60 @@
     </div>
 
     <div id="Employer3" class="tabcontent" style=" display:none">
-        <div id="Employer3" class="tabcontent" style=" display:none">
-            <main role="main" class="pb-3">
-                <div class="login-Containter">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="row">
-                                <div class="col-9 px-0">
-                                    <div>
-                                        <select class="form-input">
-                                            <option>1</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <button>
-                                        🔍
-                                    </button>
+        <main role="main" class="pb-3">
+            <div class="login-Containter">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-9 px-0">
+                                <div>
+                                    <select class="form-input">
+                                        <option>1</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-input">
-                                    <option>1</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-input">
-                                    <option>1</option>
-                                </select>
+                            <div class="col-3 px-0">
+                                <button>
+                                    🔍
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <table class="table table-sm table-striped table-bordered m-2">
-                            <thead>
-                                <tr>
-                                    <th>TYTYŁ</th>
-                                    <th>APLIKACJE</th>
-                                    <th>UTWORZONO</th>
-                                    <th>PRZEDAWNIONY</th>
-                                    <th>PODGLĄD</th>
-                                    <th>STATUS</th>
-                                    <th>WYRÓŻNIONE</th>
-                                    <th>AKCJA</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablebody">
-                            </tbody>
-                        </table>
+                    <div class="col-3">
+                        <div>
+                            <select class="form-input">
+                                <option>1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div>
+                            <select class="form-input">
+                                <option>1</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </main>
-        </div>
+                <div class="row">
+                    <table class="table table-sm table-striped table-bordered m-2">
+                        <thead>
+                            <tr>
+                                <th>TYTYŁ</th>
+                                <th>APLIKACJE</th>
+                                <th>UTWORZONO</th>
+                                <th>PRZEDAWNIONY</th>
+                                <th>PODGLĄD</th>
+                                <th>STATUS</th>
+                                <th>WYRÓŻNIONE</th>
+                                <th>AKCJA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablebody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <div id="Employer4" class="tabcontent" style=" display:none">
@@ -410,192 +418,8 @@
     </div>
 
     <div id="Employer5" class="tabcontent" style=" display:none">
+
        
-        <main role="main" class="pb-3">
-            <div class="login-Containter">
-                <div class="row">
-                    <div class="col-2">
-                        <div>
-                            @*<div class="form-group">
-                                <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
-                            </div>
-                            <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
-                        </div>
-                    </div>
-                    <div class="col-10">
-                        <div class="row">
-                            <div>
-                                Text costam
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div>
-                                <input type="button" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" id="ID" asp-for="AppUserDto.Id" />
-                    <div class="form-group">
-                        <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
-                    </div>
-                    <img ID="impPrev" class="img-fluid rounded BackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <b>NAZWA FIRMY*</b>
-                            <input id="CompanyName" class="form-control form-input" asp-for="AppUserDto.CompanyName" placeholder="Wprowadz nazwę firmy" />
-                            <span asp-validation-for="AppUserDto.CompanyName" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <b>EMAI*L</b>
-                            <input id="Email" class="form-control form-input" asp-for="AppUserDto.Email" placeholder="Wprowadz email" />
-                            <span asp-validation-for="AppUserDto.Email" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <b>NAGŁÓWEK*</b>
-                            <input id="Headline" class="form-control form-input" asp-for="AppUserDto.Headline" placeholder="Wprowadz nagłówek" />
-                            <span asp-validation-for="AppUserDto.Headline" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <b>TELEFON</b>
-                            <input id="PhoneNumber" class="form-control form-input" asp-for="AppUserDto.PhoneNumber" placeholder="Wprowadz email" />
-                            <span asp-validation-for="AppUserDto.PhoneNumber" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <b>STRONA WWW</b>
-                            <input id="Website" class="form-control form-input" asp-for="AppUserDto.Website" placeholder="Wprowadz stronę internetową" />
-                            <span asp-validation-for="AppUserDto.Website" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <b>DATA ZAŁOŻENIA=</b>
-                            <input id="FoundingDate" class="form-control form-input" asp-for="AppUserDto.FoundingDate" placeholder="Wprowadz datę założenia" />
-                            <span asp-validation-for="AppUserDto.FoundingDate" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <b>ROZMIAR FIRMY*</b>
-                            <select asp-for="AppUserDto.CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>KRÓTKI OPIS*</b>
-                            <textarea asp-for="AppUserDto.ShortDescription" id="ShortDescription"  class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                            <span asp-validation-for="AppUserDto.ShortDescription" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>OPIS</b>
-                            <textarea asp-for="AppUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                            <span asp-validation-for="AppUserDto.Descrption" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>PREFERENCJE ZAWODOWE</b>
-                            <div class="row">
-                                <div class="col-12">
-                                    <b>KATEGORIE=</b>
-                                    <input id="Categories" asp-for="AppUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>LOKALIZACJA I MAPA</b>
-                            <div class="row">
-                                <div class="col-12">
-                                    mapa
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>ADRES PLIKU WIDEO</b>
-                            <div class="row">
-                                <div class="col-12">
-                                    <input asp-for="AppUserDto.VideoUrl" id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>ZDJĘCIE W TLE</b>
-                            <div class="row">
-                                <div class="col-2">
-                                    zdjecie
-                                </div>
-                                <div class="col-10">
-                                    <input type="button" asp-for="AppUserDto.VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>GALERIA</b>
-                            <div class="row">
-                                ???
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <b>FIRMOWY PROFIL SPOŁECZNOŚCIOWY</b>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12">
-                                    <b>FACEBOOK</b>
-                                    <input id="FacebookProfile" class="form-control form-input" asp-for="AppUserDto.FacebookProfile" placeholder="Wprowadz profil facebooka" />
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <b>TWITTER</b>
-                                    <input id="TwitterProfile" class="form-control form-input" asp-for="AppUserDto.TwitterProfile" placeholder="Wprowadz profil twittera" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12">
-                                    <b>YOUTUBE</b>
-                                    <input id="YoutubeProfile" class="form-control form-input" asp-for="AppUserDto.YoutubeProfile" placeholder="Wprowadz profil youtube" />
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <b>VIMEO</b>
-                                    <input id="VimeoProfile" class="form-control form-input" asp-for="AppUserDto.VimeoProfile" placeholder="Wprowadz profil vimeo" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12">
-                                    <b>LINKEDIN</b>
-                                    <input id="LinkedinProfile" class="form-control form-input" asp-for="AppUserDto.LinkedinProfile" placeholder="Wprowadz profil linkedin" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
-                </form>
-            </div>
-        </main>
 
     </div>
 
@@ -702,6 +526,224 @@
                 </form>
             </div>
         </div>*@
+
+
+    <div id="Employer8" class="tabcontent" style=" display:none">
+
+        <main role="main" class="pb-3">
+            <div class="login-Containter">
+                <div class="row">
+                    <div class="col-2">
+                        <div>
+                            @*<div class="form-group">
+                                    <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+                                </div>
+                                <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div>
+                                Text costam
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <input type="button" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="ID" asp-for="AppUserDto.Id" />
+                    <div class="form-group">
+                        <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+                    </div>
+                    <img ID="impPrev" class="img-fluid rounded BackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">NAZWA FIRMY*</div>
+                                <input id="CompanyName" class="form-control form-input" asp-for="AppUserDto.CompanyName" placeholder="Wprowadz nazwę firmy" />
+                                <span asp-validation-for="AppUserDto.CompanyName" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">EMAIL*</div>
+                                <input id="Email" class="form-control form-input" asp-for="AppUserDto.Email" placeholder="Wprowadz email" />
+                                <span asp-validation-for="AppUserDto.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">NAGŁÓWEK*</div>
+                                <input id="Headline" class="form-control form-input" asp-for="AppUserDto.Headline" placeholder="Wprowadz nagłówek" />
+                                <span asp-validation-for="AppUserDto.Headline" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">TELEFON</div>
+                                <input id="PhoneNumber" class="form-control form-input" asp-for="AppUserDto.PhoneNumber" placeholder="Wprowadz email" />
+                                <span asp-validation-for="AppUserDto.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">STRONA WWW</div>
+                                <input id="Website" class="form-control form-input" asp-for="AppUserDto.Website" placeholder="Wprowadz stronę internetową" />
+                                <span asp-validation-for="AppUserDto.Website" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">DATA ZAŁOŻENIA</div>
+                                <input id="FoundingDate" class="form-control form-input" asp-for="AppUserDto.FoundingDate" placeholder="Wprowadz datę założenia" />
+                                <span asp-validation-for="AppUserDto.FoundingDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="text-bottom-left-padding bolded">ROZMIAR FIRMY*</div>
+                                <select asp-for="AppUserDto.CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">KRÓTKI OPIS*</div>
+                                <textarea asp-for="AppUserDto.ShortDescription" id="ShortDescription" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                                <span asp-validation-for="AppUserDto.ShortDescription" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">OPIS</div>
+                                <textarea asp-for="AppUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                                <span asp-validation-for="AppUserDto.Descrption" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">PREFERENCJE ZAWODOWE</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">KATEGORIE</div>
+                                        <input id="Categories" asp-for="AppUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        mapa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">ADRES PLIKU WIDEO</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input asp-for="AppUserDto.VideoUrl" id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">ZDJĘCIE W TLE</div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        zdjecie
+                                    </div>
+                                    <div class="col-10">
+                                        <input type="button" asp-for="AppUserDto.VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">GALERIA</div>
+                                <div class="row">
+                                    ???
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">FIRMOWY PROFIL SPOŁECZNOŚCIOWY</div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="text-bottom-left-padding bolded">FACEBOOK</div>
+                                        <input id="FacebookProfile" class="form-control form-input" asp-for="AppUserDto.FacebookProfile" placeholder="Wprowadz profil facebooka" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="text-bottom-left-padding bolded">TWITTER</div>
+                                        <input id="TwitterProfile" class="form-control form-input" asp-for="AppUserDto.TwitterProfile" placeholder="Wprowadz profil twittera" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="text-bottom-left-padding bolded">YOUTUBE</div>
+                                        <input id="YoutubeProfile" class="form-control form-input" asp-for="AppUserDto.YoutubeProfile" placeholder="Wprowadz profil youtube" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="text-bottom-left-padding bolded">VIMEO</div>
+                                        <input id="VimeoProfile" class="form-control form-input" asp-for="AppUserDto.VimeoProfile" placeholder="Wprowadz profil vimeo" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="text-bottom-left-padding bolded">LINKEDIN</div>
+                                        <input id="LinkedinProfile" class="form-control form-input" asp-for="AppUserDto.LinkedinProfile" placeholder="Wprowadz profil linkedin" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
+                </form>
+            </div>
+        </main>
+
+    </div>
+
+
 </div>
 
 
@@ -762,7 +804,7 @@
                 $("#Employer1").load("/Panel/GetEditPartialView");
             });
 
-            $("#oferta").click(function () {
+            $("#ofertypracy").click(function () {
                 $("#tablebody tr").remove();
                 $.ajax({
                     url: "/Panel/GetJobOffers",
