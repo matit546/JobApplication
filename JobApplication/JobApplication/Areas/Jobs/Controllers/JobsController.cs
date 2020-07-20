@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using JobApplication.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using JobApplication.Pagination;
+using JobApplication.Models;
 
 namespace JobApplication.Areas.Jobs.Controllers
 {
@@ -18,9 +20,12 @@ namespace JobApplication.Areas.Jobs.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.JobOffers.ToListAsync());
+            var joboffers = from j in _context.JobOffers
+                                select j;
+            int pageSize = 4;
+            return View(await PaginationList<JobOffer>.CreateAsync(joboffers.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
