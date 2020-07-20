@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Http;
 using JobApplication.Areas.Identity.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
+using AutoMapper;
+using JobApplication.Areas.Identity.Data.Mapper;
 
 namespace JobApplication
 {
@@ -39,6 +41,8 @@ namespace JobApplication
             services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders().AddDefaultUI();
+       
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential 
@@ -60,9 +64,11 @@ namespace JobApplication
             });
 
             services.AddScoped<IDbInitializer, DbInitializer>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddAutoMapper(typeof(Mappings));
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;

@@ -17,6 +17,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using JobApplication.Areas.Identity.Data.DTO;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace JobApplication.Areas.UserPanel.Controllers
 {
@@ -29,13 +30,16 @@ namespace JobApplication.Areas.UserPanel.Controllers
         private readonly IWebHostEnvironment _iWebHost;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<PanelController> _logger;
-        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost, ILogger<PanelController> logger, SignInManager<AppUser> signInManager)
+        private readonly IMapper _mapper;
+        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
+            , ILogger<PanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
             _iWebHost = webHost;
             _signInManager = signInManager;
             _logger = logger;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -70,29 +74,29 @@ namespace JobApplication.Areas.UserPanel.Controllers
                 return NotFound();
             }
 
-            var appUserDto = new AppUserDto
-            {
-                Id=user.Id,
-                PhoneNumber=user.PhoneNumber,
-                Address = user.Address,
-                BackgroundImage = user.BackgroundImage,
-                Categories = user.Categories,
-                CompanyName = user.CompanyName,
-                CompanySize = (Identity.Data.DTO.CompanySize)user.CompanySize,
-                Descrption = user.Descrption,
-                Email = user.Email,
-                FacebookProfile = user.FacebookProfile,
-                Gallery = user.Gallery,
-                FoundingDate = user.FoundingDate,
-                ShortDescription = user.ShortDescription,
-                Headline = user.Headline,
-                LinkedinProfile = user.LinkedinProfile,
-                TwitterProfile = user.TwitterProfile,
-                VideoUrl = user.VideoUrl,
-                VimeoProfile = user.VimeoProfile,
-                Website = user.Website,
-                YoutubeProfile = user.YoutubeProfile
-            };
+            AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
+            //{
+            //    Id=user.Id,
+            //    PhoneNumber=user.PhoneNumber,
+            //    Address = user.Address,
+            //    BackgroundImage = user.BackgroundImage,
+            //    Categories = user.Categories,
+            //    CompanyName = user.CompanyName,
+            //    CompanySize = (Identity.Data.DTO.CompanySize)user.CompanySize,
+            //    Descrption = user.Descrption,
+            //    Email = user.Email,
+            //    FacebookProfile = user.FacebookProfile,
+            //    Gallery = user.Gallery,
+            //    FoundingDate = user.FoundingDate,
+            //    ShortDescription = user.ShortDescription,
+            //    Headline = user.Headline,
+            //    LinkedinProfile = user.LinkedinProfile,
+            //    TwitterProfile = user.TwitterProfile,
+            //    VideoUrl = user.VideoUrl,
+            //    VimeoProfile = user.VimeoProfile,
+            //    Website = user.Website,
+            //    YoutubeProfile = user.YoutubeProfile
+            //};
 
             var  json = JsonConvert.SerializeObject(appUserDto);
             return Json(json);
@@ -145,6 +149,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
                         updateUser.BackgroundImage = fileName;
                     }
                 }
+
                 updateUser.PhoneNumber = appUserDto.PhoneNumber;
                 updateUser.Address = appUserDto.Address;
                 //updateUser.BackgroundImage = appUserDto.BackgroundImage;

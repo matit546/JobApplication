@@ -13,7 +13,7 @@
         <img alt="zdjecie" />
         <label>Witaj @User.Identity.Name!</label>
     </div>
-    <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
+    <button class="tablinks" id="Panel"  onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
     <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
     <button class="tablinks" id="oferta" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
     <button class="tablinks" id="Oferty" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
@@ -491,7 +491,7 @@
                     <div class="row">
                         <div class="col-12">
                             <b>KRÓTKI OPIS*</b>
-                            <textarea asp-for="AppUserDto.ShortDescription" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                            <textarea asp-for="AppUserDto.ShortDescription" id="ShortDescription"  class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
                             <span asp-validation-for="AppUserDto.ShortDescription" class="text-danger"></span>
                         </div>
                     </div>
@@ -499,7 +499,7 @@
                     <div class="row">
                         <div class="col-12">
                             <b>OPIS</b>
-                            <textarea asp-for="AppUserDto.Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                            <textarea asp-for="AppUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
                             <span asp-validation-for="AppUserDto.Descrption" class="text-danger"></span>
                         </div>
                     </div>
@@ -510,7 +510,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <b>KATEGORIE=</b>
-                                    <input asp-for="AppUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
+                                    <input id="Categories" asp-for="AppUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
                                 </div>
                             </div>
                         </div>
@@ -532,7 +532,7 @@
                             <b>ADRES PLIKU WIDEO</b>
                             <div class="row">
                                 <div class="col-12">
-                                    <input asp-for="AppUserDto.VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                    <input asp-for="AppUserDto.VideoUrl" id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
                                 </div>
                             </div>
                         </div>
@@ -714,7 +714,7 @@
                 method: "GET",
                 url: "/Panel/EditProfile",
                 success: function (data) {
-                    //     alert(data);
+                       alert(data);
                     // if data is in string format
                     var Data = $.parseJSON(data);
                     $("#ID").val(Data.Id);
@@ -723,8 +723,8 @@
                     $("#VideoUrl").val(Data.VideoUrl);
                     $("#Website").val(Data.Website);
                     $("#FoundingDate").val(Data.FoundingDate);
-                    $("#ShortDescription").val(Data.ShortDescription);
-                    $("#Descrption").val(Data.Descrption);
+                    $("#AppUserDto_ShortDescription").val(Data.ShortDescription);
+                    $("#AppUserDto_Descrption").val(Data.Descrption);
                     $("#Categories").val(Data.Categories);
 
 
