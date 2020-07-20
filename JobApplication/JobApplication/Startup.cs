@@ -159,7 +159,7 @@ namespace JobApplication
                 endpoints.MapAreaControllerRoute(
                 name: "myAreaEmployer",
                 areaName: "Employer",
-                pattern: "Pracodawca/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
