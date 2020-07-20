@@ -45,7 +45,7 @@
                                             Nagłówek
                                         </div>
                                         <div class="row">
-                                            <input type="button" class="tablinks" id="Edytuj" value="Edytuj" onclick="OpenNavbarItem(event, 'Employer8')" />
+                                            <input type="button" class="tablinks" id="editProfile" value="Edytuj" onclick="OpenNavbarItem(event, 'Employer8')" />
                                         </div>
                                     </div>
                                 </div>
@@ -536,9 +536,9 @@
                     <div class="col-2">
                         <div>
                             @*<div class="form-group">
-                                    <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
-                                </div>
-                                <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
+                        <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+                    </div>
+                    <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
                         </div>
                     </div>
                     <div class="col-10">
@@ -736,8 +736,9 @@
                             </div>
                         </div>
                     </div>
-                        <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
+                    <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
                 </form>
+                <a asp-controller="Panel" class="btn btn-secondary" asp-action="ResetPassword"> ZMIEN HASLO</a>
             </div>
         </main>
 
@@ -768,6 +769,7 @@
                     $("#ShortDescription").val(Data.ShortDescription);
                     $("#Descrption").val(Data.Descrption);
                     $("#Categories").val(Data.Categories);
+                    $("#CompanySize").val(Data.CompanySize);
 
 
                     $("#Address").val(Data.Address);
@@ -797,12 +799,6 @@
         //});
 
         $(document).ready(function () {
-
-
-
-            $("#editProfile").click(function () {
-                $("#Employer1").load("/Panel/GetEditPartialView");
-            });
 
             $("#ofertypracy").click(function () {
                 $("#tablebody tr").remove();
