@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JobApplication.Areas.UserPanel.Controllers
+namespace JobApplication.Areas.Candidate.Controllers
 {
-    public class PanelKandydata : Controller
+
+    [Area("Candidate")]
+    public class CandidateController : Controller
     {
         public IActionResult Index()
         {

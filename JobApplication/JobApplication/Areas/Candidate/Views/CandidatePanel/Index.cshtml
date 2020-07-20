@@ -10,7 +10,7 @@
     </div>
     <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
     <button class="tablinks" id="DodajPrace" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
-    <button class="tablinks" id="ofertypracy"  onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
+    <button class="tablinks" id="ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
     <button class="tablinks" id="Aplikacje" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
     <button class="tablinks" id="Pakiety" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
     <button class="tablinks" id="ZapisaneCV" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
@@ -273,8 +273,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-bottom-left-padding bolded">E-MAIL DO SKŁADANIA APLIKACJI</div>
-                                        <input asp-for="jobOffer.Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
-                                        <span asp-validation-for="jobOffer.Deadline" class="text-danger"></span>
+                                        <input asp-for="jobOffer.Email" class="form-control form-input" placeholder="Wprowadz email" />
+                                        <span asp-validation-for="jobOffer.Email" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -298,16 +298,6 @@
                                 Mapa fajna
                                 <input asp-for="jobOffer.Location" class="form-control form-input" placeholder="Wprowadz tytuł" />
                                 <span asp-validation-for="jobOffer.Location" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container-padding">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">PublicationTIme</div>
-                                <input asp-for="jobOffer.PublicationTime" class="form-control form-input" placeholder="Wprowadz tytuł" />
-                                <span asp-validation-for="jobOffer.PublicationTime" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -419,7 +409,7 @@
 
     <div id="Employer5" class="tabcontent" style=" display:none">
 
-       
+
 
     </div>
 
@@ -536,9 +526,9 @@
                     <div class="col-2">
                         <div>
                             @*<div class="form-group">
-                        <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
-                    </div>
-                    <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
+                                    <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
+                                </div>
+                                <img ID="impPrev" class="img-fluid rounded" src="~/images/@Model.BackgroundImage" />*@
                         </div>
                     </div>
                     <div class="col-10">
@@ -755,9 +745,9 @@
         $("#editProfile").click(function () {
             $.ajax({
                 method: "GET",
-                url: "/Panel/EditProfile",
+                url: "/EmployerPanel/EditProfile",
                 success: function (data) {
-                       alert(data);
+                    alert(data);
                     // if data is in string format
                     var Data = $.parseJSON(data);
                     $("#ID").val(Data.Id);
@@ -804,7 +794,7 @@
             $("#ofertypracy").click(function () {
                 $("#tablebody tr").remove();
                 $.ajax({
-                    url: "/Panel/GetJobOffers",
+                    url: "/EmployerPanel/GetJobOffers",
                     type: "get",
                     success: function (data) {
                         var Data = $.parseJSON(data);
@@ -826,6 +816,7 @@
                     }
                 });
             });
+
         });
 
 
@@ -833,27 +824,30 @@
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
-            alert(edited);
             if (edited == "Panel") {
                 OpenNavbarItemOnLoad('Employer1');
             }
-            if (edited == "DodajOferte") {
+            else if (edited == "DodajOferte") {
                 OpenNavbarItemOnLoad('Employer2');
             }
-            if (edited == "MojeOferty") {
+            else if (edited == "MojeOferty") {
                 OpenNavbarItemOnLoad('Employer3');
             }
-            if (edited == "OfertyAplikacyjne") {
+            else if (edited == "OfertyAplikacyjne") {
                 OpenNavbarItemOnLoad('Employer4');
             }
-            if (edited == "PakietyOfert") {
+            else if (edited == "PakietyOfert") {
                 OpenNavbarItemOnLoad('Employer5');
             }
-            if (edited == "PakietyKandydatow") {
+            else if (edited == "PakietyKandydatow") {
                 OpenNavbarItemOnLoad('Employer6');
             }
-            if (edited == "PrzegladaneZyciorysy") {
+            else if (edited == "PrzegladaneZyciorysy") {
                 OpenNavbarItemOnLoad('Employer7');
+            }
+            else {
+                OpenNavbarItemOnLoad("Employer1");
+                changeurl('Panel');
             }
         }
 
@@ -873,23 +867,26 @@
             if (itemNumber == "Employer1") {
                 changeurl('Panel');
             }
-            if (itemNumber == "Employer2") {
+            else if (itemNumber == "Employer2") {
                 changeurl('DodajOferte');
             }
-            if (itemNumber == "Employer3") {
+            else if (itemNumber == "Employer3") {
                 changeurl('MojeOferty');
             }
-            if (itemNumber == "Employer4") {
+            else if (itemNumber == "Employer4") {
                 changeurl('OfertyAplikacyjne');
             }
-            if (itemNumber == "Employer5") {
+            else if (itemNumber == "Employer5") {
                 changeurl('PakietyOfert');
             }
-            if (itemNumber == "Employer6") {
+            else if (itemNumber == "Employer6") {
                 changeurl('PakietyKandydatow');
             }
-            if (itemNumber == "Employer7") {
+            else if (itemNumber == "Employer7") {
                 changeurl('PrzegladaneZyciorysy');
+            }
+            else {
+                changeurl('Panel');
             }
         }
 
@@ -912,14 +909,10 @@
 
 
         function changeurl(url) {
-            var new_url = "/Panel?name=" + url;
+            var new_url = "/EmployerPanel?name=" + url;
             window.history.pushState("data", "Title", new_url);
-            document.title = url;
+            //document.title = url;
         }
-
-
-
-
 
     </script>
 }
