@@ -23,17 +23,17 @@ namespace JobApplication.Areas.UserPanel.Controllers
 {
     [Area("UserPanel")]
     [Authorize]
-    public class PanelController : Controller
+    public class PanelPracodawcyController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IWebHostEnvironment _iWebHost;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly ILogger<PanelController> _logger;
+        private readonly ILogger<PanelPracodawcyController> _logger;
         private readonly IMapper _mapper;
 
-        public PanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
-            , ILogger<PanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)                        
+        public PanelPracodawcyController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
+            , ILogger<PanelPracodawcyController> logger, SignInManager<AppUser> signInManager, IMapper mapper)                        
         {
             _context = context;
             _userManager = userManager;
@@ -43,12 +43,7 @@ namespace JobApplication.Areas.UserPanel.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()            //Default VIew
-        {
-            return View();
-        }
-
-        public IActionResult CandidateProfile()            //Default VIew
+        public IActionResult Index()            //Default VIew for Employer
         {
             return View();
         }
