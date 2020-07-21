@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,8 @@ namespace JobApplication.Areas.Identity.Data.DTO
     {
 
         public string Id { get; set; }
+        [Required]
+        public string UserName { get; set; }
         public string PhoneNumber { get; set; }
         [Required]
         [EmailAddress]

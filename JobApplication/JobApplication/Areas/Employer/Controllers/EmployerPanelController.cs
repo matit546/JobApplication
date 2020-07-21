@@ -249,7 +249,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 }
 
                 await _signInManager.RefreshSignInAsync(user);
-                _logger.LogInformation("User changed their password successfully.");
+                _logger.LogInformation($"Uzytkownik  { user.UserName }  zmienil swoje haslo ");
                 TempData["ReturnUrl"] = "Hasło zostało zmienione";
                 return View();
             }
