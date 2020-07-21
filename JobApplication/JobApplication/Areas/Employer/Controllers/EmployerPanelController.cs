@@ -173,7 +173,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
                     if (result.Succeeded)
                     {
-                    return RedirectToAction("Index", "EmployerPanel", "?name=DodajOferte");
+                    return RedirectToAction("Index", "EmployerPanel", "?name=Panel");
                 }
 
                 }

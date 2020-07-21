@@ -12,7 +12,7 @@ namespace JobApplication.Areas.Employer.Controllers
     {
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)          // if user is logged in we redirect him to Employer controller
+            if (User.Identity.IsAuthenticated)          // if user is logged in we redirect him to Employer P controller
             {
                 return RedirectToAction("Index", "EmployerPanel", "?name=Panel");
             }
