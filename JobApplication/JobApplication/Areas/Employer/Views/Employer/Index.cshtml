@@ -5,18 +5,20 @@
 }
 
 <h1>Pracodawca</h1>
-
-<form asp-area="Identity" asp-page="/Account/Register" method="get">
-    <p>
-        Title: <input type="text" id="RejestrujJako" name="RejestrujJako" value="Pracodawca">
-        <input type="submit" onclick=" CLick()" />
-    </p>
-</form>
-
-<a class="nav-link text-dark btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+<div class="container">
+    <div class="row container-fluid">
 
 
-<a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <form asp-area="Identity" asp-page="/Account/Register" method="get">
+
+            <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Pracodawca">
+            <input type="submit" class="btn btn-secondary" value="Rejestracja" onclick=" CLick()" />
+
+        </form>
+    </div>
+</div>
+
 
 
 @section Scripts {
