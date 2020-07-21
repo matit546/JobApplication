@@ -795,7 +795,16 @@
         $(document).ready(function () {
 
             LoadTabindex();
-            $("#ofertypracy").click(function () {
+            var pageURL = $(location).attr("href");
+            var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+            ajaxfun(edited);
+
+        });
+
+
+
+        function ajaxfun(edited) {
+            if (edited == "MojeOferty") {
                 $("#tablebody tr").remove();
                 $.ajax({
                     url: "/EmployerPanel/GetJobOffers",
@@ -819,11 +828,8 @@
                         console.log(xhr)
                     }
                 });
-            });
-
-        });
-
-
+            }
+        }
 
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
