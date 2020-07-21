@@ -43,26 +43,10 @@ namespace JobApplication.Areas.Employer.Controllers
                 _mapper = mapper;
             }
 
-            public async Task<IActionResult>Index(string name=null)            //Default VIew for Employer
+            public IActionResult Index()            //Default VIew for Employer
             {
-            if (name != "Panel")
-            {
-                return View();
+                 return View();
             }
-
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"nie znaleziono uzytkownika z takim ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            UserAndOffers userAndOffers = new UserAndOffers
-            {
-                jobOffer = null,
-                AppUserDto = _mapper.Map<AppUser, AppUserDto>(user)
-             };
-            return View(userAndOffers);
-        }
 
             //Get User Data
             [HttpGet]
@@ -191,8 +175,8 @@ namespace JobApplication.Areas.Employer.Controllers
                     var result = await _userManager.UpdateAsync(updateUser);
 
                     if (result.Succeeded)
-                    {
-                    return RedirectToAction("Index", "EmployerPanel", "?name=Panel");
+                     {
+                    return RedirectToAction("Index", "EmployerPanel", new {name= "Panel" } );
                 }
 
                 }
