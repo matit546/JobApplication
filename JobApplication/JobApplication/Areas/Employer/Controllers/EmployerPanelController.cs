@@ -50,7 +50,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
             //Get User Data
             [HttpGet]
-            public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User
+            public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User and return JSON
             {
                 var jobOffers = await _context.JobOffers.ToListAsync();
                 if (jobOffers == null)
@@ -77,29 +77,6 @@ namespace JobApplication.Areas.Employer.Controllers
                 }
 
                 AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
-                //{
-                //    Id=user.Id,
-                //    PhoneNumber=user.PhoneNumber,
-                //    Address = user.Address,
-                //    BackgroundImage = user.BackgroundImage,
-                //    Categories = user.Categories,
-                //    CompanyName = user.CompanyName,
-                //    CompanySize = (Identity.Data.DTO.CompanySize)user.CompanySize,
-                //    Descrption = user.Descrption,
-                //    Email = user.Email,
-                //    FacebookProfile = user.FacebookProfile,
-                //    Gallery = user.Gallery,
-                //    FoundingDate = user.FoundingDate,
-                //    ShortDescription = user.ShortDescription,
-                //    Headline = user.Headline,
-                //    LinkedinProfile = user.LinkedinProfile,
-                //    TwitterProfile = user.TwitterProfile,
-                //    VideoUrl = user.VideoUrl,
-                //    VimeoProfile = user.VimeoProfile,
-                //    Website = user.Website,
-                //    YoutubeProfile = user.YoutubeProfile
-                //};
-
                 var json = JsonConvert.SerializeObject(appUserDto);
                 return Json(json);
 
@@ -154,7 +131,6 @@ namespace JobApplication.Areas.Employer.Controllers
 
                     updateUser.PhoneNumber = appUserDto.PhoneNumber;
                     updateUser.Address = appUserDto.Address;
-                    //updateUser.BackgroundImage = appUserDto.BackgroundImage;
                     updateUser.Categories = appUserDto.Categories;
                     updateUser.CompanyName = appUserDto.CompanyName;
                     updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;
@@ -185,19 +161,10 @@ namespace JobApplication.Areas.Employer.Controllers
 
             }
 
-
-
-            public PartialViewResult GetEditPartialView()
-            {
-                return PartialView("_EditPartialView");
-
-            }
-
-
             [HttpPost]
             [ValidateAntiForgeryToken]
             [Authorize(Roles = SD.EmployerRole)]
-            public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category,Skills,Deadline,Description,ChooseTheCurrency")] JobOffer jobOffer)
+            public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category,Skills,Deadline,Description,ChooseTheCurrency")] JobOffer jobOffer) //Add new Job Offer
             {
                 jobOffer.PublicationTime = DateTime.Now;
                 if (ModelState.IsValid)
@@ -211,11 +178,8 @@ namespace JobApplication.Areas.Employer.Controllers
 
 
 
-
-
-
             [HttpGet]
-            public async Task<IActionResult> ResetPassword()
+            public async Task<IActionResult> ResetPassword()        //Get View for ResetPassword
             {
 
                 var user = await _userManager.GetUserAsync(User);
@@ -228,8 +192,8 @@ namespace JobApplication.Areas.Employer.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-            public async Task<IActionResult> ResetPassword(ResetPasswordModel Input)
-            {
+            public async Task<IActionResult> ResetPassword(ResetPasswordModel Input)        //Post Change Password to current User
+        {
                 if (!ModelState.IsValid)
                 {
                     return View();

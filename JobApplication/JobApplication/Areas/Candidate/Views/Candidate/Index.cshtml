@@ -4,19 +4,21 @@
 }
 
 <h1>KANDYDAT</h1>
+<div class="container">
+    <div class="row">
+        <div class="container">
+            <a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Logowanie</a>
+        </div>
+        <div class="container col-4">
+            <form asp-area="Identity" asp-page="/Account/Register" method="get">
 
+                <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Kandydat">
+                <input type="submit" value="Rerestracja" class="btn btn-secondary" onclick=" CLick()" />
 
-<form asp-area="Identity" asp-page="/Account/Register" method="get">
-    <p>
-        <input type="text" id="RejestrujJako" name="RejestrujJako" value="Kandydat">
-        <input type="submit" onclick=" CLick()" />
-    </p>
-</form>
-<a class="nav-link text-dark btn btn-secondary" asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-
-<a class="nav-link text-dark btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
-
+            </form>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
