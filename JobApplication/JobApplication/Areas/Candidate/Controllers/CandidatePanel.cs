@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,6 +10,7 @@ using JobApplication.Data;
 using JobApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +75,84 @@ namespace JobApplication.Areas.Candidate.Controllers
                 var json = JsonConvert.SerializeObject(userExtension);
                 return Json(json);
             }
+
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserDto appUserDto, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+                if (file != null)
+                {
+                    if (updateUser == null)
+                    {
+                        return NotFound();
+                    }
+                    if (updateUser.BackgroundImage != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", updateUser.BackgroundImage);
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                    }
+                    if (file != null && file.Length > 0)
+                    {
+                        var imagePath = @"\images\";
+                        var uploadPath = _iWebHost.WebRootPath + imagePath;
+
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        var newFileName = Guid.NewGuid().ToString();
+                        var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
+                        string fullPath = uploadPath + fileName;
+                        imagePath = imagePath + @"\";
+                        var filePath = @".." + Path.Combine(imagePath, fileName);
+                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+                        updateUser.BackgroundImage = fileName;
+                    }
+                }
+
+                updateUser.PhoneNumber = appUserDto.PhoneNumber;
+                updateUser.Address = appUserDto.Address;
+                //updateUser.BackgroundImage = appUserDto.BackgroundImage;
+                updateUser.Categories = appUserDto.Categories;
+                updateUser.CompanyName = appUserDto.CompanyName;
+                updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;
+                updateUser.Descrption = appUserDto.Descrption;
+                updateUser.Email = appUserDto.Email;
+                updateUser.FacebookProfile = appUserDto.FacebookProfile;
+                updateUser.Gallery = appUserDto.Gallery;
+                updateUser.FoundingDate = appUserDto.FoundingDate;
+                updateUser.ShortDescription = appUserDto.ShortDescription;
+                updateUser.Headline = appUserDto.Headline;
+                updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
+                updateUser.TwitterProfile = appUserDto.TwitterProfile;
+                updateUser.VideoUrl = appUserDto.VideoUrl;
+                updateUser.VimeoProfile = appUserDto.VimeoProfile;
+                updateUser.Website = appUserDto.Website;
+                updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
+
+                var result = await _userManager.UpdateAsync(updateUser);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "EmployerPanel", "?name=Panel");
+                }
+
+            }
+            return RedirectToAction(nameof(Index));
 
 
         }
