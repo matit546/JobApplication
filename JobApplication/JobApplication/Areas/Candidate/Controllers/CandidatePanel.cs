@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using JobApplication.Areas.Identity.Data;
 using JobApplication.Areas.Identity.Data.DTO;
+using JobApplication.Areas.Identity.Data.ViewModels;
 using JobApplication.Data;
 using JobApplication.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -55,37 +56,52 @@ namespace JobApplication.Areas.Candidate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditProfile()      // Get current User data
+        public async Task<IActionResult> EditProfileEmployee()      // Get current User data
         {
+            //var user = _userManager.GetUserId(HttpContext.User);
+
+            //var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
+            //if (userExtensionExists == null)
+            //{
+            //    var userApp = await _userManager.GetUserAsync(HttpContext.User);
+
+            //    AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp);
+            //    var json = JsonConvert.SerializeObject(appUserDto);
+            //    return Json(json);
+            //}
+            //else
+            //{
+            //    var userExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
+            //    AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userExtension.AppUser);
+            //    var json = JsonConvert.SerializeObject(userExtension);
+            //    return Json(json);
+            //}
             var user = _userManager.GetUserId(HttpContext.User);
-
-            var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
-            if (userExtensionExists == null)
+            var userApp = await _userManager.GetUserAsync(HttpContext.User);
+            CandidateViewModel candidateViewModel = new CandidateViewModel
             {
-                var userApp = await _userManager.GetUserAsync(HttpContext.User);
-
-                AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp);
-                var json = JsonConvert.SerializeObject(appUserDto);
-                return Json(json);
-            }
-            else
-            {
-                var userExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
-                AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userExtension.AppUser);
-                var json = JsonConvert.SerializeObject(userExtension);
-                return Json(json);
-            }
-
-
+                appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp),
+            AppUserEmployeeExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync(x=>x.UserId==user),
+                AwardsEmployee = (ICollection<AwardsEmployee>)_context.AwardsEmployees.FirstOrDefault(x => x.UserId == user),
+                EducationEmployee = (ICollection<EducationEmployee>)_context.EducationEmployees.FirstOrDefault(x => x.UserId == user),
+                ExperiencesEmployee = (ICollection<ExperiencesEmployee>)_context.ExperiencesEmployees.FirstOrDefault(x => x.UserId == user),
+                SkillsEmployee = (ICollection<SkillsEmployee>)_context.SkillsEmployees.FirstOrDefault(x => x.UserId == user)
+            };
+            return View(candidateViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProfile([Bind("Id,UserName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
-            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserEmployeeExtension appUserDto, IFormFile file)
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] CandidateViewModel candidateViewModel, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (candidateViewModel.AppUserEmployeeExtension.Id == 0)
+                {
+                    // .ADD
+                }
+
                 var updateUser = await _userManager.GetUserAsync(HttpContext.User);
                 if (file != null)
                 {
@@ -124,12 +140,12 @@ namespace JobApplication.Areas.Candidate.Controllers
                     }
                 }
 
-                updateUser.PhoneNumber = appUserDto.AppUser.PhoneNumber;
-                updateUser.Address = appUserDto.AppUser.UserName;
+                updateUser.PhoneNumber = candidateViewModel.appUserDto.PhoneNumber;
+                updateUser.Address = candidateViewModel.appUserDto.CompanyName;
                 //updateUser.BackgroundImage = appUserDto.BackgroundImage;
-                updateUser.Categories = appUserDto.AppUser.Categories;
-                updateUser.CompanyName = appUserDto.AppUser.Email;
-                updateUser.Descrption = appUserDto.AppUser.Headline;
+                updateUser.Categories = candidateViewModel.appUserDto.Categories;
+                updateUser.CompanyName = candidateViewModel.appUserDto.Email;
+                updateUser.Descrption = candidateViewModel.appUserDto.Headline;
 
                 //updateUser.Gallery = appUserDto.AppUser.Gallery;
                 //updateUser.FoundingDate = appUserDto.FoundingDate;
@@ -146,7 +162,7 @@ namespace JobApplication.Areas.Candidate.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "EmployerPanel", "?name=Panel");
+                    return RedirectToAction(nameof(Index));
                 }
 
             }
