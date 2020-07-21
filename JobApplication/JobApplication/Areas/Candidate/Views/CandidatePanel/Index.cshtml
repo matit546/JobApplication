@@ -311,8 +311,8 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">NAZWA UŻYTKOWNIKA*</div>
-                                <input id="CompanyName" class="form-control form-input" asp-for="UserName" placeholder="Wprowadz nazwę firmy" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                <input id="CompanyName" class="form-control form-input" asp-for="CompanyName" placeholder="Wprowadz nazwę firmy" />
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">EMAIL*</div>
@@ -505,7 +505,7 @@
         $("#editProfile").click(function () {
             $.ajax({
                 method: "GET",
-                url: "/EmployerPanel/EditProfile",
+                url: "/CandidatePanel/EditProfile",
                 success: function (data) {
                     alert(data);
                     // if data is in string format

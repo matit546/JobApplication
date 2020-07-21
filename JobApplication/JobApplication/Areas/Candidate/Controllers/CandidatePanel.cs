@@ -81,8 +81,8 @@ namespace JobApplication.Areas.Candidate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
-            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserDto appUserDto, IFormFile file)
+        public async Task<IActionResult> EditProfile([Bind("Id,UserName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
+            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserEmployeeExtension appUserDto, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -124,25 +124,23 @@ namespace JobApplication.Areas.Candidate.Controllers
                     }
                 }
 
-                updateUser.PhoneNumber = appUserDto.PhoneNumber;
-                updateUser.Address = appUserDto.Address;
+                updateUser.PhoneNumber = appUserDto.AppUser.PhoneNumber;
+                updateUser.Address = appUserDto.AppUser.UserName;
                 //updateUser.BackgroundImage = appUserDto.BackgroundImage;
-                updateUser.Categories = appUserDto.Categories;
-                updateUser.CompanyName = appUserDto.CompanyName;
-                updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;
-                updateUser.Descrption = appUserDto.Descrption;
-                updateUser.Email = appUserDto.Email;
-                updateUser.FacebookProfile = appUserDto.FacebookProfile;
-                updateUser.Gallery = appUserDto.Gallery;
-                updateUser.FoundingDate = appUserDto.FoundingDate;
-                updateUser.ShortDescription = appUserDto.ShortDescription;
-                updateUser.Headline = appUserDto.Headline;
-                updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
-                updateUser.TwitterProfile = appUserDto.TwitterProfile;
-                updateUser.VideoUrl = appUserDto.VideoUrl;
-                updateUser.VimeoProfile = appUserDto.VimeoProfile;
-                updateUser.Website = appUserDto.Website;
-                updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
+                updateUser.Categories = appUserDto.AppUser.Categories;
+                updateUser.CompanyName = appUserDto.AppUser.Email;
+                updateUser.Descrption = appUserDto.AppUser.Headline;
+
+                //updateUser.Gallery = appUserDto.AppUser.Gallery;
+                //updateUser.FoundingDate = appUserDto.FoundingDate;
+                //updateUser.ShortDescription = appUserDto.ShortDescription;
+                //updateUser.Headline = appUserDto.Headline;
+                //updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
+                //updateUser.TwitterProfile = appUserDto.TwitterProfile;
+                //updateUser.VideoUrl = appUserDto.VideoUrl;
+                //updateUser.VimeoProfile = appUserDto.VimeoProfile;
+                //updateUser.Website = appUserDto.Website;
+                //updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
 
                 var result = await _userManager.UpdateAsync(updateUser);
 

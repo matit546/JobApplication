@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using JobApplication.Areas.Identity.Data;
 using JobApplication.Areas.Identity.Data.DTO;
+using JobApplication.Areas.Identity.Data.ViewModels;
 using JobApplication.Data;
 using JobApplication.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -42,10 +43,26 @@ namespace JobApplication.Areas.Employer.Controllers
                 _mapper = mapper;
             }
 
-            public IActionResult Index()            //Default VIew for Employer
+            public async Task<IActionResult>Index(string name=null)            //Default VIew for Employer
+            {
+            if (name != "Panel")
             {
                 return View();
             }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"nie znaleziono uzytkownika z takim ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            UserAndOffers userAndOffers = new UserAndOffers
+            {
+                jobOffer = null,
+                AppUserDto = _mapper.Map<AppUser, AppUserDto>(user)
+             };
+            return View(userAndOffers);
+        }
 
             //Get User Data
             [HttpGet]
@@ -64,10 +81,12 @@ namespace JobApplication.Areas.Employer.Controllers
 
             //Get User Data
             [HttpGet]
+
             public async Task<IActionResult> EditProfile()      // Get current User data
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
 
+                
                 if (user == null)
                 {
                     return NotFound();
