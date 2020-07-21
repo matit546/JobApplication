@@ -185,10 +185,16 @@ figcaption {
     position: absolute;
     z-index: 1;
 }
-
     .dropdown-menu a {
         color: #FFFFFF !important;
     }
+/*.dropdown-all {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-all:hover .dropdown-menu {
+    display: block;
+}*/
 
 .container .dropdown .dropdown-menu a:hover {
     color: #1d448c !important;
@@ -532,4 +538,9 @@ figcaption {
 
 .bolded{
     font-weight:bold;
+}
+
+.map-view {
+    height: 300px;
+    width:100%;
 }

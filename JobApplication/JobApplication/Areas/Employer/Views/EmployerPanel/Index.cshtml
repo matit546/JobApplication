@@ -301,7 +301,11 @@
                             </div>
                         </div>
                     </div>
+                    
 
+                    <div id="map" class="map-view"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU5JFGguFmEvu3-KTiIM0pyaSo01aJx9s&callback=initMap&libraries=&v=weekly"
+                            defer></script>
                     <input type="submit" />
                 </form>
             </div>
@@ -914,5 +918,12 @@
             //document.title = url;
         }
 
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
+        }
     </script>
 }
