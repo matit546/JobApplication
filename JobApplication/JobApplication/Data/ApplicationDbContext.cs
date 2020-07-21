@@ -16,6 +16,5 @@ namespace JobApplication.Data
         }
         public DbSet<JobOffer> JobOffers { get; set; }
         public DbSet<AppUserEmployeeExtension> AppUserEmployeeExtensions { get; set; }
-
     }
 }
