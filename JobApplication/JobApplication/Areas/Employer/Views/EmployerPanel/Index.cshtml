@@ -4,13 +4,23 @@
 }
 
 <div class="tab">
-    <div class="displayImage">
-        <div>
-            @User.Identity.Name
-            <img class="img-fluid rounded MainBackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
+    <div class="p-3">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-3 p-2 rounded">
+                    <img class="img-fluid rounded MainBackgroundImage NavImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
+                </div>
+                <div class="col-9 text-center">
+                    <div class="row">
+                        Witaj!
+                    </div>
+                    <div class="row">
+                        @User.Identity.Name
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-
     </div>
     <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
     <button class="tablinks" id="DodajPrace" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
@@ -39,7 +49,7 @@
                                 <div class="col-3">
                                     <div class="boxitem">
 
-                                        <img class="img-fluid rounded MainBackgroundImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
+                                        <img class="img-fluid rounded MainBackgroundImage PanelImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
 
                                     </div>
                                 </div>
@@ -819,14 +829,17 @@
             LoadTabindex();
             var pageURL = $(location).attr("href");
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
-            ajaxfun(edited);
-
+            if (edited == "MojeOferty") {
+                ajaxfun();
+            }
+            $(".tablinks").click(function () {
+                ajaxfun();
+            });
         });
 
 
 
-        function ajaxfun(edited) {
-            if (edited == "MojeOferty") {
+        function ajaxfun() {
                 $("#tablebody tr").remove();
                 $.ajax({
                     url: "/EmployerPanel/GetJobOffers",
@@ -851,7 +864,6 @@
                     }
                 });
             }
-        }
 
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
