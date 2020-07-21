@@ -544,3 +544,13 @@ figcaption {
     height: 300px;
     width:100%;
 }
+
+.PanelImage {
+    width: 70px;
+    height: 70px;
+}
+
+.NavImage {
+    width: auto;
+    height: auto;
+}
