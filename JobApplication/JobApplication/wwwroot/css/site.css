@@ -184,6 +184,7 @@ figcaption {
     display: none;
     position: absolute;
     z-index: 1;
+    top:30px;
 }
     .dropdown-menu a {
         color: #FFFFFF !important;
