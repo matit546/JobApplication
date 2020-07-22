@@ -2,70 +2,91 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <figure>
-        <img class="background-main-image" />
-        <div class="main-settings">
-            <figcaption>
-                <div class="main-text">STREFA PRACOWNIKA</div>
-                <div><br />Zaloguj lub zarejestruj się aby stworzyć profil kandydata</div>
-                <br/>
-                <div class="text-box select-box">
-                    <div class="row justify-content-center">
-                        <div class="col-3">
-                            <div class="px-0">
-                                <form asp-area="Identity" asp-page="/Account/Login" method="get">
-                                    <button class="text-dark btn btn-success w-100 py-2">Logowanie</button>
+<figure>
+    <img class="background-main-image" />
+    <div class="main-settings">
+        <figcaption>
+            <div class="main-text">STREFA PRACOWNIKA</div>
+            <div><br />Zaloguj lub zarejestruj się aby stworzyć profil kandydata</div>
+            <br />
+            <div class="text-box select-box">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <div class="px-0">
+                            <form asp-area="Identity" asp-page="/Account/Login" method="get">
+                                <button class="text-dark btn btn-success w-100 py-2">Logowanie</button>
 
-                                </form>
-                            </div>
-                        </div>
-                        <div class="w-2">
-                        </div>
-                        <div class="col-3 h-100">
-                            <div class="px-0">
-                                <form asp-area="Identity" asp-page="/Account/Register" method="get">
-
-                                    <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Kandydat" />
-                                    <button class="btn btn-secondary w-100 py-2" onclick=" CLick()">Rerestracja</button>
-
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </div>
-            </figcaption>
-        </div>
-    </figure>
+                    <div class="w-2">
+                    </div>
+                    <div class="col-3 h-100">
+                        <div class="px-0">
+                            <form asp-area="Identity" asp-page="/Account/Register" method="get">
 
+                                <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Kandydat" />
+                                <button class="btn btn-secondary w-100 py-2" onclick=" CLick()">Rerestracja</button>
 
-
-    <main role="main" class="pb-3">
-        <div class="menu-Container justify-content-center text-center">
-            <div class="my-5">
-                <h2>
-                    Jak to dziala?
-                </h2>
-            </div>
-            <div class="my-5">
-                <img alt="????" />
-
-            </div>
-
-            <div class="text-center">
-                <div class="menu">
-                    <div class="row">
-                        <div class="menu-item disabled col-6 button1 current-menu-item disabled">
-                            <div>Najnowsze oferty </div>
-                            <div class="wee disabled"></div>
-                        </div>
-                        <div class="menu-item col-6 button2">
-                            <div>Wyróżnione oferty</div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </figcaption>
+    </div>
+</figure>
+
+
+
+<main role="main" class="pb-3">
+    <div class="menu-Container justify-content-center text-center">
+        <div class="my-5">
+            <h2>
+                Jak to dziala?
+            </h2>
         </div>
-    </main>
+        <div class="my-5">
+            <img alt="????" />
+
+        </div>
+
+        <div class="text-center">
+            <div class="menu">
+                <div class="row">
+                    <div class="menu-item disabled col-6 button1 current-menu-item disabled">
+                        <div>Najnowsze oferty </div>
+                        <div class="wee disabled"></div>
+                    </div>
+                    <div class="menu-item col-6 button2">
+                        <div>Wyróżnione oferty</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <div>
+                Tutaj dostepne oferty pracy
+            </div>
+        </div>
+
+        <div class="my-5">
+            <div class="menu col-2 a-button py-2">
+                <a class="text-white">
+                    Zobacz wszystkie oferty
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<figure>
+    <img class="backgound-image-news"/>
+
+            <div class="main-text centered">Aktualności</div>
+
+</figure>
 
 
 @section Scripts {

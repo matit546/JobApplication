@@ -568,3 +568,39 @@ figcaption {
     margin: 0px 150px 0px 150px;
     padding: 0px 15px 0px 15px;
 }
+
+.a-button{
+    cursor:pointer;
+}
+
+.a-button:hover {
+    background-color:gray;
+}
+
+.backgound-image-news {
+    background-image: url(../images/news2.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 10em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.backgound-image-Employer {
+    background-image: url(../images/indeks.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 30em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.centered {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding:40px;
+    top:inherit;
+    bottom:inherit;
+}
