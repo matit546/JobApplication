@@ -135,8 +135,8 @@ window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
     if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-        navbar.style.display = "block";
+        navbar.style.height = "100px";
     } else {
-        navbar.style.display = "none";
+        navbar.style.height = "40px";
     }
 }
