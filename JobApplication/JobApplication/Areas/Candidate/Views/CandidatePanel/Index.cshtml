@@ -1,4 +1,4 @@
-﻿@model JobApplication.Areas.Identity.Data.DTO.AppUserDto
+﻿@model JobApplication.Areas.Identity.Data.ViewModels.CandidateViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -301,7 +301,7 @@
                 </div>
                 <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" id="ID" asp-for="Id" />
+                    <input type="hidden" id="ID" asp-for="appUserDto.Id" />
                     <div class="form-group">
                         <input name="file" type="file" onchange="ShowPreview(this)" class="btn btn-primary" />
                     </div>
@@ -310,14 +310,14 @@
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
-                                <div class="text-bottom-left-padding bolded">NAZWA UŻYTKOWNIKA*</div>
-                                <input id="CompanyName" class="form-control form-input" asp-for="CompanyName" placeholder="Wprowadz nazwę firmy" />
-                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                <div class="text-bottom-left-padding bolded">TWOJE IMIĘ*</div>
+                                <input id="CompanyName" class="form-control form-input" asp-for="appUserDto.CompanyName" placeholder="Wprowadz nazwę firmy" />
+                                <span asp-validation-for="appUserDto.CompanyName" class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">EMAIL*</div>
-                                <input id="Email" class="form-control form-input" asp-for="Email" placeholder="Wprowadz email" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <input id="Email" class="form-control form-input" asp-for="appUserDto.Email" placeholder="Wprowadz email" />
+                                <span asp-validation-for="appUserDto.Email" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -326,13 +326,13 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">TELEFON</div>
-                                <input id="Headline" class="form-control form-input" asp-for="Headline" placeholder="Wprowadz nagłówek" />
-                                <span asp-validation-for="Headline" class="text-danger"></span>
+                                <input id="PhoneNumber" class="form-control form-input" asp-for="appUserDto.PhoneNumber" placeholder="Wprowadz nagłówek" />
+                                <span asp-validation-for="appUserDto.PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">DATA URODZENIA*</div>
-                                <input id="PhoneNumber" class="form-control form-input" asp-for="PhoneNumber" placeholder="Wprowadz email" />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                <input id="FoundingDate" class="form-control form-input" asp-for="appUserDto.FoundingDate" placeholder="Wprowadz email" />
+                                <span asp-validation-for="appUserDto.FoundingDate" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -341,13 +341,13 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">NAGŁÓWEK</div>
-                                <input id="Website" class="form-control form-input" asp-for="Website" placeholder="Wprowadz stronę internetową" />
-                                <span asp-validation-for="Website" class="text-danger"></span>
+                                <input id="Headline" class="form-control form-input" asp-for="appUserDto.Headline" placeholder="Wprowadz stronę internetową" />
+                                <span asp-validation-for="appUserDto.Headline" class="text-danger"></span>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">PŁEĆ</div>
-                                <input id="FoundingDate" class="form-control form-input" asp-for="FoundingDate" placeholder="Wprowadz datę założenia" />
-                                <span asp-validation-for="FoundingDate" class="text-danger"></span>
+                                <input id="Gender" class="form-control form-input" asp-for="AppUserEmployeeExtension.Gender" placeholder="Wprowadz datę założenia" />
+                                <span asp-validation-for="AppUserEmployeeExtension.Gender" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -356,7 +356,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">UPUBLICZNIJ PROFIL*</div>
-                                <select asp-for="CompanySize" id="CompanySize" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
+                                <select asp-for="AppUserEmployeeExtension.IsShowing" id="IsShowing" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
                             </div>
                         </div>
                     </div>
@@ -364,9 +364,9 @@
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">OPIS</div>
-                                <textarea asp-for="Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                                <span asp-validation-for="Descrption" class="text-danger"></span>
+                                <div class="text-bottom-left-padding bolded">OPIS*</div>
+                                <textarea asp-for="appUserDto.ShortDescription" id="ShortDescrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                                <span asp-validation-for="appUserDto.ShortDescription" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -378,14 +378,14 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="text-bottom-left-padding bolded">OPIS</div>
-                                    <textarea asp-for="Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
-                                    <span asp-validation-for="Descrption" class="text-danger"></span>
+                                    <div class="text-bottom-left-padding bolded">List Motywacyjny jako DESCRIPTION</div>
+                                    <textarea asp-for="appUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                                    <span asp-validation-for="appUserDto.Descrption" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    d
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
@@ -393,9 +393,161 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="text-bottom-left-padding bolded">KATEGORIE</div>
-                                        <input id="Categories" asp-for="Categories" class="form-control form-input" placeholder="Nie wybrano" />
+                                        <input id="Categories" asp-for="appUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">TYPY //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">Poziomy //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">Lokalizacja //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">JĘZYKI </div>
+                                        <input class="form-control form-input" id="Languages" asp-for="AppUserEmployeeExtension.Languages" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">UMIEJENTOŚCI //dodac wraz z id i asp-for</div>
+                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">EDUKACJA</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
+                                        <input id="Degree" asp-for="EducationEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">NAZWA SZKOŁY</div>
+                                        <input class="form-control form-input" id="SchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
+                                        <input class="form-control form-input" id="SchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">OPIS</div>
+                                        <input class="form-control form-input" id="EducationEmployeeDescription" asp-for="EducationEmployee[0].Description" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
+                                        <input id="ExperiencesEmployeeDegree" asp-for="ExperiencesEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">NAZWA FIRMY</div>
+                                        <input class="form-control form-input" id="ExperiencesEmployeeCompanyName" asp-for="ExperiencesEmployee[0].CompanyName" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
+                                        <input class="form-control form-input" id="ExperiencesEmployeeDateStartEnd" asp-for="ExperiencesEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">OPIS</div>
+                                        <input class="form-control form-input" id="ExperiencesEmployeeDescription" asp-for="ExperiencesEmployee[0].Description" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
+                                        <input id="SkillsEmployeeDegree" asp-for="SkillsEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">WARTOŚĆ PROCENTOWA</div>
+                                        <input class="form-control form-input" id="SkillsEmployeePercentage" asp-for="SkillsEmployee[0].Percentage" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">SUKCESY I NAGRODY</div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
+                                        <input id="AwardsEmployeeAward" asp-for="AwardsEmployee[0].Award" class="form-control form-input" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">ROK</div>
+                                        <input class="form-control form-input" id="AwardsEmployeeYear" asp-for="AwardsEmployee[0].Year" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-bottom-left-padding bolded">OPIS</div>
+                                        <input class="form-control form-input" id="AwardsEmployeeDescription" asp-for="AwardsEmployee[0].Description" placeholder="Nie wybrano" />
+                                    </div>
+                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -419,7 +571,7 @@
                                 <div class="text-bottom-left-padding bolded">ADRES PLIKU WIDEO</div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <input asp-for="VideoUrl" id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                        <input asp-for="appUserDto.VideoUrl" id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
                             </div>
@@ -435,7 +587,7 @@
                                         zdjecie
                                     </div>
                                     <div class="col-10">
-                                        <input type="button" asp-for="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                        <input type="button" asp-for="appUserDto.BackgroundImage" class="form-control form-input" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
                             </div>
@@ -460,27 +612,27 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="text-bottom-left-padding bolded">FACEBOOK</div>
-                                        <input id="FacebookProfile" class="form-control form-input" asp-for="FacebookProfile" placeholder="Wprowadz profil facebooka" />
+                                        <input id="FacebookProfile" class="form-control form-input" asp-for="appUserDto.FacebookProfile" placeholder="Wprowadz profil facebooka" />
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="text-bottom-left-padding bolded">TWITTER</div>
-                                        <input id="TwitterProfile" class="form-control form-input" asp-for="TwitterProfile" placeholder="Wprowadz profil twittera" />
+                                        <input id="TwitterProfile" class="form-control form-input" asp-for="appUserDto.TwitterProfile" placeholder="Wprowadz profil twittera" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="text-bottom-left-padding bolded">YOUTUBE</div>
-                                        <input id="YoutubeProfile" class="form-control form-input" asp-for="YoutubeProfile" placeholder="Wprowadz profil youtube" />
+                                        <input id="YoutubeProfile" class="form-control form-input" asp-for="appUserDto.YoutubeProfile" placeholder="Wprowadz profil youtube" />
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="text-bottom-left-padding bolded">VIMEO</div>
-                                        <input id="VimeoProfile" class="form-control form-input" asp-for="VimeoProfile" placeholder="Wprowadz profil vimeo" />
+                                        <input id="VimeoProfile" class="form-control form-input" asp-for="appUserDto.VimeoProfile" placeholder="Wprowadz profil vimeo" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="text-bottom-left-padding bolded">LINKEDIN</div>
-                                        <input id="LinkedinProfile" class="form-control form-input" asp-for="LinkedinProfile" placeholder="Wprowadz profil linkedin" />
+                                        <input id="LinkedinProfile" class="form-control form-input" asp-for="appUserDto.LinkedinProfile" placeholder="Wprowadz profil linkedin" />
                                     </div>
                                 </div>
                             </div>
@@ -488,7 +640,7 @@
                     </div>
                     <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
                 </form>
-                <a asp-controller="Panel" class="btn btn-secondary" asp-action="ResetPassword"> ZMIEN HASLO</a>
+                @*<a asp-controller="Panel" class="btn btn-secondary" asp-action="ResetPassword"> ZMIEN HASLO</a>*@
             </div>
         </main>
 
@@ -505,11 +657,12 @@
         $("#editProfile").click(function () {
             $.ajax({
                 method: "GET",
-                url: "/CandidatePanel/EditProfile",
+                url: "/CandidatePanel/EditProfileEmployee",
                 success: function (data) {
-                    alert(data);
+ 
                     // if data is in string format
                     var Data = $.parseJSON(data);
+                    alert(Data);
                     $("#ID").val(Data.Id);
                     $("#CompanyName").val(Data.CompanyName);
                     $("#Email").val(Data.Email);

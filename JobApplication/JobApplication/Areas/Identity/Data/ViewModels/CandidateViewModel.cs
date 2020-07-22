@@ -10,10 +10,10 @@ namespace JobApplication.Areas.Identity.Data.ViewModels
     {
         public AppUserDto appUserDto { get; set; }
         public AppUserEmployeeExtension AppUserEmployeeExtension { get; set; }
-        public ICollection<AwardsEmployee> AwardsEmployee { get; set; }
-        public ICollection<EducationEmployee> EducationEmployee  { get; set; }
-        public ICollection<ExperiencesEmployee> ExperiencesEmployee { get; set; }
-        public ICollection<SkillsEmployee> SkillsEmployee  { get; set; }
+        public List<AwardsEmployee> AwardsEmployee { get; set; }
+        public List<EducationEmployee> EducationEmployee  { get; set; }
+        public List<ExperiencesEmployee> ExperiencesEmployee { get; set; }
+        public List<SkillsEmployee> SkillsEmployee  { get; set; }
         
     }
 }

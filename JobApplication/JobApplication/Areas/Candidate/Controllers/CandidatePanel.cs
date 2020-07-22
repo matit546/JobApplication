@@ -29,6 +29,7 @@ namespace JobApplication.Areas.Candidate.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         // private readonly ILogger<CandidatePanel> _logger;
         private readonly IMapper _mapper;
+
         public CandidatePanel(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
                 , SignInManager<AppUser> signInManager, IMapper mapper)
         {
@@ -38,20 +39,20 @@ namespace JobApplication.Areas.Candidate.Controllers
             _signInManager = signInManager;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Index(string name = null)        //Get Candidate User Data
+        public  IActionResult Index(string name = null)        //Get Candidate User Data
         {
-            if (name != "Panel")
-            {
-                return View();
-            }
+            //if (name != "Panel")
+            //{
+            //    return View();
+            //}
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"nie znaleziono uzytkownika z takim ID '{_userManager.GetUserId(User)}'.");
-            }
-            AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
-            return View(appUserDto);
+            //var user = await _userManager.GetUserAsync(User);
+            //if (user == null)
+            //{
+            //    return NotFound($"nie znaleziono uzytkownika z takim ID '{_userManager.GetUserId(User)}'.");
+            //}
+            //AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
+            return View();
 
         }
 
@@ -81,13 +82,15 @@ namespace JobApplication.Areas.Candidate.Controllers
             CandidateViewModel candidateViewModel = new CandidateViewModel
             {
                 appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp),
-            AppUserEmployeeExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync(x=>x.UserId==user),
-                AwardsEmployee = (ICollection<AwardsEmployee>)_context.AwardsEmployees.FirstOrDefault(x => x.UserId == user),
-                EducationEmployee = (ICollection<EducationEmployee>)_context.EducationEmployees.FirstOrDefault(x => x.UserId == user),
-                ExperiencesEmployee = (ICollection<ExperiencesEmployee>)_context.ExperiencesEmployees.FirstOrDefault(x => x.UserId == user),
-                SkillsEmployee = (ICollection<SkillsEmployee>)_context.SkillsEmployees.FirstOrDefault(x => x.UserId == user)
+                AppUserEmployeeExtension = await _context.AppUserEmployeeExtensions.FirstOrDefaultAsync(x=>x.UserId==user),
+                AwardsEmployee = _context.AwardsEmployees.Where(x => x.UserId == user).ToList(),
+                EducationEmployee = _context.EducationEmployees.Where(x => x.UserId == user).ToList(),
+                ExperiencesEmployee = _context.ExperiencesEmployees.Where(x => x.UserId == user).ToList(),
+                SkillsEmployee = _context.SkillsEmployees.Where(x => x.UserId == user).ToList()
             };
-            return View(candidateViewModel);
+            var json = JsonConvert.SerializeObject(candidateViewModel);
+            return Json(json);
+
         }
 
         [HttpPost]
