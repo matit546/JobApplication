@@ -130,13 +130,13 @@ function OpenNavbarItem(evt, itemNumber) {
     }
 }
 
-var navbar = document.getElementById("navbar-scroll");
-window.onscroll = function () { scrollFunction() };
+//var navbar = document.getElementById("navbar-scroll");
+//window.onscroll = function () { scrollFunction() };
 
-function scrollFunction() {
-    if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-        navbar.style.height = "100px";
-    } else {
-        navbar.style.height = "40px";
-    }
-}
+//function scrollFunction() {
+//    if (document.body.scrollTop > 100 || document.documentElement.scrollTop >100) {
+//        $(".navbar").addClass("fixed-top");
+//    } else {
+//        $(".navbar").removeClass("fixed-top");
+//    }
+//}

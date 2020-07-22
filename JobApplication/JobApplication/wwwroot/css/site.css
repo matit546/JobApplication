@@ -10,6 +10,16 @@ a.navbar-brand {
     line-height: 100px;
 }
 
+body {
+    padding-top:116px;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 0px;
+    }
+}
+
 .navbar a {
     color: white !important;
     font-size: 13px;
