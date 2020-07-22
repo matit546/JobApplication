@@ -379,6 +379,10 @@ figcaption {
     border-radius: 5px;
 }
 
+.c-royalblue {
+    color: royalblue;
+}
+
 .sandybrown {
     background-color: sandybrown
 }
@@ -554,4 +558,13 @@ figcaption {
 .NavImage {
     width: auto;
     height: auto;
+}
+
+.w-2{
+    width:2%;
+}
+
+.menu-Container {
+    margin: 0px 150px 0px 150px;
+    padding: 0px 15px 0px 15px;
 }

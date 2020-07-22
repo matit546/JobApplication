@@ -4,20 +4,40 @@
 
 }
 
-<h1>Pracodawca</h1>
-<div class="container">
-    <div class="row container-fluid">
+<figure>
+    <img class="background-main-image" />
+    <div class="main-settings">
+        <figcaption>
+            <div class="main-text">STREFA PRACODAWCY</div>
+            <br />
+            <br />
+            <div class="text-box select-box">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <div class="px-0">
+                            <form asp-area="Identity" asp-page="/Account/Login" method="get">
+                                <button class="text-dark btn btn-success w-100 py-2">Logowanie</button>
 
+                            </form>
+                        </div>
+                    </div>
+                    <div class="w-2">
+                    </div>
+                    <div class="col-3 h-100">
+                        <div class="px-0">
+                            <form asp-area="Identity" asp-page="/Account/Register" method="get">
 
-        <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        <form asp-area="Identity" asp-page="/Account/Register" method="get">
+                                <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Pracodawca" />
+                                <button class="btn btn-secondary w-100 py-2" onclick=" CLick()">Rerestracja</button>
 
-            <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Pracodawca">
-            <input type="submit" class="btn btn-secondary" value="Rejestracja" onclick=" CLick()" />
-
-        </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </figcaption>
     </div>
-</div>
+</figure>
 
 
 
