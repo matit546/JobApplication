@@ -39,7 +39,7 @@ namespace JobApplication.Areas.Candidate.Controllers
             _signInManager = signInManager;
             _mapper = mapper;
         }
-        public  IActionResult Index(string name = null)        //Get Candidate User Data
+        public  IActionResult Index(string name = null)        //Default View for Candidate
         {
             //if (name != "Panel")
             //{
@@ -95,17 +95,27 @@ namespace JobApplication.Areas.Candidate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile([Bind("Id,UserName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
-            ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] CandidateViewModel candidateViewModel, IFormFile file)
+        public async Task<IActionResult> EditProfileEmployee(CandidateViewModel candidateViewModel, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                if (candidateViewModel.AppUserEmployeeExtension.Id == 0)
+                var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+                foreach (var item in candidateViewModel.EducationEmployee)
                 {
-                    // .ADD
+                   item.UserId = updateUser.Id;
+                    if (item.Id == 0)
+                    {
+                        _context.Add(item);
+                    }
+                    else
+                    {
+                        _context.Update(item);
+                    }
+                    await _context.SaveChangesAsync();
                 }
 
-                var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+
+                
                 if (file != null)
                 {
                     if (updateUser == null)
@@ -144,11 +154,11 @@ namespace JobApplication.Areas.Candidate.Controllers
                 }
 
                 updateUser.PhoneNumber = candidateViewModel.appUserDto.PhoneNumber;
-                updateUser.Address = candidateViewModel.appUserDto.CompanyName;
+                updateUser.Address = candidateViewModel.appUserDto.Address;
                 //updateUser.BackgroundImage = appUserDto.BackgroundImage;
                 updateUser.Categories = candidateViewModel.appUserDto.Categories;
-                updateUser.CompanyName = candidateViewModel.appUserDto.Email;
-                updateUser.Descrption = candidateViewModel.appUserDto.Headline;
+                updateUser.CompanyName = candidateViewModel.appUserDto.CompanyName;
+                updateUser.Descrption = candidateViewModel.appUserDto.Descrption;
 
                 //updateUser.Gallery = appUserDto.AppUser.Gallery;
                 //updateUser.FoundingDate = appUserDto.FoundingDate;

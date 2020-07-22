@@ -22,7 +22,7 @@
 <div class="userPanelPadding">
     <div id="Candidate1" class="tabcontent" style=" display:none">
         <main role="main" class="pb-3">
-             <div class="login-Containter">
+            <div class="login-Containter">
                 <div class="row">
                     <div class="userblock-6">
                         <div class="box sandybrown">
@@ -109,9 +109,9 @@
             </div>
         </main>
     </div>
-   
+
     <div id="Candidate2" class="tabcontent" style=" display:none">
-       
+
     </div>
 
     <div id="Candidate3" class="tabcontent" style=" display:none">
@@ -299,7 +299,7 @@
                         </div>
                     </div>
                 </div>
-                <form asp-action="ProfilePost" method="post" enctype="multipart/form-data">
+                <form asp-action="EditProfileEmployee" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" id="ID" asp-for="appUserDto.Id" />
                     <div class="form-group">
@@ -356,7 +356,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">UPUBLICZNIJ PROFIL*</div>
-                                <select asp-for="AppUserEmployeeExtension.IsShowing" id="IsShowing" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.CompanySize>()" class="form-control"></select>
+                                <select asp-for="AppUserEmployeeExtension.IsShowing" id="IsShowing" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.IsShowing>()" class="form-control"></select>
                             </div>
                         </div>
                     </div>
@@ -445,32 +445,43 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">EDUKACJA</div>
+                                <hr />
+                                <input hidden id="EducationEmployeeDegreeID" asp-for="EducationEmployee[0].Id" />
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                                        <input id="Degree" asp-for="EducationEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
+                                        <input id="EducationEmployeeDegree" asp-for="EducationEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
+
+
+                                    <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">NAZWA SZKOŁY</div>
-                                        <input class="form-control form-input" id="SchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
+                                        <input class="form-control form-input" id="EducationEmployeeSchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
+
+
+                                    <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
-                                        <input class="form-control form-input" id="SchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
+                                        <input class="form-control form-input" id="EducationEmployeeDateStartEnd" asp-for="EducationEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
+                                <br />
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="text-bottom-left-padding bolded">OPIS</div>
-                                        <input class="form-control form-input" id="EducationEmployeeDescription" asp-for="EducationEmployee[0].Description" placeholder="Nie wybrano" />
+                                        <textarea class="form-control form-input" id="EducationEmployeeDescription" asp-for="EducationEmployee[0].Description" placeholder="Nie wybrano"></textarea>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <input id="AddButton" type="button" value="Dodaj" />
+                                </div>
+
+                                <div id="TextBoxContainer">
+
                                 </div>
                             </div>
                         </div>
+                        <hr />
                     </div>
 
                     <div class="container-padding">
@@ -547,7 +558,7 @@
                                         <input class="form-control form-input" id="AwardsEmployeeDescription" asp-for="AwardsEmployee[0].Description" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -648,10 +659,48 @@
 
 
 </div>
-
+ 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var i = 1; //to trzeba odczytac
+            $("#AddButton").click(function () {
+                var div = $("<div />");
+                var value = "";
+
+                var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
+                var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
+                var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
+                var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
+                    
+                EduEmpdegreeBox.val(value);
+                EduEmpschoolNameBox.val(value);
+                EduEmpdescriptionBox.val(value);
+                EduEmpDateBox.val(value);
+
+                div.append(EduEmpdegreeBox);
+
+                div.append(EduEmpschoolNameBox);
+                div.append(EduEmpdescriptionBox);
+                div.append(EduEmpDateBox);
+
+                var button = $("<input />").attr("type", "button").attr("value", "Remove");
+                button.attr("onclick", "RemoveTextBox(this)");
+                div.append(button);
+                $("#TextBoxContainer").append(div);
+                i++;
+
+            });
+
+           
+        });
+        function RemoveTextBox(button) {
+            $(button).parent().remove();
+        }
+    </script>
+
     <script>
 
         $("#editProfile").click(function () {
@@ -659,10 +708,25 @@
                 method: "GET",
                 url: "/CandidatePanel/EditProfileEmployee",
                 success: function (data) {
- 
+             
                     // if data is in string format
                     var Data = $.parseJSON(data);
-                    alert(Data);
+                  
+                   
+              
+                    //    $("#Email").val(Data[value]["Email"]);
+                    //    $("#CompanyName").val(Data[value]["CompanyName"]);
+                    //$("#PhoneNumber").val(Data[value]["PhoneNumber"]);
+
+                        $.each(Data.EducationEmployee, function (value) {
+                            $("#Id").val(Data.EducationEmployee[value]["Degree"]);
+                            $("#EducationEmployeeDegree").val(Data.EducationEmployee[value]["Degree"]);
+                            $("#EducationEmployeeDegreeID").val(Data.EducationEmployee[value]["Id"]);
+                        
+                        });
+     
+           
+
                     $("#ID").val(Data.Id);
                     $("#CompanyName").val(Data.CompanyName);
                     $("#Email").val(Data.Email);
@@ -670,7 +734,6 @@
                     $("#Website").val(Data.Website);
                     $("#FoundingDate").val(Data.FoundingDate);
                     $("#ShortDescription").val(Data.ShortDescription);
-                    $("#Descrption").val(Data.Descrption);
                     $("#Categories").val(Data.Categories);
                     $("#CompanySize").val(Data.CompanySize);
 
@@ -704,33 +767,9 @@
         $(document).ready(function () {
 
             LoadTabindex();
-            $("#ofertypracy").click(function () {
-                $("#tablebody tr").remove();
-                $.ajax({
-                    url: "/EmployerPanel/GetJobOffers",
-                    type: "get",
-                    success: function (data) {
-                        var Data = $.parseJSON(data);
-                        $.each(Data, function (value) {
-                            $("tbody").append($("<tr>"));
-                            appendElement = $("tbody tr").last();
-                            appendElement.append($("<td>").html(Data[value]["Title"]));
-                            appendElement.append($("<td>").html(Data[value]["TypeOfJob"]));
-                            appendElement.append($("<td>").html(Data[value]["PublicationTime"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(xhr)
-                    }
-                });
-            });
-
         });
+
+
 
 
 
