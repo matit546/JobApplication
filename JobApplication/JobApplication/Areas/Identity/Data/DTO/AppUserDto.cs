@@ -12,24 +12,26 @@ namespace JobApplication.Areas.Identity.Data.DTO
     {
 
         public string Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [StringLength(100,ErrorMessage ="Zbyt długa nazwa")]
         public string CompanyName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
+        [StringLength(100, ErrorMessage = "Zbyt długi nagłówek")]
         public string Headline { get; set; }
         public string Website { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public DateTime FoundingDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "To pole jest wymagane")]
         public CompanySize CompanySize { get; set; }
-        [Required]
+        [Required(ErrorMessage ="To pole jest wymagane")]
         public string ShortDescription { get; set; }
         public string Descrption { get; set; }
         public string Categories { get; set; }
