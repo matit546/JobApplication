@@ -5,7 +5,7 @@
 }
 
 <figure>
-    <img class="background-main-image" />
+    <img class="backgound-image-Employer" />
     <div class="main-settings">
         <figcaption>
             <div class="main-text">STREFA PRACODAWCY</div>
@@ -35,17 +35,48 @@
                     </div>
                 </div>
             </div>
+            <div class="text-box select-box">
+                <div class="field-item text">
+                    <select>
+                        <option selected disabled>Wybierz kategorię</option>
+                        <option>Australia</option>
+                    </select>
+                </div>
+                <div class="field-item text">
+                    <select>
+                        <option selected disabled>Wybierz lokalizacje</option>
+                        <option>Australia</option>
+                    </select>
+                </div>
+                <div class="btn main-button">
+                    <div class="text-button">
+                        🡒
+                    </div>
+                </div>
+            </div>
         </figcaption>
     </div>
 </figure>
 
+<main role="main" class="pb-3">
+    <div class="menu-Container justify-content-center text-center">
+        <div>
+            Zarejestruj się, wybierz i kup pakiet aby otrzymać pełny dostęp...
+            ... do profili zawodowych Pracowników z Ukrainy!
+        </div>
+        <div>
+            Tutaj pakiety
+        </div>
+    </div>
+
+</main>
 
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        function CLick() {
-            $("#RejestrujJako").val("Pracodawca");
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+            <script>
+                function CLick() {
+                    $("#RejestrujJako").val("Pracodawca");
+                }
+            </script>
         }
-    </script>
-}
