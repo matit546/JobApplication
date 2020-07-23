@@ -518,6 +518,11 @@ figcaption {
             background-color: white;
             color: red;
         }
+
+        .joboffer-main:hover .joboffer-button-test {
+            background-color: white;
+            color: orange;
+        }
 .joboffer-button {
     padding-top:4px;
     font-size:12px;
@@ -528,6 +533,18 @@ figcaption {
     border-color: red;
     border-radius: 25px;
     color:white;
+}
+
+.joboffer-button-test {
+    padding-top: 4px;
+    font-size: 12px;
+    height: 30px;
+    width: 100px;
+    background-color: orange;
+    border: 2px solid;
+    border-color: orange;
+    border-radius: 25px;
+    color: white;
 }
 
 
