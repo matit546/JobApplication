@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
 using JobApplication.Areas.Identity.Data;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -41,17 +43,7 @@ namespace JobApplication.Areas.Candidate.Controllers
         }
         public  IActionResult Index(string name = null)        //Default View for Candidate
         {
-            //if (name != "Panel")
-            //{
-            //    return View();
-            //}
 
-            //var user = await _userManager.GetUserAsync(User);
-            //if (user == null)
-            //{
-            //    return NotFound($"nie znaleziono uzytkownika z takim ID '{_userManager.GetUserId(User)}'.");
-            //}
-            //AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
             return View();
 
         }
@@ -59,35 +51,21 @@ namespace JobApplication.Areas.Candidate.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProfileEmployee()      // Get current User data
         {
-            //var user = _userManager.GetUserId(HttpContext.User);
-
-            //var userExtensionExists = _context.AppUserEmployeeExtensions.FirstOrDefault(u => u.UserId == user);
-            //if (userExtensionExists == null)
-            //{
-            //    var userApp = await _userManager.GetUserAsync(HttpContext.User);
-
-            //    AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp);
-            //    var json = JsonConvert.SerializeObject(appUserDto);
-            //    return Json(json);
-            //}
-            //else
-            //{
-            //    var userExtension = await _context.AppUserEmployeeExtensions.Include(x => x.AppUser).FirstOrDefaultAsync();
-            //    AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(userExtension.AppUser);
-            //    var json = JsonConvert.SerializeObject(userExtension);
-            //    return Json(json);
-            //}
-            var user = _userManager.GetUserId(HttpContext.User);
+  
             var userApp = await _userManager.GetUserAsync(HttpContext.User);
             CandidateViewModel candidateViewModel = new CandidateViewModel
             {
                 appUserDto = _mapper.Map<AppUser, AppUserDto>(userApp),
-                AppUserEmployeeExtension = await _context.AppUserEmployeeExtensions.FirstOrDefaultAsync(x=>x.UserId==user),
-                AwardsEmployee = _context.AwardsEmployees.Where(x => x.UserId == user).ToList(),
-                EducationEmployee = _context.EducationEmployees.Where(x => x.UserId == user).ToList(),
-                ExperiencesEmployee = _context.ExperiencesEmployees.Where(x => x.UserId == user).ToList(),
-                SkillsEmployee = _context.SkillsEmployees.Where(x => x.UserId == user).ToList()
+                AppUserEmployeeExtension =  _context.AppUserEmployeeExtensions.FirstOrDefault(x=>x.UserId==userApp.Id),
+                AwardsEmployee = _context.AwardsEmployees.Where(x => x.UserId == userApp.Id).ToList(),
+                EducationEmployee = _context.EducationEmployees.Where(x => x.UserId == userApp.Id).ToList(),
+                ExperiencesEmployee = _context.ExperiencesEmployees.Where(x => x.UserId == userApp.Id).ToList(),
+                SkillsEmployee = _context.SkillsEmployees.Where(x => x.UserId == userApp.Id).ToList()
             };
+            if(candidateViewModel.AppUserEmployeeExtension == null)
+            {
+                candidateViewModel.AppUserEmployeeExtension = new AppUserEmployeeExtension();
+            }
             var json = JsonConvert.SerializeObject(candidateViewModel);
             return Json(json);
 
@@ -100,6 +78,16 @@ namespace JobApplication.Areas.Candidate.Controllers
             if (ModelState.IsValid)
             {
                 var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+               // var objfromDb = await _context.EducationEmployees.Where(x => x.UserId == updateUser.Id).ToListAsync();
+                //int i = 0;
+                //foreach ( var exists in objfromDb)
+                //{
+                //    if (exists.Id != candidateViewModel.EducationEmployee[i].Id)
+                //    {
+                //        return NotFound();
+                //    }
+                //    i++;
+                //}
                 foreach (var item in candidateViewModel.EducationEmployee)
                 {
                    item.UserId = updateUser.Id;
@@ -152,24 +140,22 @@ namespace JobApplication.Areas.Candidate.Controllers
                         updateUser.BackgroundImage = fileName;
                     }
                 }
-
+                //User Update
                 updateUser.PhoneNumber = candidateViewModel.appUserDto.PhoneNumber;
                 updateUser.Address = candidateViewModel.appUserDto.Address;
-                //updateUser.BackgroundImage = appUserDto.BackgroundImage;
                 updateUser.Categories = candidateViewModel.appUserDto.Categories;
                 updateUser.CompanyName = candidateViewModel.appUserDto.CompanyName;
                 updateUser.Descrption = candidateViewModel.appUserDto.Descrption;
-
-                //updateUser.Gallery = appUserDto.AppUser.Gallery;
-                //updateUser.FoundingDate = appUserDto.FoundingDate;
-                //updateUser.ShortDescription = appUserDto.ShortDescription;
-                //updateUser.Headline = appUserDto.Headline;
-                //updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
-                //updateUser.TwitterProfile = appUserDto.TwitterProfile;
-                //updateUser.VideoUrl = appUserDto.VideoUrl;
-                //updateUser.VimeoProfile = appUserDto.VimeoProfile;
-                //updateUser.Website = appUserDto.Website;
-                //updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
+                updateUser.Gallery = candidateViewModel.appUserDto.Gallery;
+                updateUser.FoundingDate = candidateViewModel.appUserDto.FoundingDate;
+                updateUser.ShortDescription = candidateViewModel.appUserDto.ShortDescription;
+                updateUser.Headline = candidateViewModel.appUserDto.Headline;
+                updateUser.LinkedinProfile = candidateViewModel.appUserDto.LinkedinProfile;
+                updateUser.TwitterProfile = candidateViewModel.appUserDto.TwitterProfile;
+                updateUser.VideoUrl = candidateViewModel.appUserDto.VideoUrl;
+                updateUser.VimeoProfile = candidateViewModel.appUserDto.VimeoProfile;
+                updateUser.Website = candidateViewModel.appUserDto.Website;
+                updateUser.YoutubeProfile = candidateViewModel.appUserDto.YoutubeProfile;
 
                 var result = await _userManager.UpdateAsync(updateUser);
 
@@ -183,5 +169,8 @@ namespace JobApplication.Areas.Candidate.Controllers
 
 
         }
+
+           
     }
+  
 }
