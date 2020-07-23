@@ -141,3 +141,11 @@ function OpenNavbarItem(evt, itemNumber) {
 //        //$(".navbar").removeClass("fixed-top");
 //    }
 //}
+var color = document.getElementById("color-change");
+window.onload = function () { changeColor() };
+
+function changeColor() {
+    if ($("#color-change").val("WYMIAR")) {
+        color.classList.add("joboffer-button-test");
+    }
+}
