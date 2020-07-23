@@ -135,8 +135,9 @@ function OpenNavbarItem(evt, itemNumber) {
 
 //function scrollFunction() {
 //    if (document.body.scrollTop > 100 || document.documentElement.scrollTop >100) {
-//        $(".navbar").addClass("fixed-top");
-//    } else {
-//        $(".navbar").removeClass("fixed-top");
+//        //$(".navbar").addClass("fixed-top");
+//        navbar.style.height = "70";
+//        navbar.style.lineHeight = "70";
+//        //$(".navbar").removeClass("fixed-top");
 //    }
 //}

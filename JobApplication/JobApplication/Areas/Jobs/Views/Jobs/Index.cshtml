@@ -10,51 +10,40 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.Title)*@
                 Tytuł
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Location)*@
                 Lokacja
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.TypeOfJob)*@
                 Typ pracy
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.PaymentMin)*@
                 Płaca min
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.PaymentMax)*@
                 Płaca max
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.PublicationTime)*@
                 Data publikacji
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Category)*@
                 Kategoria
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Skills)*@
                 Umiejętności
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Deadline)*@
                 Data zakończenia
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Description)*@
                 Opis
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.ChooseTheCurrency)*@
                 Wybierz walutę
             </th>
             <th></th>
@@ -102,7 +91,27 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
+@foreach (var item in Model)
+{
+    <div class="container col-sm-6">
+        <div class="joboffer-main">
+            <div class="card-body text-center">
+                <div class="row">
+                    <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main" />
+                    <h5><a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Title)</a></h5>
+                    <div class="joboffer-button">
+                        <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+                    </div>
+                </div>
+                <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
+            </div>
+        </div>
+        <div><br /><br /></div>
+    </div>
+}
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
