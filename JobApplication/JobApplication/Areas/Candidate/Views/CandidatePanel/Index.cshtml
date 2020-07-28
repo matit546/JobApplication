@@ -388,7 +388,7 @@
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">PREFERENCJE ZAWODOWE</div>
                                 <hr />
-                                <input id="AppUserEmployeeExtensionId" asp-for="AppUserEmployeeExtension.Id" hidden />
+                                <input  asp-for="AppUserEmployeeExtension.Id" id="AppUserEmployeeExtensionId" hidden="hidden" />
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">KATEGORIE*</div>
@@ -824,14 +824,14 @@
                 $("#Descrption").val(Data.appUserDto["Descrption"]);
                 $("#Categories").val(Data.appUserDto["Categories"]);
                 $("#Headline").val(Data.appUserDto["Headline"]);
-                $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);d
+                $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
                 $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
                 $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
                  $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
                 $("#YoutubeProfile").val(Data.appUserDto["YoutubeProfile"]);
                 $("#FacebookProfile").val(Data.appUserDto["FacebookProfile"]);
                 $(".BackgroundImage").attr("src", "/images/" + Data.appUserDto["BackgroundImage"]);
-
+                $("#AppUserEmployeeExtensionId").val(Data.AppUserEmployeeExtension["Id"]);
                 $("#AppUserEmployeeExtensionGender").val(Data.AppUserEmployeeExtension["Gender"]);
                 $("#AppUserEmployeeExtensionIsShowing").val(Data.AppUserEmployeeExtension["IsShowing"]);
                 $("#AppUserEmployeeExtensionCVFile").val(Data.AppUserEmployeeExtension["CVFile"]);
@@ -843,8 +843,7 @@
                 $("#AppUserEmployeeExtensionPaymentMinProfile").val(Data.AppUserEmployeeExtension["PaymentMinProfile"]);
                 $("#AppUserEmployeeExtensionExperiencesProfile").val(Data.AppUserEmployeeExtension["ExperiencesProfile"]);
                 $("#AppUserEmployeeExtensionSkillsProfile").val(Data.AppUserEmployeeExtension["SkillsProfile"]);
-                $("#AppUserEmployeeExtensionId").val(Data.AppUserEmployeeExtension["Id"]);
-
+  
                 $.each(Data.EducationEmployee, function (value) {
                     CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd', 'Description', 'EducationContainer');
                     $("input[name*='EducationEmployee[" + i + "].Degree']").val(Data.EducationEmployee[value]["Degree"]);

@@ -88,60 +88,72 @@ namespace JobApplication.Areas.Candidate.Controllers
                 //    }
                 //    i++;
                 //}
-                foreach (var item in candidateViewModel.EducationEmployee)
+                if (candidateViewModel.EducationEmployee != null)
                 {
-                    item.UserId = updateUser.Id;
-                    if (item.Id == 0)
+                    foreach (var item in candidateViewModel.EducationEmployee)
                     {
-                        _context.Add(item);
+                        item.UserId = updateUser.Id;
+                        if (item.Id == 0)
+                        {
+                            _context.Add(item);
+                        }
+                        else
+                        {
+                            _context.Update(item);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    else
-                    {
-                        _context.Update(item);
-                    }
-                    await _context.SaveChangesAsync();
                 }
 
-                foreach (var item in candidateViewModel.ExperiencesEmployee)
+                if (candidateViewModel.ExperiencesEmployee != null)
                 {
-                    item.UserId = updateUser.Id;
-                    if (item.Id == 0)
+                    foreach (var item in candidateViewModel.ExperiencesEmployee)
                     {
-                        _context.Add(item);
+                        item.UserId = updateUser.Id;
+                        if (item.Id == 0)
+                        {
+                            _context.Add(item);
+                        }
+                        else
+                        {
+                            _context.Update(item);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    else
-                    {
-                        _context.Update(item);
-                    }
-                    await _context.SaveChangesAsync();
                 }
 
-                foreach (var item in candidateViewModel.AwardsEmployee)
+                if (candidateViewModel.AwardsEmployee != null)
                 {
-                    item.UserId = updateUser.Id;
-                    if (item.Id == 0)
+                    foreach (var item in candidateViewModel.AwardsEmployee)
                     {
-                        _context.Add(item);
+                        item.UserId = updateUser.Id;
+                        if (item.Id == 0)
+                        {
+                            _context.Add(item);
+                        }
+                        else
+                        {
+                            _context.Update(item);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    else
-                    {
-                        _context.Update(item);
-                    }
-                    await _context.SaveChangesAsync();
                 }
 
-                foreach (var item in candidateViewModel.SkillsEmployee)
+                if (candidateViewModel.SkillsEmployee != null)
                 {
-                    item.UserId = updateUser.Id;
-                    if (item.Id == 0)
+                    foreach (var item in candidateViewModel.SkillsEmployee)
                     {
-                        _context.Add(item);
+                        item.UserId = updateUser.Id;
+                        if (item.Id == 0)
+                        {
+                            _context.Add(item);
+                        }
+                        else
+                        {
+                            _context.Update(item);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    else
-                    {
-                        _context.Update(item);
-                    }
-                    await _context.SaveChangesAsync();
                 }
 
                 candidateViewModel.AppUserEmployeeExtension.UserId = updateUser.Id;
