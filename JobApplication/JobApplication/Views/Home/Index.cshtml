@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<JobApplication.Models.JobOffer>; 
+@model IEnumerable<JobApplication.Models.JobOffer>;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -36,12 +36,9 @@
         </figcaption>
     </div>
 </figure>
-<div class="container">
-    <main role="main" class="pb-3">
-        <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Cor e</a>.</p>
-        </div>
+
+<main role="main" class="pb-3">
+    <div class="container">
 
         @if (User.IsInRole(SD.EmployerRole))
         {
@@ -53,7 +50,7 @@
             <p>kandydat</p>
         }
         <div class="text-center">
-            <div class="menu">
+            <div class="menu my-5">
                 <div class="row">
                     <div class="menu-item disabled col-6 button1 current-menu-item disabled">
                         <div text-align:center;">NAJNOWSZE OFERTY</div>
@@ -68,34 +65,105 @@
         <div class="lds-ellipsis-wrapper">
             <div class="lds-ellipsis" id="Loader"><div></div><div></div><div></div><div></div></div>
         </div>
-
-    </main>
-    <div class="row">
-        @if(Model==null)
-        {
-            <h1>Brak ofert</h1>
-        }
-        else
-        @foreach (var item in Model)
-        {
-            <div class="container col-sm-6">
-                <div class="joboffer-main">
-                    <div class="card-body text-center">
-                        <div class="row">
-                            <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main"/>
-                            <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
-                            <div id="color-change" class="joboffer-button">
-                                <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+        <div class="row">
+            @if (Model == null)
+            {
+                <h1>Brak ofert</h1>
+            }
+            else
+                @foreach (var item in Model)
+                {
+                    <div class="container col-sm-6">
+                        <div class="joboffer-main">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
+                                    </div>
+                                    <div class="col-7">
+                                        <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
+                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="joboffer-button text-center text-center">
+                                            <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
-                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
+                        <div><br /><br /></div>
                     </div>
-                </div>
-                <div><br /><br /></div>
-            </div>
-        }
-    </div>
-</div>
+                }
+        </div>
 
+        <div class="my-5 row justify-content-center">
+            <div class="menu col-3 a-button py-2 text-center">
+                <a class="text-white" href="../Jobs">
+                    Zobacz wszystkie oferty 🡲
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<figure class="px-0">
+    <div class="row">
+
+        <div class="col-6 px-0">
+            <img class="backgound-image-choice1" />
+
+            <div class="text-on-img-back centered">
+                <b>Jestem</b><br />
+                <div class="text-on-img-back-main">PRACODAWCĄ</div><br />
+                Dodawaj oferty pracy i szukaj kandydatkow<br />
+                <form asp-area="Identity" asp-page="/Account/Register" method="get">
+                    <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Pracodawca" />
+                    <button class="btn-primary mt-5 rounded-5" onclick="CLick1" id="RejestrujJakoPracodawca">
+                        <div class="p-1">
+                            Zarejestruj firmę
+                        </div>
+                    </button>
+                 </form>
+            </div>
+        </div>
+        <div class="col-6 px-0">
+            <img class="backgound-image-choice2" />
+
+
+            <div class="text-on-img-back centered">
+                <b>Jestem</b><br />
+                <div class="text-on-img-back-main">KANDYDATEM</div><br />
+                Przeszukaj bazę ofert pracy, aplikuj, zapisuj na później...<br />
+                <form asp-area="Identity" asp-page="/Account/Register" method="get">
+                    <input type="text" hidden id="RejestrujJako" name="RejestrujJako" value="Kandydat" />
+                    <button class="btn-primary mt-5 rounded-5" onclick="CLick2" id="RejestrujJakoKandydat">
+                        <div class="p-1">
+                            Zarejestruj się jako kandydat
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</figure>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function CLick1() {
+            $("#RejestrujJakoKandydat").val("Kandydat");
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function CLick2() {
+            $("#RejestrujJakoPracodawca").val("Pracodawca");
+        }
+    </script>
+}

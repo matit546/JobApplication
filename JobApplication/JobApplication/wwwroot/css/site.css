@@ -631,3 +631,61 @@ figcaption {
     top:inherit;
     bottom:inherit;
 }
+
+.background-offers-image {
+    background-image: url(../images/OfertyBg.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 18em;
+    background-position: center;
+    background-size: 100% 400px;
+    background-repeat: no-repeat;
+}
+
+.filter-area{
+    padding:15px;
+    background-color:white;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.container-center{
+    display:grid;
+}
+
+.backgound-image-choice1 {
+    background-image: url(../images/news2.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 22em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.backgound-image-choice2 {
+    background-image: url(../images/OfertyBg.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 22em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.text-on-img-back {
+    font-size: 22px;
+    color: white;
+ text-shadow: 1px 1px 1px black;
+}
+
+.text-on-img-back-main {
+    font-size: 32px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+}
+
+.rounded-5{
+    border-radius:5px;
+}
