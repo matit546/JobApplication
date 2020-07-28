@@ -4,118 +4,73 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Tytuł
-            </th>
-            <th>
-                Lokacja
-            </th>
-            <th>
-                Typ pracy
-            </th>
-            <th>
-                Płaca min
-            </th>
-            <th>
-                Płaca max
-            </th>
-            <th>
-                Data publikacji
-            </th>
-            <th>
-                Kategoria
-            </th>
-            <th>
-                Umiejętności
-            </th>
-            <th>
-                Data zakończenia
-            </th>
-            <th>
-                Opis
-            </th>
-            <th>
-                Wybierz walutę
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Title)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeOfJob)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PaymentMin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PaymentMax)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublicationTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Skills)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Deadline)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ChooseTheCurrency)
-                </td>
-                <td>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
-@foreach (var item in Model)
-{
-    <div class="container col-sm-6">
-        <div class="joboffer-main">
-            <div class="card-body text-center">
-                <div class="row">
-                    <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main" />
-                    <h5><a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Title)</a></h5>
-                    <div class="joboffer-button">
-                        <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
-                    </div>
+<figure>
+<img class="background-offers-image" />
+<div class="main-settings">
+    <figcaption>
+        <div class="main-text">Oferty pracy</div>
+    </figcaption>
+</div>
+</figure>
+<main role="main" class="pb-3">
+    <div class="container">
+        <div class="justify-content-center row">
+ 
+            <div class="col-3">
+                <div class="filter-area">
+                    Lista filtrów
                 </div>
-                <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
-                <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
-                <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
             </div>
+
+            <div class="col-6">
+                <div class="filter-area">
+                    filtry
+                </div>
+
+                @foreach (var item in Model)
+                {
+                    <div class="filter-area">
+                        <div class="joboffer-main">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
+                                    </div>
+                                    <div class="col-7">
+                                        <h5><a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Title)</a></h5>
+
+                                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="joboffer-button text-center">
+                                            <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+                <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-info @prevDisabled "><</a>
+                <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-info @nextDisabled">></a>
+            </div>
+
+            <div class="col-3">
+                <div class="filter-area">
+                    Ostatni pracownicy <br/>
+                    Statystyki <br/>
+                    Ostatnie prace <br/>
+                </div>
+            </div>
+    
         </div>
-        <div><br /><br /></div>
     </div>
-}
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-info @prevDisabled "><</a>
-<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-info @nextDisabled">></a>
+</main>
 
