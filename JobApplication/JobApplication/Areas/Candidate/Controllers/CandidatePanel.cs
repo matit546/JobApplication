@@ -102,8 +102,50 @@ namespace JobApplication.Areas.Candidate.Controllers
                     await _context.SaveChangesAsync();
                 }
 
+                foreach (var item in candidateViewModel.ExperiencesEmployee)
+                {
+                    item.UserId = updateUser.Id;
+                    if (item.Id == 0)
+                    {
+                        _context.Add(item);
+                    }
+                    else
+                    {
+                        _context.Update(item);
+                    }
+                    await _context.SaveChangesAsync();
+                }
 
-                
+                foreach (var item in candidateViewModel.AwardsEmployee)
+                {
+                    item.UserId = updateUser.Id;
+                    if (item.Id == 0)
+                    {
+                        _context.Add(item);
+                    }
+                    else
+                    {
+                        _context.Update(item);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
+                foreach (var item in candidateViewModel.SkillsEmployee)
+                {
+                    item.UserId = updateUser.Id;
+                    if (item.Id == 0)
+                    {
+                        _context.Add(item);
+                    }
+                    else
+                    {
+                        _context.Update(item);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
+
+
                 if (file != null)
                 {
                     if (updateUser == null)

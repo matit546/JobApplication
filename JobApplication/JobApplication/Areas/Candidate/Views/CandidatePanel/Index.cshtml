@@ -445,9 +445,10 @@
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">EDUKACJA</div>
+                                <h1 class="text-bottom-left-padding bolded">EDUKACJA</h1>
                                 <hr />
-                                @*<input  id="EducationEmployeeDegreeID" asp-for="EducationEmployee[0].Id" />
+                                <br />
+                                @*<input  id="EducationEmployeeDegreeID"  asp-for="EducationEmployee[0].Id" hidden />
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">TYTUŁ</div>
@@ -472,15 +473,13 @@
                                         <div class="text-bottom-left-padding bolded">OPIS</div>
                                         <textarea class="form-control form-input" id="EducationEmployeeDescription" asp-for="EducationEmployee[0].Description" placeholder="Nie wybrano"></textarea>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input id="AddButton" type="button" value="Dodaj" />
                                 </div>*@
-                                 <div class="form-group">
-                                    <input id="AddButton" type="button" value="Dodaj" />
+                                <div class="form-group">
+                                    <input id="AddButtonEducation" type="button" value="Dodaj" />
                                 </div>
-                                <div id="TextBoxContainer">
-
+                               
+                                <div id="EducationContainer">
+                                    <br />
                                 </div>
                             </div>
                         </div>
@@ -490,30 +489,55 @@
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA</div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                                        <input id="ExperiencesEmployeeDegree" asp-for="ExperiencesEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
+                                <h1 class="text-bottom-left-padding bolded">DOŚWIADCZENIA</h1>
+                                <hr />
+                                <br />
+                                @*<div class="row">
+                <div class="col-12">
+                    <div class="text-bottom-left-padding bolded">TYTUŁ</div>
+                    <input id="ExperiencesEmployeeDegree" asp-for="ExperiencesEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-bottom-left-padding bolded">NAZWA FIRMY</div>
+                    <input class="form-control form-input" id="ExperiencesEmployeeCompanyName" asp-for="ExperiencesEmployee[0].CompanyName" placeholder="Nie wybrano" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
+                    <input class="form-control form-input" id="ExperiencesEmployeeDateStartEnd" asp-for="ExperiencesEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-bottom-left-padding bolded">OPIS</div>
+                    <input class="form-control form-input" id="ExperiencesEmployeeDescription" asp-for="ExperiencesEmployee[0].Description" placeholder="Nie wybrano" />
+                </div>
+            </div>
+        </div>*@
+                                <div class="form-group">
+                                    <input id="AddButtonExperience" type="button" value="Dodaj" />
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">NAZWA FIRMY</div>
-                                        <input class="form-control form-input" id="ExperiencesEmployeeCompanyName" asp-for="ExperiencesEmployee[0].CompanyName" placeholder="Nie wybrano" />
-                                    </div>
+
+                                <div id="ExperienceContainer">
+                                    <br />
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
-                                        <input class="form-control form-input" id="ExperiencesEmployeeDateStartEnd" asp-for="ExperiencesEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
-                                    </div>
+                            </div>
+                    </div>
+                        </div>
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1 class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI</h1>
+                                <hr />
+                                <div class="form-group">
+                                    <input id="AddButtonSkills" type="button" value="Dodaj" />
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">OPIS</div>
-                                        <input class="form-control form-input" id="ExperiencesEmployeeDescription" asp-for="ExperiencesEmployee[0].Description" placeholder="Nie wybrano" />
-                                    </div>
+
+                                <div id="SkillsContainer">
+                                    <br />
                                 </div>
                             </div>
                         </div>
@@ -522,46 +546,16 @@
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI</div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                                        <input id="SkillsEmployeeDegree" asp-for="SkillsEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">WARTOŚĆ PROCENTOWA</div>
-                                        <input class="form-control form-input" id="SkillsEmployeePercentage" asp-for="SkillsEmployee[0].Percentage" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <h1 class="text-bottom-left-padding bolded">SUKCESY I NAGRODY</h1>
 
-                    <div class="container-padding">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">SUKCESY I NAGRODY</div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                                        <input id="AwardsEmployeeAward" asp-for="AwardsEmployee[0].Award" class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">ROK</div>
-                                        <input class="form-control form-input" id="AwardsEmployeeYear" asp-for="AwardsEmployee[0].Year" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">OPIS</div>
-                                        <input class="form-control form-input" id="AwardsEmployeeDescription" asp-for="AwardsEmployee[0].Description" placeholder="Nie wybrano" />
-                                    </div>
+                                <div class="form-group">
+                                    <input id="AddButtonAwards" type="button" value="Dodaj" />
                                 </div>
 
+                                <div id="AwardsContainer">
+                                    <br />
+                                </div>
+                          
                             </div>
                         </div>
                     </div>
@@ -666,247 +660,319 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript">
-        i = 0;
-        $(document).ready(function () {
-            $("#AddButton").click(function () {
-                CreateFildwithNOID(i);
-                i++;
-            });
-
-                var pageURL = $(location).attr("href");
-                var edited = pageURL.substr(pageURL.indexOf("=") + 1);
-                if (edited == "EditProfile") {
-                    ajaxfunction();
-            }
-            $("#editProfile").click(function () { ajaxfunction();});
-             
-            });
-   
-        function RemoveTextBox(button) {
-            $(button).parent().remove();
-            location.reload();
-        }
-        function CreateFildwithNOID(i) {
-            var div = $("<div />");
-
-            
-            var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
-            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
-            var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
-            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
-
-
-            div.append(EduEmpdegreeBox);
-            div.append(EduEmpschoolNameBox);
-            div.append(EduEmpdescriptionBox);
-            div.append(EduEmpDateBox);
-
-            var button = $("<input />").attr("type", "button").attr("value", "Remove");
-            button.attr("onclick", "RemoveTextBox(this)");
-            div.append(button);
-            $("#TextBoxContainer").append(div);
-
-        }
-
-        function CreateFild(i) {
-            var div = $("<div />");
-
-            var EduEmpdegreeIdx = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Id").addClass("form-control form-input").attr("type","hidden");
-            var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
-            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
-            var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
-            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
-
-            div.append(EduEmpdegreeIdx);
-            div.append(EduEmpdegreeBox);
-            div.append(EduEmpschoolNameBox);
-            div.append(EduEmpdescriptionBox);
-            div.append(EduEmpDateBox);
-
-            var button = $("<input />").attr("type", "button").attr("value", "Remove");
-            button.attr("onclick", "RemoveTextBox(this)");
-            div.append(button);
-            $("#TextBoxContainer").append(div);
+<script type="text/javascript">
+    i = 0;
+    b = 0;
+    j = 0;
+    k = 0;
+    $(document).ready(function () {
+        $("#AddButtonEducation").click(function () {
+            CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd', 'Description', 'EducationContainer');
             i++;
-        }
-        function ajaxfunction () {
-       
-            $.ajax({
-                method: "GET",
-                url: "/CandidatePanel/EditProfileEmployee",
-                success: function (data) {
-             
-                    // if data is in string format
-                    var Data = $.parseJSON(data);
-
-                    $("#CompanyName").val(Data.appUserDto["CompanyName"]);
-                    $("#Email").val(Data.appUserDto["Email"]);
-                    $("#PhoneNumber").val(Data.appUserDto["PhoneNumber"]);
-                    $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
-                    $("#Website").val(Data.appUserDto["Website"]);
-                    $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
-                    $("#FoundingDate").val(Data.appUserDto["FoundingDate"]);
-                    $("#ShortDescription").val(Data.appUserDto["ShortDescription"]);
-                    $("#Categories").val(Data.appUserDto["Categories"]);
-                    $("#Headline").val(Data.appUserDto["Headline"]);
-                    $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
-                    $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
-                    $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
-                    $("#YoutubeProfile").val(Data.appUserDto["YoutubeProfile"]);
-                   
-
-                    $.each(Data.EducationEmployee, function (value) {
-                        CreateFild(i);
-                        $("input[name*='EducationEmployee[" +i+ "].Degree']").val(Data.EducationEmployee[value]["Degree"]);
-                        $("input[name*='EducationEmployee[" + i + "].Id']").val(Data.EducationEmployee[value]["Id"]);
-                        $("input[name*='EducationEmployee[" + i + "].SchoolName']").val(Data.EducationEmployee[value]["SchoolName"]);
-                        $("input[name*='EducationEmployee[" + i + "].DateStartEnd']").val(Data.EducationEmployee[value]["DateStartEnd"]);
-                        $("input[name*='EducationEmployee[" + i + "].Description']").val(Data.EducationEmployee[value]["Description"]);
-                        i++;
-                      
-                    });
-           
-
-                    //$("#ID").val(Data.Id);
-                    //$("#CompanyName").val(Data.CompanyName);
-                    //$("#Email").val(Data.Email);
-                    //$("#VideoUrl").val(Data.VideoUrl);
-                    //$("#Website").val(Data.Website);
-                    //$("#FoundingDate").val(Data.FoundingDate);
-                    //$("#ShortDescription").val(Data.ShortDescription);
-                    //$("#Categories").val(Data.Categories);
-                    //$("#CompanySize").val(Data.CompanySize);
-
-
-                    //$("#Address").val(Data.Address);
-                    //$("#PhoneNumber").val(Data.PhoneNumber);
-                    ////$("#BackgroundImage").val(Data.BackgroundImage);
-                    //$(".BackgroundImage").attr("src", "/images/" + Data.BackgroundImage);
-                    //$("#FacebookProfile").val(Data.FacebookProfile);
-                    //$("#Gallery").val(Data.Gallery);
-                    //$("#Headline").val(Data.Headline);
-                    //$("#LinkedinProfile").val(Data.LinkedinProfile);
-                    //$("#TwitterProfile").val(Data.TwitterProfile);
-
-                    //$("#VideoUrl").val(Data.VideoUrl);
-                    //$("#VimeoProfile").val(Data.VimeoProfile);
-                    //$("#YoutubeProfile").val(Data.YoutubeProfile);
-
-                }
-            });
-  
-        }
-        //$(document).ready(function () {
-        //    $(".tablinks").click(function () {
-        //        var id = $(this).attr("id");
-        //        var url = "/Panel?ID=" + id;
-        //        window.location.href = url;
-        //    });
-        //});
-
-        $(document).ready(function () {
-
-            LoadTabindex();
         });
 
 
+        var pageURL = $(location).attr("href");
+        var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+        if (edited == "EditProfile") {
+            ajaxfunction();
+        }
+        $("#editProfile").click(function () { ajaxfunction(); });
 
+    });
 
+    $("#AddButtonExperience").click(function () {
+        CreateFild(b, 'ExperiencesEmployee', 'Id', 'Degree', 'CompanyName', 'DateStartEnd', 'Description', 'ExperienceContainer');
+        b++;
+    });
 
-        function LoadTabindex() {
-            var pageURL = $(location).attr("href");
-            var edited = pageURL.substr(pageURL.indexOf("=") + 1);
-            if (edited == "Panel") {
-                OpenNavbarItemOnLoad('Candidate1');
-            }
-            else if (edited == "AplikowaneOferty") {
-                OpenNavbarItemOnLoad('Candidate2');
-            }
-            else if (edited == "Sledzfirmy") {
-                OpenNavbarItemOnLoad('Candidate3');
-            }
-            else if (edited == "ZapisaneOferty") {
-                OpenNavbarItemOnLoad('Candidate4');
-            }
-            else if (edited == "Powiadomienia") {
-                OpenNavbarItemOnLoad('Candidate5');
-            }
-            else if (edited == "MojeRecenzje") {
-                OpenNavbarItemOnLoad('Candidate6');
-            }
-            else if (edited == "EditProfile") {
-                OpenNavbarItemOnLoad('Candidate8');
-            }
-            else {
-                OpenNavbarItemOnLoad("Candidate1");
-                changeurl('Panel');
-            }
+    $("#AddButtonAwards").click(function () {
+  
+        CreateFild(j, 'AwardsEmployee', 'Id', '', 'Award', 'Year', 'Description', 'AwardsContainer');
+        j++;
 
+    });
+
+    $("#AddButtonSkills").click(function () {
+        CreateFild(k, 'SkillsEmployee', 'Id', '', '', 'Degree', 'Percentage', 'SkillsContainer');
+        k++;
+    });
+    
+    function RemoveTextBox(button) {
+        $(button).parent().remove();
+        location.reload();
+    }
+    
+
+    function CreateFild(i, a, b, c, d, e, f, containerName) {
+        var div = $("<div />");
+        var divcol4first = $("<div />");
+        var divcol4second = $("<div />");
+        var divcol4third = $("<div />");
+        var divcol4fourth = $("<div />");
+        var divcol4fivth = $("<div />");
+        var divtext = $("<div />");
+        var divtext2 = $("<div />");
+        var divtext3 = $("<div />");
+        var divtext4 = $("<div />");
+        var br = $("<br/>");
+
+        if (containerName == 'EducationContainer') {
+            $(divtext).html('TYTUŁ');
+            $(divtext2).html('NAZWA SZKOŁY');
+            $(divtext3).html('DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA');
+            $(divtext4).html('OPIS');
+        }
+        if (containerName == 'ExperienceContainer') {
+            $(divtext).html('TYTUŁ');
+            $(divtext2).html('NAZWA ');
+            $(divtext3).html('DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA');
+            $(divtext4).html('OPIS');
+        }
+        if (containerName == 'SkillsContainer') {
+            $(divtext2).html('TYTUŁ');
+            $(divtext3).html('WARTOŚĆ (PROCENTOWA)');
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + e).addClass("form-control form-input");
+            var EduEmpDateBox = $("<input />").attr("type", "number").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input");
+            divcol4third.addClass("col-6");
+            divcol4fourth.addClass("col-6");
         }
 
-        function OpenNavbarItem(evt, itemNumber) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(itemNumber).style.display = "block";
-            evt.currentTarget.className += " active";
-
-            if (itemNumber == "Candidate1") {
-                changeurl('Panel');
-            }
-            else if (itemNumber == "Candidate2") {
-                changeurl('AplikowaneOferty');
-            }
-            else if (itemNumber == "Candidate3") {
-                changeurl('Sledzfirmy');
-            }
-            else if (itemNumber == "Candidate4") {
-                changeurl('ZapisaneOferty');
-            }
-            else if (itemNumber == "Candidate5") {
-                changeurl('Powiadomienia');
-            }
-            else if (itemNumber == "Candidate6") {
-                changeurl('MojeRecenzje');
-            }
-            else if (itemNumber == "Candidate8") {
-                changeurl('EditProfile');
-            }
-            else {
-                changeurl('Panel');
-            }
-        }
-
-
-        function OpenNavbarItemOnLoad(itemNumber) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(itemNumber).style.display = "block";
-
-
-
+        if (containerName == 'AwardsContainer') {
+            $(divtext4).html('OPIS');
+            $(divtext2).html('TYTUŁ');
+            $(divtext3).html('ROK');
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + d).addClass("form-control form-input");
+            var EduEmpdescriptionBox = $("<textarea />").attr("type", "textbox").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input");
+            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + e).addClass("form-control form-input");
+            divcol4third.addClass("col-6");
+            divcol4fourth.addClass("col-6");
         }
 
 
-        function changeurl(url) {
-            var new_url = "/CandidatePanel?name=" + url;
-            window.history.pushState("data", "Title", new_url);
-            //document.title = url;
+        if (containerName == 'EducationContainer' || containerName =='ExperienceContainer') {
+            var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + c).addClass("form-control form-input");
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + d).addClass("form-control form-input");
+            var EduEmpdescriptionBox = $("<textarea />").attr("type", "textbox").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input");
+            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + e).addClass("form-control form-input");
+
+            divcol4second.addClass("col-4");
+            divcol4second.append(divtext);
+            divcol4second.append(EduEmpdegreeBox);
+            div.append(divcol4second);
+            divcol4third.addClass("col-4");
+            divcol4fourth.addClass("col-4");
         }
 
-    </script>
+        var EduEmpdegreeIdx = $("<input />").attr("type", "textbox").attr("name", a+"[" + i + "]."+b).addClass("form-control form-input").attr("type", "hidden");
+        $(EduEmpdegreeIdx).val("0");
+
+        divtext.addClass("text-bottom-left-padding bolded");
+        divtext2.addClass("text-bottom-left-padding bolded");
+        divtext3.addClass("text-bottom-left-padding bolded");
+        divtext4.addClass("text-bottom-left-padding bolded");
+
+       
+        divcol4fivth.addClass("col-12");
+        divcol4fivth.append(br);
+
+        divcol4third.append(divtext2);
+        divcol4fourth.append(divtext3);
+        divcol4fivth.append(divtext4);
+
+
+        divcol4third.append(EduEmpschoolNameBox);
+        divcol4fourth.append(EduEmpDateBox);
+        divcol4fivth.append(EduEmpdescriptionBox);
+
+        div.append(divcol4first);
+
+        div.append(divcol4third);
+        div.append(divcol4fourth);
+        div.append(divcol4fivth);
+
+        div.addClass("row")
+        div.append(EduEmpdegreeIdx);
+        var button = $("<input />").attr("type", "button").attr("value", "Remove");
+        button.attr("onclick", "RemoveTextBox(this)");
+
+        $("#" + containerName).append(div).append(br);
+    }
+
+    function ajaxfunction() {
+
+        $.ajax({
+            method: "GET",
+            url: "/CandidatePanel/EditProfileEmployee",
+            success: function (data) {
+
+                // if data is in string format
+                var Data = $.parseJSON(data);
+
+                $("#CompanyName").val(Data.appUserDto["CompanyName"]);
+                $("#Email").val(Data.appUserDto["Email"]);
+                $("#PhoneNumber").val(Data.appUserDto["PhoneNumber"]);
+                $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
+                $("#Website").val(Data.appUserDto["Website"]);
+                $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
+                $("#FoundingDate").val(Data.appUserDto["FoundingDate"]);
+                $("#ShortDescription").val(Data.appUserDto["ShortDescription"]);
+                $("#Categories").val(Data.appUserDto["Categories"]);
+                $("#Headline").val(Data.appUserDto["Headline"]);
+                $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
+                $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
+                $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
+                $("#YoutubeProfile").val(Data.appUserDto["YoutubeProfile"]);
+         
+                $.each(Data.EducationEmployee, function (value) {
+                    CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd','Description','EducationContainer');
+                    $("input[name*='EducationEmployee[" + i + "].Degree']").val(Data.EducationEmployee[value]["Degree"]);
+                    $("input[name*='EducationEmployee[" + i + "].Id']").val(Data.EducationEmployee[value]["Id"]);
+                    $("input[name*='EducationEmployee[" + i + "].SchoolName']").val(Data.EducationEmployee[value]["SchoolName"]);
+                    $("input[name*='EducationEmployee[" + i + "].DateStartEnd']").val(Data.EducationEmployee[value]["DateStartEnd"]);
+                    $("textarea[name*='EducationEmployee[" + i + "].Description']").val(Data.EducationEmployee[value]["Description"]);
+                    i++;
+                });
+  
+                $.each(Data.ExperiencesEmployee, function (value) {
+
+                    CreateFild(b, 'ExperiencesEmployee', 'Id', 'Degree', 'CompanyName', 'DateStartEnd', 'Description', 'ExperienceContainer');
+                    $("input[name*='ExperiencesEmployee[" + b + "].Degree']").val(Data.ExperiencesEmployee[value]["Degree"]);
+                    $("input[name*='ExperiencesEmployee[" + b + "].Id']").val(Data.ExperiencesEmployee[value]["Id"]);
+                    $("input[name*='ExperiencesEmployee[" + b + "].CompanyName']").val(Data.ExperiencesEmployee[value]["CompanyName"]);
+                    $("input[name*='ExperiencesEmployee[" + b + "].DateStartEnd']").val(Data.ExperiencesEmployee[value]["DateStartEnd"]);
+                    $("textarea[name*='ExperiencesEmployee[" + b + "].Description']").val(Data.ExperiencesEmployee[value]["Description"]);
+                    b++;
+
+                });
+
+                $.each(Data.AwardsEmployee, function (value) {
+
+                    CreateFild(j, 'AwardsEmployee', 'Id', '', 'Award', 'Year', 'Description', 'AwardsContainer');
+                    $("input[name*='AwardsEmployee[" + j + "].Award']").val(Data.AwardsEmployee[value]["Award"]);
+                    $("input[name*='AwardsEmployee[" + j + "].Id']").val(Data.AwardsEmployee[value]["Id"]);
+                    $("input[name*='AwardsEmployee[" + j + "].Year']").val(Data.AwardsEmployee[value]["Year"]);
+                    $("textarea[name*='AwardsEmployee[" + j + "].Description']").val(Data.AwardsEmployee[value]["Description"]);
+                    j++;
+                });
+
+                $.each(Data.SkillsEmployee, function (value) {
+
+                    CreateFild(k, 'SkillsEmployee', 'Id', '', '', 'Degree', 'Percentage', 'SkillsContainer');
+                    $("input[name*='SkillsEmployee[" + k + "].Degree']").val(Data.SkillsEmployee[value]["Degree"]);
+                    $("input[name*='SkillsEmployee[" + k + "].Id']").val(Data.SkillsEmployee[value]["Id"]);
+                    $("input[name*='SkillsEmployee[" + k + "].Percentage']").val(Data.SkillsEmployee[value]["Percentage"]);
+                    k++;
+                });
+
+            }
+        });
+
+    }
+
+
+    $(document).ready(function () {
+
+        LoadTabindex();
+    });
+
+
+
+
+
+    function LoadTabindex() {
+        var pageURL = $(location).attr("href");
+        var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+        if (edited == "Panel") {
+            OpenNavbarItemOnLoad('Candidate1');
+        }
+        else if (edited == "AplikowaneOferty") {
+            OpenNavbarItemOnLoad('Candidate2');
+        }
+        else if (edited == "Sledzfirmy") {
+            OpenNavbarItemOnLoad('Candidate3');
+        }
+        else if (edited == "ZapisaneOferty") {
+            OpenNavbarItemOnLoad('Candidate4');
+        }
+        else if (edited == "Powiadomienia") {
+            OpenNavbarItemOnLoad('Candidate5');
+        }
+        else if (edited == "MojeRecenzje") {
+            OpenNavbarItemOnLoad('Candidate6');
+        }
+        else if (edited == "EditProfile") {
+            OpenNavbarItemOnLoad('Candidate8');
+        }
+        else {
+            OpenNavbarItemOnLoad("Candidate1");
+            changeurl('Panel');
+        }
+
+    }
+
+    function OpenNavbarItem(evt, itemNumber) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(itemNumber).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        if (itemNumber == "Candidate1") {
+            changeurl('Panel');
+        }
+        else if (itemNumber == "Candidate2") {
+            changeurl('AplikowaneOferty');
+        }
+        else if (itemNumber == "Candidate3") {
+            changeurl('Sledzfirmy');
+        }
+        else if (itemNumber == "Candidate4") {
+            changeurl('ZapisaneOferty');
+        }
+        else if (itemNumber == "Candidate5") {
+            changeurl('Powiadomienia');
+        }
+        else if (itemNumber == "Candidate6") {
+            changeurl('MojeRecenzje');
+        }
+        else if (itemNumber == "Candidate8") {
+            changeurl('EditProfile');
+        }
+        else {
+            changeurl('Panel');
+        }
+    }
+
+
+    function OpenNavbarItemOnLoad(itemNumber) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(itemNumber).style.display = "block";
+
+
+
+    }
+
+
+    function changeurl(url) {
+        var new_url = "/CandidatePanel?name=" + url;
+        window.history.pushState("data", "Title", new_url);
+        //document.title = url;
+    }
+
+</script>
 }
