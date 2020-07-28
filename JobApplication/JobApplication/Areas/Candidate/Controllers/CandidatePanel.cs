@@ -78,7 +78,7 @@ namespace JobApplication.Areas.Candidate.Controllers
             if (ModelState.IsValid)
             {
                 var updateUser = await _userManager.GetUserAsync(HttpContext.User);
-               // var objfromDb = await _context.EducationEmployees.Where(x => x.UserId == updateUser.Id).ToListAsync();
+                // var objfromDb = await _context.EducationEmployees.Where(x => x.UserId == updateUser.Id).ToListAsync();
                 //int i = 0;
                 //foreach ( var exists in objfromDb)
                 //{
@@ -90,7 +90,7 @@ namespace JobApplication.Areas.Candidate.Controllers
                 //}
                 foreach (var item in candidateViewModel.EducationEmployee)
                 {
-                   item.UserId = updateUser.Id;
+                    item.UserId = updateUser.Id;
                     if (item.Id == 0)
                     {
                         _context.Add(item);
@@ -144,7 +144,16 @@ namespace JobApplication.Areas.Candidate.Controllers
                     await _context.SaveChangesAsync();
                 }
 
+                candidateViewModel.AppUserEmployeeExtension.UserId = updateUser.Id;
+                if (candidateViewModel.AppUserEmployeeExtension.Id == 0)
+                {
+                    _context.Add(candidateViewModel.AppUserEmployeeExtension);
 
+                }else
+                {
+                    _context.Update(candidateViewModel.AppUserEmployeeExtension);
+                }
+                await _context.SaveChangesAsync();
 
                 if (file != null)
                 {
@@ -198,6 +207,8 @@ namespace JobApplication.Areas.Candidate.Controllers
                 updateUser.VimeoProfile = candidateViewModel.appUserDto.VimeoProfile;
                 updateUser.Website = candidateViewModel.appUserDto.Website;
                 updateUser.YoutubeProfile = candidateViewModel.appUserDto.YoutubeProfile;
+                updateUser.FacebookProfile = candidateViewModel.appUserDto.FacebookProfile;
+                updateUser.Email = candidateViewModel.appUserDto.Email;
 
                 var result = await _userManager.UpdateAsync(updateUser);
 

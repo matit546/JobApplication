@@ -346,7 +346,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">PŁEĆ</div>
-                                <input id="Gender" class="form-control form-input" asp-for="AppUserEmployeeExtension.Gender" placeholder="Wprowadz datę założenia" />
+                                <input id="AppUserEmployeeExtensionGender" class="form-control form-input" asp-for="AppUserEmployeeExtension.Gender" placeholder="Wybierz płeć" />
                                 <span asp-validation-for="AppUserEmployeeExtension.Gender" class="text-danger"></span>
                             </div>
                         </div>
@@ -356,7 +356,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-bottom-left-padding bolded">UPUBLICZNIJ PROFIL*</div>
-                                <select asp-for="AppUserEmployeeExtension.IsShowing" id="IsShowing" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.IsShowing>()" class="form-control"></select>
+                                <select asp-for="AppUserEmployeeExtension.IsShowing" id="AppUserEmployeeExtensionIsShowing" asp-items="@Html.GetEnumSelectList<JobApplication.Areas.Identity.Data.IsShowing>()" class="form-control"></select>
                             </div>
                         </div>
                     </div>
@@ -373,75 +373,79 @@
 
                     <div class="container-padding">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-
-                                </div>
-                                <div class="row">
+                            <div class="col-12">                          
+                                
                                     <div class="text-bottom-left-padding bolded">List Motywacyjny jako DESCRIPTION</div>
                                     <textarea asp-for="appUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
                                     <span asp-validation-for="appUserDto.Descrption" class="text-danger"></span>
-                                </div>
+                             
                             </div>
                         </div>
                     </div>
-                    d
+                    <br />
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">PREFERENCJE ZAWODOWE</div>
-                                <input  id="AppUserEmployeeExtensionId" asp-for="AppUserEmployeeExtension.Id" />
+                                <hr />
+                                <input id="AppUserEmployeeExtensionId" asp-for="AppUserEmployeeExtension.Id" hidden />
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">KATEGORIE</div>
+                                    <div class="col-4">
+                                        <div class="text-bottom-left-padding bolded">KATEGORIE*</div>
                                         <input id="Categories" asp-for="appUserDto.Categories" class="form-control form-input" placeholder="Nie wybrano" />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">TYPY //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+
+
+                                    <div class="col-4">
+                                        <div class="text-bottom-left-padding bolded">TYPY*</div>
+                                        <input class="form-control form-input" id="AppUserEmployeeExtensionTypePreferes" asp-for="AppUserEmployeeExtension.TypePreferes" placeholder="Nie wybrano" />
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <div class="text-bottom-left-padding bolded">POZIOMY*</div>
+                                        <input class="form-control form-input" id="AppUserEmployeeExtensionLevels" asp-for="AppUserEmployeeExtension.Levels" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">Poziomy //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
+                                <br />
+                             
+                                   <div class="row">
+                                        <div class="col-4">
+                                            <div class="text-bottom-left-padding bolded">LOKALIZACJA*</div>
+                                            <input class="form-control form-input" id="AppUserEmployeeExtensionLocalization" asp-for="AppUserEmployeeExtension.Localization" placeholder="Nie wybrano" />
+                                        </div>
+
+
+                                        <div class="col-4">
+                                            <div class="text-bottom-left-padding bolded">JĘZYKI </div>
+                                            <input class="form-control form-input" id="AppUserEmployeeExtensionLanguages" asp-for="AppUserEmployeeExtension.Languages" placeholder="Nie wybrano" />
+                                        </div>
+
+
+                                        <div class="col-4">
+                                            <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD</div>
+                                            <input class="form-control form-input" id="AppUserEmployeeExtensionPaymentMinProfile" asp-for="AppUserEmployeeExtension.PaymentMinProfile" placeholder="Nie wybrano" />
+                                        </div>
+                                    
                                 </div>
+                                <br />
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">Lokalizacja //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                                    <div class="col-4">
+                                        <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA</div>
+                                        <input class="form-control form-input" id="AppUserEmployeeExtensionExperiencesProfile" asp-for="AppUserEmployeeExtension.ExperiencesProfile" placeholder="Nie wybrano" />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">JĘZYKI </div>
-                                        <input class="form-control form-input" id="Languages" asp-for="AppUserEmployeeExtension.Languages" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-bottom-left-padding bolded">UMIEJENTOŚCI //dodac wraz z id i asp-for</div>
-                                        <input class="form-control form-input" placeholder="Nie wybrano" />
+                               
+                            
+                                    <div class="col-8">
+                                        <div class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI </div>
+                                        <input class="form-control form-input" id="AppUserEmployeeExtensionSkillsProfile" asp-for="AppUserEmployeeExtension.SkillsProfile" placeholder="Nie wybrano" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <br />
                     <div class="container-padding">
                         <div class="row">
                             <div class="col-12">
@@ -548,14 +552,14 @@
                             <div class="col-12">
                                 <h1 class="text-bottom-left-padding bolded">SUKCESY I NAGRODY</h1>
 
-                                <div class="form-group">
-                                    <input id="AddButtonAwards" type="button" value="Dodaj" />
-                                </div>
+
 
                                 <div id="AwardsContainer">
                                     <br />
                                 </div>
-                          
+                                <div class="form-group">
+                                    <input id="AddButtonAwards" type="button" value="Dodaj" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -687,7 +691,7 @@
     });
 
     $("#AddButtonAwards").click(function () {
-  
+
         CreateFild(j, 'AwardsEmployee', 'Id', '', 'Award', 'Year', 'Description', 'AwardsContainer');
         j++;
 
@@ -697,12 +701,12 @@
         CreateFild(k, 'SkillsEmployee', 'Id', '', '', 'Degree', 'Percentage', 'SkillsContainer');
         k++;
     });
-    
+
     function RemoveTextBox(button) {
         $(button).parent().remove();
         location.reload();
     }
-    
+
 
     function CreateFild(i, a, b, c, d, e, f, containerName) {
         var div = $("<div />");
@@ -716,7 +720,7 @@
         var divtext3 = $("<div />");
         var divtext4 = $("<div />");
         var br = $("<br/>");
-
+        var hr = $("<hr/>");
         if (containerName == 'EducationContainer') {
             $(divtext).html('TYTUŁ');
             $(divtext2).html('NAZWA SZKOŁY');
@@ -750,7 +754,7 @@
         }
 
 
-        if (containerName == 'EducationContainer' || containerName =='ExperienceContainer') {
+        if (containerName == 'EducationContainer' || containerName == 'ExperienceContainer') {
             var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + c).addClass("form-control form-input");
             var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + d).addClass("form-control form-input");
             var EduEmpdescriptionBox = $("<textarea />").attr("type", "textbox").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input");
@@ -764,7 +768,7 @@
             divcol4fourth.addClass("col-4");
         }
 
-        var EduEmpdegreeIdx = $("<input />").attr("type", "textbox").attr("name", a+"[" + i + "]."+b).addClass("form-control form-input").attr("type", "hidden");
+        var EduEmpdegreeIdx = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + b).addClass("form-control form-input").attr("type", "hidden");
         $(EduEmpdegreeIdx).val("0");
 
         divtext.addClass("text-bottom-left-padding bolded");
@@ -772,7 +776,7 @@
         divtext3.addClass("text-bottom-left-padding bolded");
         divtext4.addClass("text-bottom-left-padding bolded");
 
-       
+
         divcol4fivth.addClass("col-12");
         divcol4fivth.append(br);
 
@@ -796,7 +800,7 @@
         var button = $("<input />").attr("type", "button").attr("value", "Remove");
         button.attr("onclick", "RemoveTextBox(this)");
 
-        $("#" + containerName).append(div).append(br);
+        $("#" + containerName).append(div).append(br).append(hr);
     }
 
     function ajaxfunction() {
@@ -816,16 +820,33 @@
                 $("#Website").val(Data.appUserDto["Website"]);
                 $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
                 $("#FoundingDate").val(Data.appUserDto["FoundingDate"]);
-                $("#ShortDescription").val(Data.appUserDto["ShortDescription"]);
+                $("#ShortDescrption").val(Data.appUserDto["ShortDescription"]);
+                $("#Descrption").val(Data.appUserDto["Descrption"]);
                 $("#Categories").val(Data.appUserDto["Categories"]);
                 $("#Headline").val(Data.appUserDto["Headline"]);
-                $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
+                $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);d
                 $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
                 $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
+                 $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
                 $("#YoutubeProfile").val(Data.appUserDto["YoutubeProfile"]);
-         
+                $("#FacebookProfile").val(Data.appUserDto["FacebookProfile"]);
+                $(".BackgroundImage").attr("src", "/images/" + Data.appUserDto["BackgroundImage"]);
+
+                $("#AppUserEmployeeExtensionGender").val(Data.AppUserEmployeeExtension["Gender"]);
+                $("#AppUserEmployeeExtensionIsShowing").val(Data.AppUserEmployeeExtension["IsShowing"]);
+                $("#AppUserEmployeeExtensionCVFile").val(Data.AppUserEmployeeExtension["CVFile"]);
+                $("#AppUserEmployeeExtensionLanguages").val(Data.AppUserEmployeeExtension["Languages"]);
+
+                $("#AppUserEmployeeExtensionTypePreferes").val(Data.AppUserEmployeeExtension["TypePreferes"]);
+                $("#AppUserEmployeeExtensionLevels").val(Data.AppUserEmployeeExtension["Levels"]);
+                $("#AppUserEmployeeExtensionLocalization").val(Data.AppUserEmployeeExtension["Localization"]);
+                $("#AppUserEmployeeExtensionPaymentMinProfile").val(Data.AppUserEmployeeExtension["PaymentMinProfile"]);
+                $("#AppUserEmployeeExtensionExperiencesProfile").val(Data.AppUserEmployeeExtension["ExperiencesProfile"]);
+                $("#AppUserEmployeeExtensionSkillsProfile").val(Data.AppUserEmployeeExtension["SkillsProfile"]);
+                $("#AppUserEmployeeExtensionId").val(Data.AppUserEmployeeExtension["Id"]);
+
                 $.each(Data.EducationEmployee, function (value) {
-                    CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd','Description','EducationContainer');
+                    CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd', 'Description', 'EducationContainer');
                     $("input[name*='EducationEmployee[" + i + "].Degree']").val(Data.EducationEmployee[value]["Degree"]);
                     $("input[name*='EducationEmployee[" + i + "].Id']").val(Data.EducationEmployee[value]["Id"]);
                     $("input[name*='EducationEmployee[" + i + "].SchoolName']").val(Data.EducationEmployee[value]["SchoolName"]);
@@ -833,7 +854,7 @@
                     $("textarea[name*='EducationEmployee[" + i + "].Description']").val(Data.EducationEmployee[value]["Description"]);
                     i++;
                 });
-  
+
                 $.each(Data.ExperiencesEmployee, function (value) {
 
                     CreateFild(b, 'ExperiencesEmployee', 'Id', 'Degree', 'CompanyName', 'DateStartEnd', 'Description', 'ExperienceContainer');
