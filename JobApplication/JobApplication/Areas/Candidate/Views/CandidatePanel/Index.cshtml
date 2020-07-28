@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<a asp-action="EditProfileEmployee">EDITPFOFILE</a>
+
 <div class="tab">
     <div class="displayImage">
         <img alt="zdjecie" />
@@ -390,6 +390,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">PREFERENCJE ZAWODOWE</div>
+                                <input  id="AppUserEmployeeExtensionId" asp-for="AppUserEmployeeExtension.Id" />
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="text-bottom-left-padding bolded">KATEGORIE</div>
@@ -446,7 +447,7 @@
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">EDUKACJA</div>
                                 <hr />
-                                <input hidden id="EducationEmployeeDegreeID" asp-for="EducationEmployee[0].Id" />
+                                @*<input  id="EducationEmployeeDegreeID" asp-for="EducationEmployee[0].Id" />
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="text-bottom-left-padding bolded">TYTUŁ</div>
@@ -474,8 +475,10 @@
                                 </div>
                                 <div class="form-group">
                                     <input id="AddButton" type="button" value="Dodaj" />
+                                </div>*@
+                                 <div class="form-group">
+                                    <input id="AddButton" type="button" value="Dodaj" />
                                 </div>
-
                                 <div id="TextBoxContainer">
 
                                 </div>
@@ -659,51 +662,76 @@
 
 
 </div>
- 
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
+        i = 0;
         $(document).ready(function () {
-            var i = 1; //to trzeba odczytac
             $("#AddButton").click(function () {
-                var div = $("<div />");
-                var value = "";
-
-                var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
-                var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
-                var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
-                var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
-                    
-                EduEmpdegreeBox.val(value);
-                EduEmpschoolNameBox.val(value);
-                EduEmpdescriptionBox.val(value);
-                EduEmpDateBox.val(value);
-
-                div.append(EduEmpdegreeBox);
-
-                div.append(EduEmpschoolNameBox);
-                div.append(EduEmpdescriptionBox);
-                div.append(EduEmpDateBox);
-
-                var button = $("<input />").attr("type", "button").attr("value", "Remove");
-                button.attr("onclick", "RemoveTextBox(this)");
-                div.append(button);
-                $("#TextBoxContainer").append(div);
+                CreateFildwithNOID(i);
                 i++;
-
             });
 
-           
-        });
+                var pageURL = $(location).attr("href");
+                var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+                if (edited == "EditProfile") {
+                    ajaxfunction();
+            }
+            $("#editProfile").click(function () { ajaxfunction();});
+             
+            });
+   
         function RemoveTextBox(button) {
             $(button).parent().remove();
+            location.reload();
         }
-    </script>
+        function CreateFildwithNOID(i) {
+            var div = $("<div />");
 
-    <script>
+            
+            var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
+            var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
+            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
 
-        $("#editProfile").click(function () {
+
+            div.append(EduEmpdegreeBox);
+            div.append(EduEmpschoolNameBox);
+            div.append(EduEmpdescriptionBox);
+            div.append(EduEmpDateBox);
+
+            var button = $("<input />").attr("type", "button").attr("value", "Remove");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+            $("#TextBoxContainer").append(div);
+
+        }
+
+        function CreateFild(i) {
+            var div = $("<div />");
+
+            var EduEmpdegreeIdx = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Id").addClass("form-control form-input").attr("type","hidden");
+            var EduEmpdegreeBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Degree").addClass("form-control form-input");
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].SchoolName").addClass("form-control form-input");
+            var EduEmpdescriptionBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].Description").addClass("form-control form-input");
+            var EduEmpDateBox = $("<input />").attr("type", "textbox").attr("name", "EducationEmployee[" + i + "].DateStartEnd").addClass("form-control form-input");
+
+            div.append(EduEmpdegreeIdx);
+            div.append(EduEmpdegreeBox);
+            div.append(EduEmpschoolNameBox);
+            div.append(EduEmpdescriptionBox);
+            div.append(EduEmpDateBox);
+
+            var button = $("<input />").attr("type", "button").attr("value", "Remove");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+            $("#TextBoxContainer").append(div);
+            i++;
+        }
+        function ajaxfunction () {
+       
             $.ajax({
                 method: "GET",
                 url: "/CandidatePanel/EditProfileEmployee",
@@ -711,51 +739,64 @@
              
                     // if data is in string format
                     var Data = $.parseJSON(data);
-                  
-                   
-              
-                    //    $("#Email").val(Data[value]["Email"]);
-                    //    $("#CompanyName").val(Data[value]["CompanyName"]);
-                    //$("#PhoneNumber").val(Data[value]["PhoneNumber"]);
 
-                        $.each(Data.EducationEmployee, function (value) {
-                            $("#Id").val(Data.EducationEmployee[value]["Degree"]);
-                            $("#EducationEmployeeDegree").val(Data.EducationEmployee[value]["Degree"]);
-                            $("#EducationEmployeeDegreeID").val(Data.EducationEmployee[value]["Id"]);
-                        
-                        });
-     
+                    $("#CompanyName").val(Data.appUserDto["CompanyName"]);
+                    $("#Email").val(Data.appUserDto["Email"]);
+                    $("#PhoneNumber").val(Data.appUserDto["PhoneNumber"]);
+                    $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
+                    $("#Website").val(Data.appUserDto["Website"]);
+                    $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
+                    $("#FoundingDate").val(Data.appUserDto["FoundingDate"]);
+                    $("#ShortDescription").val(Data.appUserDto["ShortDescription"]);
+                    $("#Categories").val(Data.appUserDto["Categories"]);
+                    $("#Headline").val(Data.appUserDto["Headline"]);
+                    $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
+                    $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
+                    $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
+                    $("#YoutubeProfile").val(Data.appUserDto["YoutubeProfile"]);
+                   
+
+                    $.each(Data.EducationEmployee, function (value) {
+                        CreateFild(i);
+                        $("input[name*='EducationEmployee[" +i+ "].Degree']").val(Data.EducationEmployee[value]["Degree"]);
+                        $("input[name*='EducationEmployee[" + i + "].Id']").val(Data.EducationEmployee[value]["Id"]);
+                        $("input[name*='EducationEmployee[" + i + "].SchoolName']").val(Data.EducationEmployee[value]["SchoolName"]);
+                        $("input[name*='EducationEmployee[" + i + "].DateStartEnd']").val(Data.EducationEmployee[value]["DateStartEnd"]);
+                        $("input[name*='EducationEmployee[" + i + "].Description']").val(Data.EducationEmployee[value]["Description"]);
+                        i++;
+                      
+                    });
            
 
-                    $("#ID").val(Data.Id);
-                    $("#CompanyName").val(Data.CompanyName);
-                    $("#Email").val(Data.Email);
-                    $("#VideoUrl").val(Data.VideoUrl);
-                    $("#Website").val(Data.Website);
-                    $("#FoundingDate").val(Data.FoundingDate);
-                    $("#ShortDescription").val(Data.ShortDescription);
-                    $("#Categories").val(Data.Categories);
-                    $("#CompanySize").val(Data.CompanySize);
+                    //$("#ID").val(Data.Id);
+                    //$("#CompanyName").val(Data.CompanyName);
+                    //$("#Email").val(Data.Email);
+                    //$("#VideoUrl").val(Data.VideoUrl);
+                    //$("#Website").val(Data.Website);
+                    //$("#FoundingDate").val(Data.FoundingDate);
+                    //$("#ShortDescription").val(Data.ShortDescription);
+                    //$("#Categories").val(Data.Categories);
+                    //$("#CompanySize").val(Data.CompanySize);
 
 
-                    $("#Address").val(Data.Address);
-                    $("#PhoneNumber").val(Data.PhoneNumber);
-                    //$("#BackgroundImage").val(Data.BackgroundImage);
-                    $(".BackgroundImage").attr("src", "/images/" + Data.BackgroundImage);
-                    $("#FacebookProfile").val(Data.FacebookProfile);
-                    $("#Gallery").val(Data.Gallery);
-                    $("#Headline").val(Data.Headline);
-                    $("#LinkedinProfile").val(Data.LinkedinProfile);
-                    $("#TwitterProfile").val(Data.TwitterProfile);
+                    //$("#Address").val(Data.Address);
+                    //$("#PhoneNumber").val(Data.PhoneNumber);
+                    ////$("#BackgroundImage").val(Data.BackgroundImage);
+                    //$(".BackgroundImage").attr("src", "/images/" + Data.BackgroundImage);
+                    //$("#FacebookProfile").val(Data.FacebookProfile);
+                    //$("#Gallery").val(Data.Gallery);
+                    //$("#Headline").val(Data.Headline);
+                    //$("#LinkedinProfile").val(Data.LinkedinProfile);
+                    //$("#TwitterProfile").val(Data.TwitterProfile);
 
-                    $("#VideoUrl").val(Data.VideoUrl);
-                    $("#VimeoProfile").val(Data.VimeoProfile);
-                    $("#YoutubeProfile").val(Data.YoutubeProfile);
+                    //$("#VideoUrl").val(Data.VideoUrl);
+                    //$("#VimeoProfile").val(Data.VimeoProfile);
+                    //$("#YoutubeProfile").val(Data.YoutubeProfile);
 
                 }
             });
-        });
-
+  
+        }
         //$(document).ready(function () {
         //    $(".tablinks").click(function () {
         //        var id = $(this).attr("id");
@@ -794,10 +835,14 @@
             else if (edited == "MojeRecenzje") {
                 OpenNavbarItemOnLoad('Candidate6');
             }
+            else if (edited == "EditProfile") {
+                OpenNavbarItemOnLoad('Candidate8');
+            }
             else {
                 OpenNavbarItemOnLoad("Candidate1");
                 changeurl('Panel');
             }
+
         }
 
         function OpenNavbarItem(evt, itemNumber) {
@@ -830,6 +875,9 @@
             }
             else if (itemNumber == "Candidate6") {
                 changeurl('MojeRecenzje');
+            }
+            else if (itemNumber == "Candidate8") {
+                changeurl('EditProfile');
             }
             else {
                 changeurl('Panel');
