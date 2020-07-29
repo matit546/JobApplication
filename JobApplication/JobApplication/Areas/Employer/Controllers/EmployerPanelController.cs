@@ -52,7 +52,8 @@ namespace JobApplication.Areas.Employer.Controllers
             [HttpGet]
             public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User and return JSON
             {
-                var jobOffers = await _context.JobOffers.ToListAsync();
+            var userId = _userManager.GetUserId(User);
+                var jobOffers = await _context.JobOffers.Where(u=>u.UserId==userId).ToListAsync();
                 if (jobOffers == null)
                 {
                     return NotFound();
@@ -69,7 +70,7 @@ namespace JobApplication.Areas.Employer.Controllers
             public async Task<IActionResult> EditProfile()      // Get current User data
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-
+ 
                 
                 if (user == null)
                 {
@@ -82,7 +83,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
             }
 
-            //Post User changes in data
+            //Post EditProfile User and Adding/updating Image
             [HttpPost]
             [Authorize(Roles = SD.EmployerRole)]
             [ValidateAntiForgeryToken]
@@ -166,13 +167,17 @@ namespace JobApplication.Areas.Employer.Controllers
             [Authorize(Roles = SD.EmployerRole)]
             public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category,Skills,Deadline,Description,ChooseTheCurrency")] JobOffer jobOffer) //Add new Job Offer
             {
-                jobOffer.PublicationTime = DateTime.Now;
+            var currentUserId =  _userManager.GetUserId(User);
+            
                 if (ModelState.IsValid)
                 {
-                    _context.Add(jobOffer);
+                jobOffer.PublicationTime = DateTime.Now;
+                jobOffer.UserId = currentUserId;
+                _context.Add(jobOffer);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
+                //Tempdata alert That smth went wrong
                 return RedirectToAction(nameof(Index));
             }
 
