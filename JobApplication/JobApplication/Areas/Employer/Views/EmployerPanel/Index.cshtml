@@ -832,7 +832,7 @@
             if (edited == "MojeOferty") {
                 ajaxfun();
             }
-            $(".tablinks").click(function () {
+            $("#ofertypracy").click(function () {
                 ajaxfun();
             });
         });
@@ -846,6 +846,10 @@
                     type: "get",
                     success: function (data) {
                         var Data = $.parseJSON(data);
+
+                        if (Data == "") {
+                            alert("Nie dodano ofert pracy");
+                        }
                         $.each(Data, function (value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
