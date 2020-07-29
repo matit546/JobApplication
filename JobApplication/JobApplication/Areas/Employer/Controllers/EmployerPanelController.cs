@@ -52,8 +52,9 @@ namespace JobApplication.Areas.Employer.Controllers
             [HttpGet]
             public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User and return JSON
             {
-            var userId = _userManager.GetUserId(User);
+                var userId = _userManager.GetUserId(User);
                 var jobOffers = await _context.JobOffers.Where(u=>u.UserId==userId).ToListAsync();
+
                 if (jobOffers == null)
                 {
                     return NotFound();
@@ -171,7 +172,8 @@ namespace JobApplication.Areas.Employer.Controllers
             
                 if (ModelState.IsValid)
                 {
-                jobOffer.PublicationTime = DateTime.Now;
+                String dateTime = DateTime.Now.ToShortDateString();
+                jobOffer.PublicationTime = Convert.ToDateTime(dateTime);
                 jobOffer.UserId = currentUserId;
                 _context.Add(jobOffer);
                     await _context.SaveChangesAsync();
