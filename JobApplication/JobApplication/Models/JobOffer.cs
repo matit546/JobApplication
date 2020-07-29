@@ -44,6 +44,7 @@ namespace JobApplication.Models
         public string CompanyNameOffer { get; set; }
         public string WorkingTime { get; set; }
         public bool IsFeatured { get; set; }
+        public string UserId { get; set; }
         //public string PhotoCompanyOffer { get; set; }
     }
 }

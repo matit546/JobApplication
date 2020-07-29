@@ -20,5 +20,6 @@ namespace JobApplication.Data
         public DbSet<EducationEmployee> EducationEmployees { get; set; }
         public DbSet<ExperiencesEmployee> ExperiencesEmployees { get; set; }
         public DbSet<SkillsEmployee> SkillsEmployees { get; set; }
+        public DbSet<OfferApplied> OffersApplied { get; set; }
     }
 }

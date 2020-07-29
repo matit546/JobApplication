@@ -234,6 +234,13 @@ namespace JobApplication.Areas.Candidate.Controllers
 
 
         }
+        //[HttpGet]
+        //public async Task<IActionResult> AppliedOffers()
+        //{
+        //    var jobOffers = await _context.JobOffers.ToListAsync();
+        //    var json = JsonConvert.SerializeObject();
+        //    return Json(json);
+        //}
 
            
     }
