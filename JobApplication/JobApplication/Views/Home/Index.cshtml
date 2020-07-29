@@ -74,6 +74,7 @@
                 @foreach (var item in Model)
                 {
                     <div class="container col-sm-6">
+                    <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id" class="text-decoration-none text-black">
                         <div class="joboffer-main">
                             <div class="card-body">
                                 <div class="row">
@@ -81,19 +82,22 @@
                                         <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
                                     </div>
                                     <div class="col-7">
-                                        <h5>@Html.DisplayFor(modelItem => item.Title)</h5>
-                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                        <h5></h5>
+                                        <p>@Html.DisplayFor(modelItem => item.Title)</p>
                                         <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.Deadline)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                        <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
                                     </div>
                                     <div class="col-3">
-                                        <div class="joboffer-button text-center text-center">
-                                            <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+                                        <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
+                                            <div>@Html.DisplayFor(modelItem => item.TypeOfJob)</div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+                    </a>
                         <div><br /><br /></div>
                     </div>
                 }
