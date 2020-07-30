@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobApplication.Pagination;
 using JobApplication.Models;
+using Microsoft.AspNetCore.Identity;
+using JobApplication.Areas.Identity.Data;
 
 namespace JobApplication.Areas.Jobs.Controllers
 {
@@ -14,10 +16,12 @@ namespace JobApplication.Areas.Jobs.Controllers
     public class JobsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public  JobsController(ApplicationDbContext context)
+        public  JobsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(int? pageNumber)
@@ -44,6 +48,22 @@ namespace JobApplication.Areas.Jobs.Controllers
             }
 
             return View(jobOffer);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Applied(OfferApplied offerApplied, int id)
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            var jobOffer = await _context.JobOffers.FindAsync(id);
+            offerApplied = new OfferApplied();
+            offerApplied.OfferId = jobOffer.Id;
+            offerApplied.UserId = user;
+            _context.OffersApplied.Add(offerApplied);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

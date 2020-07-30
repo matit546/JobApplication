@@ -661,14 +661,34 @@ figcaption {
     background-color: red;
 }
 
-.TypeOfJob-KONTRAKT {
+.TypeOfJob-Kontrakt {
     border-color: blue;
     background-color: blue;
 }
 
-.TypeOfJob-PEŁNY {
+.TypeOfJob-Pełny_etat {
     border-color: orange;
     background-color: orange;
+}
+
+.TypeOfJob-Część_etatu {
+    border-color: forestgreen;
+    background-color: forestgreen;
+}
+
+.TypeOfJob-Praca_czasowa {
+    border-color: cyan;
+    background-color: cyan;
+}
+
+.TypeOfJob-Praktyka {
+    border-color: palevioletred;
+    background-color: palevioletred;
+}
+
+.TypeOfJob-Wolontariat {
+    border-color: yellow;
+    background-color: yellow;
 }
 
 .joboffer-main {
@@ -687,15 +707,37 @@ figcaption {
         color: red;
     }
 
-    .joboffer-main:hover .TypeOfJob-KONTRAKT {
+    .joboffer-main:hover .TypeOfJob-Kontrakt {
         background-color: white;
         color: blue;
     }
 
-    .joboffer-main:hover .TypeOfJob-PEŁNY {
+    .joboffer-main:hover .TypeOfJob-Pełny_etat {
         background-color: white;
         color: orange;
     }
+
+    .joboffer-main:hover .TypeOfJob-Część_etatu {
+        background-color: white;
+        color: forestgreen;
+    }
+
+    .joboffer-main:hover .TypeOfJob-Praca_czasowa {
+        background-color: white;
+        color: cyan;
+    }
+
+    .joboffer-main:hover .TypeOfJob-Praktyka {
+        background-color: white;
+        color: palevioletred;
+    }
+
+    .joboffer-main:hover .TypeOfJob-Wolontariat {
+        background-color: white;
+        color: yellow;
+    }
+
+
 
 .text-black{
     color:black;
