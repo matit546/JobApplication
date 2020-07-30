@@ -11,6 +11,6 @@ namespace JobApplication.Models
         public const string EmployerRole="Employer";
         public const string CandidateRole="Candidate";
 
-        public const string DefaultImage="";
+        public const string DefaultImage= "defaultImage.jpg";
     }
 }

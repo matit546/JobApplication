@@ -60,6 +60,9 @@ namespace JobApplication.Areas.Employer.Controllers
                     return NotFound();
                 }
 
+                jobOffers.ForEach(x => x.PublicationTime.ToShortDateString());
+               
+
                 var json = JsonConvert.SerializeObject(jobOffers);
                 return Json(json);
             }
@@ -167,14 +170,14 @@ namespace JobApplication.Areas.Employer.Controllers
             [ValidateAntiForgeryToken]
             [Authorize(Roles = SD.EmployerRole)]
             public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category,Skills,Deadline,Description,ChooseTheCurrency")] JobOffer jobOffer) //Add new Job Offer
-            {
-            var currentUserId =  _userManager.GetUserId(User);
-            
-                if (ModelState.IsValid)
+            {        
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (ModelState.IsValid)
                 {
                 String dateTime = DateTime.Now.ToShortDateString();
                 jobOffer.PublicationTime = Convert.ToDateTime(dateTime);
-                jobOffer.UserId = currentUserId;
+                jobOffer.UserId = currentUser.Id;
+                jobOffer.PhotoCompanyOffer = currentUser.BackgroundImage;
                 _context.Add(jobOffer);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");

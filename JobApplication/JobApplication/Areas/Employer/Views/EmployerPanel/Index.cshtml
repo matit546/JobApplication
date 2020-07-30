@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-3 p-2 rounded">
-                    <img class="img-fluid rounded MainBackgroundImage NavImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
+                    <img class="img-fluid rounded MainBackgroundImage PanelImage backgroundimage-css" @*src="~/images/@Model.BackgroundImage"*@ />
                 </div>
                 <div class="col-9 text-center">
                     <div class="row">
@@ -846,10 +846,10 @@
                     type: "get",
                     success: function (data) {
                         var Data = $.parseJSON(data);
-
                         if (Data == "") {
                             alert("Nie dodano ofert pracy");
                         }
+
                         $.each(Data, function (value) {
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
@@ -860,7 +860,7 @@
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                            appendElement.append($("<td>").append(($("<a/>")).attr("class", "btn btn-info").html('Edytuj').attr("asp-action", "EditJobOffer").attr("asp-route-id",Data[value]["Id"])));
                         });
                     },
                     error: function (xhr, status, error) {

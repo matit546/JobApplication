@@ -75,11 +75,12 @@ namespace JobApplication.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new AppUser 
-                { 
-                    UserName = Input.Username, 
-                    CompanyName=Input.companyName,
-                    Email = Input.Email 
+                var user = new AppUser
+                {
+                    UserName = Input.Username,
+                    CompanyName = Input.companyName,
+                    Email = Input.Email,
+                    BackgroundImage = SD.DefaultImage        
                 };
 
                
