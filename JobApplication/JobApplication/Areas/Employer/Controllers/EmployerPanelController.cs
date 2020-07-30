@@ -103,7 +103,7 @@ namespace JobApplication.Areas.Employer.Controllers
                         {
                             return NotFound();
                         }
-                        if (updateUser.BackgroundImage != null)
+                        if (updateUser.BackgroundImage != null && updateUser.BackgroundImage!="defaultImage.jpg")
                         {
                             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", updateUser.BackgroundImage);
                             if (System.IO.File.Exists(path))
