@@ -229,13 +229,13 @@
                             </div>
                             <div class="col-lg-4 col-md-12">
                                 <div class="text-bottom-left-padding bolded">WYMIAR PRACY*</div>
-                                <select asp-for="jobOffer.TypeOfJob" asp-items="@Html.GetEnumSelectList<TypeOfJob>()" class="form-control form-input" placeholder="Wybierz wymiar pracy" />
+                                <select asp-for="jobOffer.TypeOfJob" asp-items="@Html.GetEnumSelectList<TypeOfJob>()" class="form-control form-input" placeholder="Wybierz wymiar pracy" ></select>
                                 <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
                             </div>
                             <div class="col-lg-4 col-md-12">
                                 <div class="text-bottom-left-padding bolded">POZIOM STANOWISKA*</div>
-                                <input asp-for="jobOffer.TypeOfJob" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
-                                <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
+                                <input asp-for="jobOffer.WorkingTime" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
+                                <span asp-validation-for="jobOffer.WorkingTime" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

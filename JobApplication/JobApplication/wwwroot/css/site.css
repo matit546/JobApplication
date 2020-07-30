@@ -656,7 +656,7 @@ figcaption {
     color: white;
 }
 
-.TypeOfJob-FREELANCER {
+.TypeOfJob-Freelancer {
     border-color: red;
     background-color: red;
 }
@@ -682,7 +682,7 @@ figcaption {
     box-shadow: 0px 0px 48px -7px rgba(153,194,240,1);
 }
 
-    .joboffer-main:hover .TypeOfJob-FREELANCER {
+    .joboffer-main:hover .TypeOfJob-Freelancer {
         background-color: white;
         color: red;
     }
