@@ -129,7 +129,6 @@
                     <div class="row">
                         Form
                     </div>
-                    <form>
                         <div class="row px-5">
                            <input />
                         </div>
@@ -143,9 +142,10 @@
                             <input />
                         </div>
                         <div class="row px-5">
-                            <a asp-action="Applied" asp-route-id="@Model.Id" type="button" class="btn-primary" value="Aplikuj"/>
+                            <form asp-action="Applied" asp-route-id="@Model.Id">
+                                <button type="submit" class="btn-primary">Aplikuj</button>
+                            </form>
                         </div>
-                    </form>
                     @*@Html.DisplayFor(model => model.image)*@
                 </div>
             </div>

@@ -49,19 +49,21 @@ namespace JobApplication.Areas.Jobs.Controllers
 
             return View(jobOffer);
         }
-
+        [HttpPost]
         public async Task<IActionResult> Applied(OfferApplied offerApplied, int id)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = _userManager.GetUserId(HttpContext.User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            offerApplied.OfferId = id;
-            offerApplied.UserId = user.Id;
+            var jobOffer = await _context.JobOffers.FindAsync(id);
+            offerApplied = new OfferApplied();
+            offerApplied.OfferId = jobOffer.Id;
+            offerApplied.UserId = user;
             _context.OffersApplied.Add(offerApplied);
             await _context.SaveChangesAsync();
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
