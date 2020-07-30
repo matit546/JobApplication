@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -169,7 +170,8 @@ namespace JobApplication.Areas.Employer.Controllers
             [HttpPost]
             [ValidateAntiForgeryToken]
             [Authorize(Roles = SD.EmployerRole)]
-            public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category,Skills,Deadline,Description,ChooseTheCurrency")] JobOffer jobOffer) //Add new Job Offer
+            public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category," +
+                "Skills,Deadline,Description,ChooseTheCurrency,Email,Languages,CompanyNameOffer,WorkingTime")] JobOffer jobOffer) //Add new Job Offer
             {        
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
@@ -187,8 +189,77 @@ namespace JobApplication.Areas.Employer.Controllers
             }
 
 
+        [HttpGet]
+        public async Task<IActionResult> EditJobOffer(int? id)        //Get View for Edit JobOffer
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            [HttpGet]
+            var joboffer = await _context.JobOffers.FindAsync(id);
+
+            if (joboffer == null)
+            {
+                return NotFound();
+            }
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+            if (userId == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (joboffer.UserId != userId)
+            {
+                return Unauthorized("Nie możesz zedytować tej oferty!");
+            }
+
+            return View(joboffer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostEditJobOffer(JobOffer jobOffer)        //Post Edit Jod Offer
+        {
+            var userdb = await _userManager.GetUserAsync(User);
+            if (userdb == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            var jobofferfromDb = await _context.JobOffers.FindAsync(jobOffer.Id);
+            if(jobofferfromDb==null || jobofferfromDb.UserId != userdb.Id)
+            { 
+                return Unauthorized("NIe możesz zedytować tej oferty!");
+            }
+            if (ModelState.IsValid)
+            {
+                jobofferfromDb.Category = jobOffer.Category;
+                jobofferfromDb.ChooseTheCurrency = jobOffer.ChooseTheCurrency;
+               jobofferfromDb.CompanyNameOffer = jobOffer.CompanyNameOffer;
+                 jobofferfromDb.Deadline = jobOffer.Deadline;
+            jobofferfromDb.Description = jobOffer.Description;
+             jobofferfromDb.Email = jobOffer.Email;
+            jobofferfromDb.Languages = jobOffer.Languages;
+            jobofferfromDb.Location = jobOffer.Location;
+            jobofferfromDb.PaymentMax = jobOffer.PaymentMax;
+            jobofferfromDb.PaymentMin = jobOffer.PaymentMin;
+                jobofferfromDb.Title = jobOffer.Title;
+                jobofferfromDb.TypeOfJob = jobOffer.TypeOfJob;
+                jobofferfromDb.WorkingTime = jobOffer.WorkingTime;
+                jobofferfromDb.PhotoCompanyOffer = userdb.BackgroundImage;
+                jobofferfromDb.Skills = jobOffer.Skills;
+
+                _context.Update(jobofferfromDb);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(jobOffer);
+        }
+
+
+
+        [HttpGet]
             public async Task<IActionResult> ResetPassword()        //Get View for ResetPassword
             {
 

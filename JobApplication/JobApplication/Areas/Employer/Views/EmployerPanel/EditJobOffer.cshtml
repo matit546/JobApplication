@@ -1,0 +1,171 @@
+﻿@model JobApplication.Models.JobOffer
+
+@{
+    ViewData["Title"] = "EditJobOffer";
+}
+
+
+
+<div class="offset-2">
+    <div class="col-10">
+        <main role="main" class="pb-3">
+            <div class="login-Containter">
+                <h2>Edycja Oferty Pracy</h2>
+                <br />
+                <form asp-action="PostEditJobOffer">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input hidden asp-for="Id" />
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">TYTUŁ*</div>
+                                <input asp-for="Title" class="form-control form-input" placeholder="Wprowadz tytuł" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">OPIS*</div>
+                                <textarea asp-for="Description" class="form-control form-input" placeholder="Wprowadz opis"> </textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">KATEGORIA OFERTY PRACY*</div>
+                                <input asp-for="Category" class="form-control form-input" placeholder="Wybierz kategorię" />
+                                <span asp-validation-for="Category" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYMIAR PRACY*</div>
+                                <select asp-for="TypeOfJob" asp-items="@Html.GetEnumSelectList<TypeOfJob>()" class="form-control form-input" placeholder="Wybierz wymiar pracy"></select>
+                                <span asp-validation-for="TypeOfJob" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">POZIOM STANOWISKA*</div>
+                                <input asp-for="WorkingTime" class="form-control form-input" placeholder="Wybierz poziom stanowiska" />
+                                <span asp-validation-for="WorkingTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD</div>
+                                <input asp-for="PaymentMin" class="form-control form-input" placeholder="Wprowadz wynagrodzenie od" />
+                                <span asp-validation-for="PaymentMin" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WYNAGRODZENIE DO</div>
+                                <input asp-for="PaymentMax" class="form-control form-input" placeholder="Wprowadz wynagrodzenie do" />
+                                <span asp-validation-for="PaymentMax" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">WALUTA</div>
+                                <select asp-for="ChooseTheCurrency" class="form-input">
+                                    <option disabled selected>Wybierz walutę</option>
+                                    <option value="PLN">PLN</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">JĘZYKI</div>
+                                <input type="text" asp-for="Languages" placeholder="Wybierz język" class="w-100" />
+
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="text-bottom-left-padding bolded">PŁEĆ</div>
+                                <input type="text" placeholder="Wprowadz płeć" class="w-100" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">USTAWIENIA APLIKACJI</div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="text-bottom-left-padding bolded">TERMIN SKŁADANIA APLIKACJI</div>
+                                        <input asp-for="Deadline" class="form-control form-input" placeholder="Wprowadz deadline" />
+                                        <span asp-validation-for="Deadline" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-bottom-left-padding bolded">E-MAIL DO SKŁADANIA APLIKACJI</div>
+                                        <input asp-for="Email" class="form-control form-input" placeholder="Wprowadz email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">WYMAGANE UMIEJĘTNOŚCI</div>
+                                <input asp-for="Skills" class="form-control form-input" placeholder="Wprowadz wymagane umiejętności" />
+                                <span asp-validation-for="Skills" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-padding">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
+                                <input asp-for="Location" class="form-control form-input" placeholder="Wprowadz lokalizację" />
+                                <span asp-validation-for="Location" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="map" class="map-view"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU5JFGguFmEvu3-KTiIM0pyaSo01aJx9s&callback=initMap&libraries=&v=weekly"
+                            defer></script>
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="submit" value="Zedytuj" class="btn btn-success form-control" />
+                        </div>
+                        <br />
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn btn-secondary form-control">Cofnij</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var map;  //google maps
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
+        }
+        </script>
+}
+
+
