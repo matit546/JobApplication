@@ -40,23 +40,14 @@
 <main role="main" class="pb-3">
     <div class="container">
 
-        @if (User.IsInRole(SD.EmployerRole))
-        {
-            <p>pracownik</p>
-        }
-
-        @if (User.IsInRole(SD.CandidateRole))
-        {
-            <p>kandydat</p>
-        }
         <div class="text-center">
             <div class="menu my-5">
                 <div class="row">
-                    <div class="menu-item disabled col-6 button1 current-menu-item disabled">
+                    <div class="menu-item disabled col-6 button1 filter-feature current-menu-item disabled " data-filter="newestNoFeature">
                         <div text-align:center;">NAJNOWSZE OFERTY</div>
                         <div class="wee disabled"></div>
                     </div>
-                    <div class="menu-item col-6 button2">
+                    <div class="menu-item col-6 filter-feature button2" data-filter="newestFeatured">
                         <div text-align:center;">WYRÓŻNIONE OFERTY</div>
                     </div>
                 </div>
@@ -65,52 +56,94 @@
         <div class="lds-ellipsis-wrapper">
             <div class="lds-ellipsis" id="Loader"><div></div><div></div><div></div><div></div></div>
         </div>
-        <div class="row">
-            @if (Model == null)
-            {
-                <h1>Brak ofert</h1>
-            }
-            else
-                @foreach (var item in Model)
+        <div class="filter newestNoFeature ">
+            <div class="row">
+
+                @if (Model.Where(f => f.IsFeatured == false).Count() == 0)
+                {
+                    <h1>Brak ofert</h1>
+                }
+                @foreach (var item in Model.Where(f => f.IsFeatured == false).Reverse().Take(8))
                 {
                     <div class="container col-sm-6">
-                    <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id" class="text-decoration-none text-black">
-                        <div class="joboffer-main">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
-                                    </div>
-                                    <div class="col-7">
-                                        <h5></h5>
-                                        <p>@Html.DisplayFor(modelItem => item.Title)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
-                                            <div>@Html.DisplayFor(modelItem => item.TypeOfJob)</div>
+                        <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id" class="text-decoration-none text-black">
+                            <div class="joboffer-main">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
+                                        </div>
+                                        <div class="col-7">
+                                            <h5></h5>
+                                            <p>@Html.DisplayFor(modelItem => item.Title)</p>
+                                            <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                                            <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                            <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
+                                                <div>@Html.DisplayFor(modelItem => item.TypeOfJob)</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                         <div><br /><br /></div>
                     </div>
                 }
-        </div>
-
-        <div class="my-5 row justify-content-center">
-            <div class="menu col-3 a-button py-2 text-center">
-                <a class="text-white" href="../Jobs">
-                    Zobacz wszystkie oferty 🡲
-                </a>
             </div>
         </div>
-    </div>
+
+        <div class="filter newestFeatured" style="display:none;">
+            <div class="row">
+                    @if (Model.Where(f => f.IsFeatured == true).Count() == 0)
+                    {
+                        <h1>Brak ofert</h1>
+                    }
+                    @foreach (var item in Model.Where(f => f.IsFeatured == true).Take(8))
+                    {
+                        <div class="container col-sm-6">
+                            <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id" class="text-decoration-none text-black">
+                                <div class="joboffer-main">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
+                                            </div>
+                                            <div class="col-7">
+                                                <h5></h5>
+                                                <p>@Html.DisplayFor(modelItem => item.Title)</p>
+                                                <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                                                <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                                <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
+                                                    <div>@Html.DisplayFor(modelItem => item.TypeOfJob)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                            <div><br /><br /></div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+            <div class="my-5 row justify-content-center">
+                <div class="menu col-3 a-button py-2 text-center">
+                    <a class="text-white" href="../Jobs">
+                        Zobacz wszystkie oferty 🡲
+                    </a>
+                </div>
+            </div>
+        </div>
 </main>
 
 <figure class="px-0">
@@ -170,4 +203,17 @@
             $("#RejestrujJakoPracodawca").val("Pracodawca");
         }
     </script>
+<script>
+    $(document).ready(function () {
+
+        $(".filter-feature").click(function () {
+            var value = $(this).attr('data-filter');
+
+                $(".filter").not('.' + value).hide('5000');
+                $('.filter').filter('.' + value).show('5000');
+    
+        });
+
+    });
+</script>
 }
