@@ -4,80 +4,154 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>JobOffer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TypeOfJob)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TypeOfJob)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentMin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentMin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentMax)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentMax)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublicationTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublicationTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Skills)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Skills)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Deadline)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Deadline)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChooseTheCurrency)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChooseTheCurrency)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<main role="main" class="pb-3">
+    <div class="container">
+        <div class="justify-content-center row">
+            <div class="col-8 py-5">
+                <div class="filter-area px-5">
+
+                    <div class="row py-4">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Lokalizacja:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.Location)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Wynagrodzenie:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.PaymentMin) -  @Html.DisplayFor(model => model.PaymentMax)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Typ pracy:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.TypeOfJob)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Opublikowano:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.PublicationTime)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Kategoria:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.Category)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Termin ostateczny:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.Deadline)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    Języki:
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayFor(model => model.Languages)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    @Html.DisplayFor(model => model.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    Lokalizacja
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="col-4 py-5">
+                <div class="filter-area">
+                    <div class="row">
+                        @Html.DisplayFor(model => model.Title)
+                    </div>
+                    <div class="row">
+                        Form
+                    </div>
+                    <form>
+                        <div class="row px-5">
+                           <input />
+                        </div>
+                        <div class="row px-5">
+                            <input />
+                        </div>
+                        <div class="row px-5">
+                            <input />
+                        </div>
+                        <div class="row px-5">
+                            <input />
+                        </div>
+                        <div class="row px-5">
+                            <input type="button" class="btn-primary" value="Aplikuj"/>
+                        </div>
+                    </form>
+                    @*@Html.DisplayFor(model => model.image)*@
+                </div>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</main>
