@@ -5,17 +5,17 @@
     ViewData["Title"] = "Index";
 }
 <figure>
-<img class="background-offers-image" />
-<div class="main-settings">
-    <figcaption>
-        <div class="main-text">Oferty pracy</div>
-    </figcaption>
-</div>
+    <img class="background-offers-image" />
+    <div class="main-settings">
+        <figcaption>
+            <div class="main-text">Oferty pracy</div>
+        </figcaption>
+    </div>
 </figure>
 <main role="main" class="pb-3">
     <div class="container">
         <div class="justify-content-center row">
- 
+
             <div class="col-3">
                 <div class="filter-area">
                     Lista filtrów
@@ -29,7 +29,8 @@
 
                 @foreach (var item in Model)
                 {
-                    <div class="filter-area">
+                <div class="filter-area">
+                    <a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id" class="text-decoration-none text-black">
                         <div class="joboffer-main">
                             <div class="card-body">
                                 <div class="row">
@@ -37,22 +38,23 @@
                                         <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
                                     </div>
                                     <div class="col-7">
-                                        <h5><a asp-action="Details" asp-route-name="@item.Title" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Title)</a></h5>
-
+                                        <h5></h5>
+                                        <p>@Html.DisplayFor(modelItem => item.Title)</p>
                                         <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
                                         <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
                                         <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
                                     </div>
                                     <div class="col-3">
-                                        <div class="joboffer-button text-center">
-                                            <a>@Html.DisplayFor(modelItem => item.TypeOfJob)</a>
+                                        <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
+                                            <div>@Html.DisplayFor(modelItem => item.TypeOfJob)</div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
                 }
                 @{
                     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -64,13 +66,26 @@
 
             <div class="col-3">
                 <div class="filter-area">
-                    Ostatni pracownicy <br/>
-                    Statystyki <br/>
-                    Ostatnie prace <br/>
+                    Ostatni pracownicy <br />
+                    Statystyki <br />
+                    Ostatnie prace <br />
                 </div>
             </div>
-    
+
         </div>
     </div>
 </main>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+
+            
+
+        });
+    </script>
+}
+
 

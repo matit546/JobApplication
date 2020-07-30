@@ -17,7 +17,7 @@ namespace JobApplication.Models
         [Required(ErrorMessage = "To pole jest wymagane")]
         public string Location { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane")]
-        public string TypeOfJob { get; set; }
+        public TypeOfJob TypeOfJob { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Range(1, 20000, ErrorMessage = "Wartość maksymalna to 200000")]
         [DataType(DataType.Currency)]
@@ -46,5 +46,9 @@ namespace JobApplication.Models
         public bool IsFeatured { get; set; }
         public string UserId { get; set; }
         //public string PhotoCompanyOffer { get; set; }
+    }
+    public enum TypeOfJob
+    {
+        Kontrakt, Freelancer, Część_etatu, Pełny_etat, Praca_czasowa, Praktyka, Wolontariat
     }
 }

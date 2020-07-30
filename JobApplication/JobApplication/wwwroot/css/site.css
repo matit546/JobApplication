@@ -504,50 +504,6 @@ figcaption {
     width: 100%;
 }
 
-.joboffer-main {
-    border: 1px solid;
-    border-radius: 4px;
-    border-color: #cfd0d1;
-    height: 250px;
-}
-    .joboffer-main:hover {
-        box-shadow: 0px 0px 48px -7px rgba(153,194,240,1);
-    }
-
-        .joboffer-main:hover .joboffer-button {
-            background-color: white;
-            color: red;
-        }
-
-        .joboffer-main:hover .joboffer-button-test {
-            background-color: white;
-            color: orange;
-        }
-.joboffer-button {
-    padding-top:4px;
-    font-size:12px;
-    height: 30px;
-    width: 100px;
-    background-color:red;
-    border: 2px solid;
-    border-color: red;
-    border-radius: 25px;
-    color:white;
-}
-
-.joboffer-button-test {
-    padding-top: 4px;
-    font-size: 12px;
-    height: 30px;
-    width: 100px;
-    background-color: orange;
-    border: 2px solid;
-    border-color: orange;
-    border-radius: 25px;
-    color: white;
-}
-
-
 .backgroundimage-css{
     height:150px;
     width:300px;
@@ -688,4 +644,59 @@ figcaption {
 
 .rounded-5{
     border-radius:5px;
+}
+
+.TypeOfJob {
+    padding-top: 4px;
+    font-size: 12px;
+    height: 30px;
+    width: 100px;
+    border: 2px solid;
+    border-radius: 25px;
+    color: white;
+}
+
+.TypeOfJob-FREELANCER {
+    border-color: red;
+    background-color: red;
+}
+
+.TypeOfJob-KONTRAKT {
+    border-color: blue;
+    background-color: blue;
+}
+
+.TypeOfJob-PEŁNY {
+    border-color: orange;
+    background-color: orange;
+}
+
+.joboffer-main {
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: #cfd0d1;
+    height: 250px;
+}
+
+.joboffer-main:hover {
+    box-shadow: 0px 0px 48px -7px rgba(153,194,240,1);
+}
+
+    .joboffer-main:hover .TypeOfJob-FREELANCER {
+        background-color: white;
+        color: red;
+    }
+
+    .joboffer-main:hover .TypeOfJob-KONTRAKT {
+        background-color: white;
+        color: blue;
+    }
+
+    .joboffer-main:hover .TypeOfJob-PEŁNY {
+        background-color: white;
+        color: orange;
+    }
+
+.text-black{
+    color:black;
 }
