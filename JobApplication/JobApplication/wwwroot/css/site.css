@@ -678,21 +678,25 @@ figcaption {
 .TypeOfJob-Część_etatu {
     border-color: forestgreen;
     background-color: forestgreen;
+    color: white;
 }
 
 .TypeOfJob-Praca_czasowa {
     border-color: cyan;
     background-color: cyan;
+    color: black;
 }
 
 .TypeOfJob-Praktyka {
     border-color: palevioletred;
     background-color: palevioletred;
+    color: black;
 }
 
 .TypeOfJob-Wolontariat {
     border-color: yellow;
     background-color: yellow;
+    color: black;
 }
 
 .joboffer-main {
@@ -722,22 +726,22 @@ figcaption {
     }
 
     .joboffer-main:hover .TypeOfJob-Część_etatu {
-        background-color: black;
+        background-color: white;
         color: forestgreen;
     }
 
     .joboffer-main:hover .TypeOfJob-Praca_czasowa {
-        background-color: black;
+        background-color: white;
         color: cyan;
     }
 
     .joboffer-main:hover .TypeOfJob-Praktyka {
-        background-color: black;
+        background-color: white;
         color: palevioletred;
     }
 
     .joboffer-main:hover .TypeOfJob-Wolontariat {
-        background-color: black;
+        background-color: white;
         color: yellow;
     }
 
