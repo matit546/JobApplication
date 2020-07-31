@@ -281,17 +281,21 @@ namespace JobApplication.Areas.Candidate.Controllers
         {
             var userApp = _userManager.GetUserId(HttpContext.User);
             var offerApplied = await _context.OffersApplied.Where(x=>x.UserId==userApp).ToListAsync();
-            var jobOffers= await _context.JobOffers.ToListAsync();
-            foreach (var job in offerApplied)
-            {
-                jobOffers = await _context.JobOffers.Where(y => y.Id == job.OfferId).ToListAsync();
-            }
-
-            if (jobOffers == null)
+            if(offerApplied.Count==0)
             {
                 return NotFound();
             }
-            var json = JsonConvert.SerializeObject(jobOffers);
+            var jobOffers= await _context.JobOffers.ToListAsync();
+            //var result = jobOffers.Where(r => offerApplied.All(r2 => r2.UserId == userApp));
+            var result = jobOffers.Where(y => offerApplied.Any(z => z.OfferId == y.Id));
+            //int i = 0;
+            //var jobOffers = _context.JobOffers.ToList();
+            //foreach (var offer in offerApplied)
+            //{
+            //    jobOffers = _context.JobOffers.Where(y => y.Id == offer.OfferId).ToList();
+            //}
+
+            var json = JsonConvert.SerializeObject(result);
             return Json(json);
         }
 

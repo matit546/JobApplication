@@ -22,12 +22,10 @@ namespace JobApplication.Models
         [Range(1, 200000, ErrorMessage = "Wartość maksymalna to 200000")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(15, 2)")]
-        [RegularExpression(@"^\d+\.\d{0,2}$")]
         public decimal PaymentMin { get; set; }
         [Range(1, 200000, ErrorMessage = "Wypłata musi mieć wartość przynajmniej 1")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(15, 2)")]
-        [RegularExpression(@"^\d+\.\d{0,2}$")]
         [Required(ErrorMessage = "To pole jest wymagane")]
         public decimal PaymentMax { get; set; }
         [DataType(DataType.Date)]
