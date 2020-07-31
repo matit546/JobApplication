@@ -237,8 +237,18 @@ namespace JobApplication.Areas.Candidate.Controllers
         [HttpGet]
         public async Task<IActionResult> AppliedOffers()
         {
-            var userApp = await _userManager.GetUserAsync(HttpContext.User);
-            var jobOffers = await _context.OffersApplied.Include(j=>j.JobOffer).Where(x=>x.UserId==userApp.Id).ToListAsync();
+            var userApp = _userManager.GetUserId(HttpContext.User);
+            var offerApplied = await _context.OffersApplied.Where(x=>x.UserId==userApp).ToListAsync();
+            var jobOffers= await _context.JobOffers.ToListAsync();
+            foreach (var job in offerApplied)
+            {
+                jobOffers = await _context.JobOffers.Where(y => y.Id == job.OfferId).ToListAsync();
+            }
+
+            if (jobOffers == null)
+            {
+                return NotFound();
+            }
             var json = JsonConvert.SerializeObject(jobOffers);
             return Json(json);
         }

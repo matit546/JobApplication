@@ -993,5 +993,49 @@
         //document.title = url;
     }
 
+
+    $(document).ready(function () {
+
+        LoadTabindex();
+        var pageURL = $(location).attr("href");
+        var edited = pageURL.substr(pageURL.indexOf("=") + 1);
+        if (edited == "MojeOferty") {
+            ajaxfun();
+        }
+        $("#ofertypracy").click(function () {
+            ajaxfun();
+        });
+    });
+
+
+
+    function ajaxfun() {
+        $("#tablebody tr").remove();
+        $.ajax({
+            url: "/CandidatePanel/AppliedOffers",
+            type: "get",
+            success: function (data) {
+                var Data = $.parseJSON(data);
+                if (Data == "") {
+                    alert("Brak ofert aplikowanych");
+                }
+
+                $.each(Data, function (value) {
+                    $("tbody").append($("<tr>"));
+                    appendElement = $("tbody tr").last();
+                    appendElement.append($("<td>").html(Data[value]["Title"]));
+                    appendElement.append($("<td>").html(Data[value]["TypeOfJob"]));
+                    appendElement.append($("<td>").html(Data[value]["PublicationTime"]));
+                    appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                    appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                    appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                    appendElement.append($("<td>").html(Data[value]["Deadline"]));
+                });
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr)
+            }
+        });
+    }
 </script>
 }
