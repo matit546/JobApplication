@@ -35,14 +35,15 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-2">
-                                        <img src="~/images/36cd8375-c845-412a-86ac-ce0893c4a86d.png" class="job-offer-images-main PanelImage" />
+                                        <img src="~/images/@Html.DisplayFor(modelItem => item.PhotoCompanyOffer)" class="job-offer-images-main PanelImage" />
                                     </div>
                                     <div class="col-7">
                                         <h5></h5>
-                                        <p>@Html.DisplayFor(modelItem => item.Title)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
-                                        <p>@Html.DisplayFor(modelItem => item.PublicationTime)</p>
+                                        <p class="bolded">@Html.DisplayFor(modelItem => item.Title)</p>
+                                        <p>🗺 @Html.DisplayFor(modelItem => item.Location)</p>
+                                        <p>🏢 @Html.DisplayFor(modelItem => item.CompanyNameOffer)</p>
+                                        <p>💵 @Html.DisplayFor(modelItem => item.PaymentMin) - @Html.DisplayFor(modelItem => item.PaymentMax)</p>
+                                        <p>📅 @Html.DisplayFor(modelItem => item.PublicationTime)</p>
                                     </div>
                                     <div class="col-3">
                                         <div class="joboffer-button TypeOfJob text-center TypeOfJob-@Html.DisplayFor(modelItem => item.TypeOfJob)">
@@ -82,9 +83,9 @@
     <script>
         $(document).ready(function () {
 
-            
 
         });
+
     </script>
 }
 
