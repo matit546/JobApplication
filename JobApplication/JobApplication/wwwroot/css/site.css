@@ -389,8 +389,9 @@ figcaption {
 }
 
 .box {
-    box-shadow: rgba(0, 0, 0, 0.30) 0px 0px 5px 0px;
+    box-shadow: rgba(0, 0, 0, 0.30) 0px 0px 100px 0px;
     border-radius: 5px;
+    padding: 30px 5px 30px 5px;
 }
 
 .c-royalblue {
@@ -418,7 +419,8 @@ figcaption {
 }
 
 .boxitem {
-    padding: 15px;
+
+    padding: 15px ;
     text-align: center;
 }
 
@@ -758,4 +760,8 @@ figcaption {
 
 .text-20{
     font-size:20px;
+}
+
+.cursor-pointer{
+    cursor:pointer;
 }

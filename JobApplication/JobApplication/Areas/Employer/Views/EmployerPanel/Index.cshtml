@@ -24,7 +24,7 @@
     </div>
     <button class="tablinks" id="Panel" onclick="OpenNavbarItem(event, 'Employer1')">Panel użytkownika</button>
     <button class="tablinks" id="DodajPrace" onclick="OpenNavbarItem(event, 'Employer2')">Dodaj ofertę pracy</button>
-    <button class="tablinks" id="ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
+    <button class="tablinks ofertypracy" id="ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">Wszystkie oferty pracy</button>
     <button class="tablinks" id="Aplikacje" onclick="OpenNavbarItem(event, 'Employer4')">Aplikacje</button>
     <button class="tablinks" id="Pakiety" onclick="OpenNavbarItem(event, 'Employer5')">Pakiety</button>
     <button class="tablinks" id="ZapisaneCV" onclick="OpenNavbarItem(event, 'Employer6')">Zapisane cv</button>
@@ -62,7 +62,7 @@
                                             <div id="MainHeadline"></div>
                                         </div>
                                         <div class="row">
-                                            <input type="button" class="tablinks" id="editProfile" value="Edytuj" onclick="OpenNavbarItem(event, 'Employer8')" />
+                                            <input type="button" class="btn btn-info tablinks" id="editProfile" value="Edytuj" onclick="OpenNavbarItem(event, 'Employer8')" />
                                         </div>
                                     </div>
                                 </div>
@@ -77,29 +77,29 @@
                         <div class="row">
                             <div class="userblock-3">
                                 <div class="box sandybrown">
-                                    <div class="boxitem">
-                                        cos tu
+                                    <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        Wszystkie Oferty
                                     </div>
                                 </div>
                             </div>
                             <div class="userblock-3">
                                 <div class="box darkseagreen">
-                                    <div class="boxitem">
-                                        cos tu
+                                    <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        Opublikowane Oferty
                                     </div>
                                 </div>
                             </div>
                             <div class="userblock-3">
                                 <div class="box cadetblue">
-                                    <div class="boxitem">
-                                        cos tu
+                                    <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        Wygasłe oferty
                                     </div>
                                 </div>
                             </div>
                             <div class="userblock-3">
                                 <div class="box blanchedalmond">
-                                    <div class="boxitem">
-                                        cos tu
+                                    <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        Oczekujące oferty
                                     </div>
                                 </div>
                             </div>
@@ -781,8 +781,14 @@
             if (edited == "MojeOferty") {
                 ajaxfun();
             }
-            $("#ofertypracy").click(function () {
+            $(".ofertypracy").click(function () {
                 ajaxfun();
+            });
+
+            window.addEventListener('popstate', function (event) {
+
+                location.reload();
+
             });
         });
 
@@ -800,17 +806,38 @@
                         }
 
                         $.each(Data, function (value) {
+
+                            var Year = @int.Parse(DateTime.Now.Year.ToString());
+                            var Month = @int.Parse(DateTime.Now.Month.ToString());
+                            var Day = @int.Parse(DateTime.Now.Day.ToString());
+
                             $("tbody").append($("<tr>"));
                             appendElement = $("tbody tr").last();
                             appendElement.append($("<td>").html(Data[value]["Title"]));
                             appendElement.append($("<td>").html(Data[value]["TypeOfJob"]));
-                            appendElement.append($("<td>").html(Data[value]["PublicationTime"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").append(($("<a/>")).attr("class", "btn btn-info mx-1").html('✏').attr("href", "EmployerPanel/EditJobOffer/" + Data[value]["Id"])) 
-                                .append($("<a/>").attr("class", "btn btn-danger mx-1").html('🗑').attr("href", "EmployerPanel/DeleteJobOffer/" + Data[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');")).append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "Jobs/Details/" + Data[value]["Id"] +"/"+ Data[value]["Title"])));
+                            appendElement.append($("<td>").html(Data[value]["PublicationTime"].substr(0, 10)));
+                            appendElement.append($("<td>").html(Data[value]["Deadline"].substr(0, 10)));
+                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "Jobs/Details/" + Data[value]["Id"] + "/" + Data[value]["Title"]))
+                            if (Year > parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                                appendElement.append($("<td>").html("Przedawniony").attr("style", "color:red"));
+                            }
+                            else if (Month > Data[value]["Deadline"].substr(5, 2) && Year >= parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                                appendElement.append($("<td>").html("Przedawniony").attr("style", "color:red"));
+                            }
+                            else if ((Day > parseInt(Data[value]["Deadline"].substr(8, 2)) && Month >= Data[value]["Deadline"].substr(5, 2)) && Year >= parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                                appendElement.append($("<td>").html("Przedawniony").attr("style", "color:red"));
+                            }
+                            else {
+                                appendElement.append($("<td>").html("Aktualny").attr("style", "color:green"));
+                            }
+                            if (Data[value]["IsFeatured"] == true) {
+                                appendElement.append($("<td>").html("🗸"));
+                            }
+                            else {
+                                appendElement.append($("<td>").html("X"));
+                            }
+                            appendElement.append($("<td>").append(($("<a/>")).attr("class", "btn btn-info mx-1").html('✏').attr("href", "EmployerPanel/EditJobOffer/" + Data[value]["Id"]))
+                                .append($("<a/>").attr("class", "btn btn-danger mx-1").html('🗑').attr("href", "EmployerPanel/DeleteJobOffer/" + Data[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');")));
                         });
                     },
                     error: function (xhr, status, error) {
