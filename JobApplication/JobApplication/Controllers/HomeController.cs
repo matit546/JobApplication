@@ -30,6 +30,7 @@ namespace JobApplication.Controllers
         {
             return View(await _context.JobOffers.ToListAsync());
         }
+
         [Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult Privacy()
         {

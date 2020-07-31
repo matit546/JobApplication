@@ -180,6 +180,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 jobOffer.PublicationTime = Convert.ToDateTime(dateTime);
                 jobOffer.UserId = currentUser.Id;
                 jobOffer.PhotoCompanyOffer = currentUser.BackgroundImage;
+                jobOffer.CompanyNameOffer = currentUser.CompanyName;
                 _context.Add(jobOffer);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
@@ -214,13 +215,14 @@ namespace JobApplication.Areas.Employer.Controllers
             {
                 return Unauthorized("Nie możesz zedytować tej oferty!");
             }
-
+            joboffer.PaymentMax = Convert.ToUInt32(joboffer.PaymentMax);
+            joboffer.PaymentMin = Convert.ToUInt32(joboffer.PaymentMin);
             return View(joboffer);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostEditJobOffer(JobOffer jobOffer)        //Post Edit Jod Offer
+        public async Task<IActionResult> EditJobOffer(JobOffer jobOffer)        //Post Edit Jod Offer
         {
             var userdb = await _userManager.GetUserAsync(User);
             if (userdb == null)
@@ -252,12 +254,37 @@ namespace JobApplication.Areas.Employer.Controllers
 
                 _context.Update(jobofferfromDb);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["Message"] = "Pomyślnie zedytowano ofertę pracy";
+                return RedirectToAction("Index", "EmployerPanel", "?name=MojeOferty");
             }
             return View(jobOffer);
         }
 
+ 
+        public async Task<IActionResult> DeleteJobOffer(int? id)        //Get View for Edit JobOffer
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var userdb = await _userManager.GetUserAsync(User);
+            if (userdb == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var jobofferfromDb = await _context.JobOffers.FindAsync(id);
+
+            if (jobofferfromDb == null || jobofferfromDb.UserId != userdb.Id)
+            {
+                return Unauthorized("NIe możesz usunąć tej oferty!");
+            }
+            _context.JobOffers.Remove(jobofferfromDb);
+            await _context.SaveChangesAsync();
+            TempData["Message"] = "Pomyślnie usunięto ofertę pracy";
+            return RedirectToAction("Index", "EmployerPanel", "?name=MojeOferty");
+        }
 
         [HttpGet]
             public async Task<IActionResult> ResetPassword()        //Get View for ResetPassword

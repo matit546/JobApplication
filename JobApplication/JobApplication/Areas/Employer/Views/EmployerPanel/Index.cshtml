@@ -55,8 +55,8 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="boxitem">
-                                        <div class="row" >
-                                           <div  id="MainCompanyNAME"></div>
+                                        <div class="row">
+                                            <div id="MainCompanyNAME"></div>
                                         </div>
                                         <div class="row">
                                             <div id="MainHeadline"></div>
@@ -229,7 +229,7 @@
                             </div>
                             <div class="col-lg-4 col-md-12">
                                 <div class="text-bottom-left-padding bolded">WYMIAR PRACY*</div>
-                                <select asp-for="jobOffer.TypeOfJob" asp-items="@Html.GetEnumSelectList<TypeOfJob>()" class="form-control form-input" placeholder="Wybierz wymiar pracy" ></select>
+                                <select asp-for="jobOffer.TypeOfJob" asp-items="@Html.GetEnumSelectList<TypeOfJob>()" class="form-control form-input" placeholder="Wybierz wymiar pracy"></select>
                                 <span asp-validation-for="jobOffer.TypeOfJob" class="text-danger"></span>
                             </div>
                             <div class="col-lg-4 col-md-12">
@@ -318,7 +318,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div id="map" class="map-view"></div>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU5JFGguFmEvu3-KTiIM0pyaSo01aJx9s&callback=initMap&libraries=&v=weekly"
@@ -332,6 +332,7 @@
     <div id="Employer3" class="tabcontent" style=" display:none">
         <main role="main" class="pb-3">
             <div class="login-Containter">
+                <h2 id="message" class="text-black">@TempData["Message"]</h2>
                 <div class="row">
                     <div class="col-4">
                         <div class="row">
@@ -489,56 +490,6 @@
             </div>
         </main>
     </div>
-    @*</div>
-            </main>
-        </div>*@
-
-
-    @*<div>
-            <a asp-action="Index">Back to List</a>
-        </div>*@
-
-
-
-    @*<div class="row">
-            <div class="col-md-4">
-                <form asp-action="Index">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
-                    <div class="form-group">
-                        <label asp-for="UserName" class="control-label"></label>
-                        <input asp-for="UserName" class="form-control" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="IsShowing" /> @Html.DisplayNameFor(model => model.IsShowing)
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="CVFile" class="control-label"></label>
-                            <input asp-for="CVFile" class="form-control" />
-                            <span asp-validation-for="CVFile" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Languages" class="control-label"></label>
-                            <input asp-for="Languages" class="form-control" />
-                            <span asp-validation-for="Languages" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="UserId" class="control-label"></label>
-                            <input asp-for="UserId" class="form-control" />
-                            <span asp-validation-for="UserId" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                        </div>
-
-                </form>
-            </div>
-        </div>*@
-
-
     <div id="Employer8" class="tabcontent" style=" display:none">
 
         <main role="main" class="pb-3">
@@ -761,7 +712,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
+<script>
 
         $("#editProfile").click(function () {
             $.ajax({
@@ -816,13 +767,11 @@
             });
         });
 
-        //$(document).ready(function () {
-        //    $(".tablinks").click(function () {
-        //        var id = $(this).attr("id");
-        //        var url = "/Panel?ID=" + id;
-        //        window.location.href = url;
-        //    });
-        //});
+        $(document).ready(function () {
+            $(".tablinks").click(function () {
+                $("#message").remove();
+            });
+        });
 
         $(document).ready(function () {
 
@@ -860,7 +809,8 @@
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
                             appendElement.append($("<td>").html(Data[value]["Deadline"]));
-                            appendElement.append($("<td>").append(($("<a/>")).attr("class", "btn btn-info").html('Edytuj').attr("href", "EmployerPanel/EditJobOffer/" + Data[value]["Id"])));
+                            appendElement.append($("<td>").append(($("<a/>")).attr("class", "btn btn-info mx-1").html('✏').attr("href", "EmployerPanel/EditJobOffer/" + Data[value]["Id"])) 
+                                .append($("<a/>").attr("class", "btn btn-danger mx-1").html('🗑').attr("href", "EmployerPanel/DeleteJobOffer/" + Data[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');")).append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "Jobs/Details/" + Data[value]["Id"] +"/"+ Data[value]["Title"])));
                         });
                     },
                     error: function (xhr, status, error) {
@@ -871,6 +821,7 @@
 
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
+
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
             if (edited == "Panel") {
                 OpenNavbarItemOnLoad('Employer1');
@@ -899,11 +850,12 @@
             }
         }
 
-        
+
 
 
         function OpenNavbarItemOnLoad(itemNumber) {
             var i, tabcontent, tablinks;
+
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
@@ -932,5 +884,5 @@
                 zoom: 8
             });
         }
-    </script>
+</script>
 }
