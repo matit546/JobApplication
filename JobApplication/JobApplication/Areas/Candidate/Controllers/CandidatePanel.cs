@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -73,7 +74,7 @@ namespace JobApplication.Areas.Candidate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfileEmployee(CandidateViewModel candidateViewModel, IFormFile file)
+        public async Task<IActionResult> EditProfileEmployee(CandidateViewModel candidateViewModel, IFormFile file, IFormFile cvFile)
         {
             if (ModelState.IsValid)
             {
@@ -156,6 +157,44 @@ namespace JobApplication.Areas.Candidate.Controllers
                     }
                 }
 
+                if (cvFile != null)
+                {
+                    if (!(cvFile.ContentType == "application/pdf"))
+                    {
+                        return NotFound("TO nie jest plik PDF");
+                    }
+                    if (candidateViewModel.AppUserEmployeeExtension.CVFile != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", candidateViewModel.AppUserEmployeeExtension.CVFile);
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                    }
+                    if (cvFile != null && cvFile.Length > 0)
+                    {
+                        var imagePath = @"\files\";
+                        var uploadPath = _iWebHost.WebRootPath + imagePath;
+
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        var newFileName = Guid.NewGuid().ToString();
+                        var fileName = Path.GetFileName(newFileName + "." + cvFile.FileName.Split(".")[1].ToLower());
+                        string fullPath = uploadPath + fileName;
+                        imagePath = imagePath + @"\";
+                        var filePath = @".." + Path.Combine(imagePath, fileName);
+                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await cvFile.CopyToAsync(fileStream);
+                        }
+                        candidateViewModel.AppUserEmployeeExtension.CVFile = fileName;
+
+                    }
+                }
+  
                 candidateViewModel.AppUserEmployeeExtension.UserId = updateUser.Id;
                 if (candidateViewModel.AppUserEmployeeExtension.Id == 0)
                 {
@@ -163,6 +202,7 @@ namespace JobApplication.Areas.Candidate.Controllers
 
                 }else
                 {
+                    var AppUser = _context.AppUserEmployeeExtensions.Where(i => i.UserId == updateUser.Id);
                     _context.Update(candidateViewModel.AppUserEmployeeExtension);
                 }
                 await _context.SaveChangesAsync();
@@ -203,6 +243,8 @@ namespace JobApplication.Areas.Candidate.Controllers
                         updateUser.BackgroundImage = fileName;
                     }
                 }
+               
+         
                 //User Update
                 updateUser.PhoneNumber = candidateViewModel.appUserDto.PhoneNumber;
                 updateUser.Address = candidateViewModel.appUserDto.Address;
@@ -251,6 +293,24 @@ namespace JobApplication.Areas.Candidate.Controllers
             }
             var json = JsonConvert.SerializeObject(jobOffers);
             return Json(json);
+        }
+
+        [HttpGet]
+        public ActionResult GetPdf()
+        {
+            var userApp = _userManager.GetUserId(HttpContext.User);
+            var cvfilepath = _context.AppUserEmployeeExtensions.FirstOrDefault(i => i.UserId == userApp);
+            var uploadPath = _iWebHost.WebRootPath + @"\files\"+ cvfilepath.CVFile;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", cvfilepath.CVFile);
+
+            if (!System.IO.File.Exists(path))
+            {
+                return NotFound("Nie znaleziono takiego pliku");
+            }
+
+            string filePath = "~/files/"+cvfilepath.CVFile;
+            Response.Headers.Add($"Content-Disposition", "inline; filename="+cvfilepath.CVFile);
+            return File(filePath, "application/pdf");
         }
     }
   
