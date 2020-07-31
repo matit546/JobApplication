@@ -22,170 +22,170 @@ using Newtonsoft.Json;
 namespace JobApplication.Areas.Employer.Controllers
 {
     [Area("Employer")]
-    [Authorize(Roles =SD.EmployerRole)]
-   
-        public class EmployerPanelController : Controller
+    [Authorize(Roles = SD.EmployerRole)]
+
+    public class EmployerPanelController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IWebHostEnvironment _iWebHost;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILogger<Controllers.EmployerPanelController> _logger;
+        private readonly IMapper _mapper;
+
+        public EmployerPanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
+            , ILogger<Controllers.EmployerPanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)
         {
-            private readonly ApplicationDbContext _context;
-            private readonly UserManager<AppUser> _userManager;
-            private readonly IWebHostEnvironment _iWebHost;
-            private readonly SignInManager<AppUser> _signInManager;
-            private readonly ILogger<Controllers.EmployerPanelController> _logger;
-            private readonly IMapper _mapper;
+            _context = context;
+            _userManager = userManager;
+            _iWebHost = webHost;
+            _signInManager = signInManager;
+            _logger = logger;
+            _mapper = mapper;
+        }
 
-            public EmployerPanelController(ApplicationDbContext context, UserManager<AppUser> userManager, IWebHostEnvironment webHost
-                , ILogger<Controllers.EmployerPanelController> logger, SignInManager<AppUser> signInManager, IMapper mapper)
+        public IActionResult Index()            //Default VIew for Employer
+        {
+            return View();
+        }
+
+        //Get User Data
+        [HttpGet]
+        public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User and return JSON
+        {
+            var userId = _userManager.GetUserId(User);
+            var jobOffers = await _context.JobOffers.Where(u => u.UserId == userId).ToListAsync();
+
+            if (jobOffers == null)
             {
-                _context = context;
-                _userManager = userManager;
-                _iWebHost = webHost;
-                _signInManager = signInManager;
-                _logger = logger;
-                _mapper = mapper;
-            }
-
-            public IActionResult Index()            //Default VIew for Employer
-            {
-                 return View();
-            }
-
-            //Get User Data
-            [HttpGet]
-            public async Task<IActionResult> GetJobOffers()         //Get Job offers Current User and return JSON
-            {
-                var userId = _userManager.GetUserId(User);
-                var jobOffers = await _context.JobOffers.Where(u=>u.UserId==userId).ToListAsync();
-
-                if (jobOffers == null)
-                {
-                    return NotFound();
-                }
- 
-
-                var json = JsonConvert.SerializeObject(jobOffers);
-                return Json(json);
+                return NotFound();
             }
 
 
-            //Get User Data
-            [HttpGet]
+            var json = JsonConvert.SerializeObject(jobOffers);
+            return Json(json);
+        }
 
-            public async Task<IActionResult> EditProfile()      // Get current User data
+
+        //Get User Data
+        [HttpGet]
+
+        public async Task<IActionResult> EditProfile()      // Get current User data
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+
+            if (user == null)
             {
-                var user = await _userManager.GetUserAsync(HttpContext.User);
- 
-                
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
-                var json = JsonConvert.SerializeObject(appUserDto);
-                return Json(json);
-
+                return NotFound();
             }
 
-            //Post EditProfile User and Adding/updating Image
-            [HttpPost]
-            [Authorize(Roles = SD.EmployerRole)]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
+            AppUserDto appUserDto = _mapper.Map<AppUser, AppUserDto>(user);
+            var json = JsonConvert.SerializeObject(appUserDto);
+            return Json(json);
+
+        }
+
+        //Post EditProfile User and Adding/updating Image
+        [HttpPost]
+        [Authorize(Roles = SD.EmployerRole)]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProfilePost([Bind("Id,CompanyName,Email,Headline,Website,FoundingDate,CompanySize,ShortDescription,Descrption" +
             ",Categories,Address,VideoUrl,Gallery,FacebookProfile,TwitterProfile,YoutubeProfile,VimeoProfile,LinkedinProfile,PhoneNumber")] AppUserDto appUserDto, IFormFile file)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var updateUser = await _userManager.GetUserAsync(HttpContext.User);
+                if (file != null)
                 {
-                    var updateUser = await _userManager.GetUserAsync(HttpContext.User);
-                    if (file != null)
+                    if (updateUser == null)
                     {
-                        if (updateUser == null)
+                        return NotFound();
+                    }
+                    if (updateUser.BackgroundImage != null && updateUser.BackgroundImage != "defaultImage.jpg")
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", updateUser.BackgroundImage);
+                        if (System.IO.File.Exists(path))
                         {
-                            return NotFound();
-                        }
-                        if (updateUser.BackgroundImage != null && updateUser.BackgroundImage!="defaultImage.jpg")
-                        {
-                            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", updateUser.BackgroundImage);
-                            if (System.IO.File.Exists(path))
-                            {
-                                System.IO.File.Delete(path);
-                            }
-                        }
-                        if (file != null && file.Length > 0)
-                        {
-                            var imagePath = @"\images\";
-                            var uploadPath = _iWebHost.WebRootPath + imagePath;
-
-                            if (!Directory.Exists(uploadPath))
-                            {
-                                Directory.CreateDirectory(uploadPath);
-                            }
-
-                            var newFileName = Guid.NewGuid().ToString();
-                            var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
-                            string fullPath = uploadPath + fileName;
-                            imagePath = imagePath + @"\";
-                            var filePath = @".." + Path.Combine(imagePath, fileName);
-                            using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                            {
-                                await file.CopyToAsync(fileStream);
-                            }
-                            updateUser.BackgroundImage = fileName;
+                            System.IO.File.Delete(path);
                         }
                     }
+                    if (file != null && file.Length > 0)
+                    {
+                        var imagePath = @"\images\";
+                        var uploadPath = _iWebHost.WebRootPath + imagePath;
 
-                    updateUser.PhoneNumber = appUserDto.PhoneNumber;
-                    updateUser.Address = appUserDto.Address;
-                    updateUser.Categories = appUserDto.Categories;
-                    updateUser.CompanyName = appUserDto.CompanyName;
-                    updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;
-                    updateUser.Descrption = appUserDto.Descrption;
-                    updateUser.Email = appUserDto.Email;
-                    updateUser.FacebookProfile = appUserDto.FacebookProfile;
-                    updateUser.Gallery = appUserDto.Gallery;
-                    updateUser.FoundingDate = appUserDto.FoundingDate;
-                    updateUser.ShortDescription = appUserDto.ShortDescription;
-                    updateUser.Headline = appUserDto.Headline;
-                    updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
-                    updateUser.TwitterProfile = appUserDto.TwitterProfile;
-                    updateUser.VideoUrl = appUserDto.VideoUrl;
-                    updateUser.VimeoProfile = appUserDto.VimeoProfile;
-                    updateUser.Website = appUserDto.Website;
-                    updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            Directory.CreateDirectory(uploadPath);
+                        }
+
+                        var newFileName = Guid.NewGuid().ToString();
+                        var fileName = Path.GetFileName(newFileName + "." + file.FileName.Split(".")[1].ToLower());
+                        string fullPath = uploadPath + fileName;
+                        imagePath = imagePath + @"\";
+                        var filePath = @".." + Path.Combine(imagePath, fileName);
+                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+                        updateUser.BackgroundImage = fileName;
+                    }
+                }
+
+                updateUser.PhoneNumber = appUserDto.PhoneNumber;
+                updateUser.Address = appUserDto.Address;
+                updateUser.Categories = appUserDto.Categories;
+                updateUser.CompanyName = appUserDto.CompanyName;
+                updateUser.CompanySize = (Identity.Data.CompanySize)appUserDto.CompanySize;
+                updateUser.Descrption = appUserDto.Descrption;
+                updateUser.Email = appUserDto.Email;
+                updateUser.FacebookProfile = appUserDto.FacebookProfile;
+                updateUser.Gallery = appUserDto.Gallery;
+                updateUser.FoundingDate = appUserDto.FoundingDate;
+                updateUser.ShortDescription = appUserDto.ShortDescription;
+                updateUser.Headline = appUserDto.Headline;
+                updateUser.LinkedinProfile = appUserDto.LinkedinProfile;
+                updateUser.TwitterProfile = appUserDto.TwitterProfile;
+                updateUser.VideoUrl = appUserDto.VideoUrl;
+                updateUser.VimeoProfile = appUserDto.VimeoProfile;
+                updateUser.Website = appUserDto.Website;
+                updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
 
                 var result = await _userManager.UpdateAsync(updateUser);
 
-                    if (result.Succeeded)
-                     {
-                    return RedirectToAction("Index", "EmployerPanel", new {name= "Panel" } );
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "EmployerPanel", new { name = "Panel" });
                 }
-
-                }
-                return RedirectToAction(nameof(Index));
-
 
             }
+            return RedirectToAction(nameof(Index));
 
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            [Authorize(Roles = SD.EmployerRole)]
-            public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category," +
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.EmployerRole)]
+        public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category," +
                 "Skills,Deadline,Description,ChooseTheCurrency,Email,Languages,CompanyNameOffer,WorkingTime")] JobOffer jobOffer) //Add new Job Offer
-            {        
+        {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
-                {
+            {
                 String dateTime = DateTime.Now.ToShortDateString();
                 jobOffer.PublicationTime = Convert.ToDateTime(dateTime);
                 jobOffer.UserId = currentUser.Id;
                 jobOffer.PhotoCompanyOffer = currentUser.BackgroundImage;
                 jobOffer.CompanyNameOffer = currentUser.CompanyName;
                 _context.Add(jobOffer);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-                //Tempdata alert That smth went wrong
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
+            //Tempdata alert That smth went wrong
+            return RedirectToAction(nameof(Index));
+        }
 
 
         [HttpGet]
@@ -213,7 +213,7 @@ namespace JobApplication.Areas.Employer.Controllers
             {
                 return Unauthorized("Nie możesz zedytować tej oferty!");
             }
-            
+
             return View(joboffer);
         }
 
@@ -227,22 +227,22 @@ namespace JobApplication.Areas.Employer.Controllers
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             var jobofferfromDb = await _context.JobOffers.FindAsync(jobOffer.Id);
-            if(jobofferfromDb==null || jobofferfromDb.UserId != userdb.Id)
-            { 
+            if (jobofferfromDb == null || jobofferfromDb.UserId != userdb.Id)
+            {
                 return Unauthorized("NIe możesz zedytować tej oferty!");
             }
             if (ModelState.IsValid)
             {
                 jobofferfromDb.Category = jobOffer.Category;
                 jobofferfromDb.ChooseTheCurrency = jobOffer.ChooseTheCurrency;
-               jobofferfromDb.CompanyNameOffer = jobOffer.CompanyNameOffer;
-                 jobofferfromDb.Deadline = jobOffer.Deadline;
-            jobofferfromDb.Description = jobOffer.Description;
-             jobofferfromDb.Email = jobOffer.Email;
-            jobofferfromDb.Languages = jobOffer.Languages;
-            jobofferfromDb.Location = jobOffer.Location;
-            jobofferfromDb.PaymentMax = jobOffer.PaymentMax;
-            jobofferfromDb.PaymentMin = jobOffer.PaymentMin;
+                jobofferfromDb.CompanyNameOffer = jobOffer.CompanyNameOffer;
+                jobofferfromDb.Deadline = jobOffer.Deadline;
+                jobofferfromDb.Description = jobOffer.Description;
+                jobofferfromDb.Email = jobOffer.Email;
+                jobofferfromDb.Languages = jobOffer.Languages;
+                jobofferfromDb.Location = jobOffer.Location;
+                jobofferfromDb.PaymentMax = jobOffer.PaymentMax;
+                jobofferfromDb.PaymentMin = jobOffer.PaymentMin;
                 jobofferfromDb.Title = jobOffer.Title;
                 jobofferfromDb.TypeOfJob = jobOffer.TypeOfJob;
                 jobofferfromDb.WorkingTime = jobOffer.WorkingTime;
@@ -257,7 +257,7 @@ namespace JobApplication.Areas.Employer.Controllers
             return View(jobOffer);
         }
 
- 
+
         public async Task<IActionResult> DeleteJobOffer(int? id)        //Get View for Edit JobOffer
         {
             if (id == null)
@@ -284,47 +284,47 @@ namespace JobApplication.Areas.Employer.Controllers
         }
 
         [HttpGet]
-            public async Task<IActionResult> ResetPassword()        //Get View for ResetPassword
-            {
-
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-                }
-                return View();
-            }
-
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> ResetPassword(ResetPasswordModel Input)        //Post Change Password to current User
+        public async Task<IActionResult> ResetPassword()        //Get View for ResetPassword
         {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
 
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-                }
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            return View();
+        }
 
-                var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
-                if (!changePasswordResult.Succeeded)
-                {
-                    foreach (var error in changePasswordResult.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                    return View();
-                }
-
-                await _signInManager.RefreshSignInAsync(user);
-                _logger.LogInformation($"Uzytkownik  { user.UserName }  zmienil swoje haslo ");
-                TempData["ReturnUrl"] = "Hasło zostało zmienione";
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel Input)        //Post Change Password to current User
+        {
+            if (!ModelState.IsValid)
+            {
                 return View();
             }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+            if (!changePasswordResult.Succeeded)
+            {
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+
+            await _signInManager.RefreshSignInAsync(user);
+            _logger.LogInformation($"Uzytkownik  { user.UserName }  zmienil swoje haslo ");
+            TempData["ReturnUrl"] = "Hasło zostało zmienione";
+            return View();
+        }
         [HttpGet]
         public async Task<IActionResult> CandidatesApplied()
         {
@@ -334,18 +334,31 @@ namespace JobApplication.Areas.Employer.Controllers
 
             var offers = _context.OffersApplied.ToList();
 
-            var result = offers.Where(y => jobs.Any(z=>z.Id==y.OfferId)).ToList();
+            var result = offers.Where(y => jobs.Any(z => z.Id == y.OfferId)).ToList();
 
             var userCandidate = _userManager.Users.ToList();
 
-            var resultCandidates = userCandidate.Where(x => result.Any(y=>y.UserId==x.Id));
+           // var jobstoShow = jobs.Where(x => result.Any(z => z.OfferId == x.Id));
 
-            var json = JsonConvert.SerializeObject(resultCandidates);
-            var jsonTateusz = JsonConvert.SerializeObject(result);
-            var jsonMati = json + jsonTateusz;
-            return Json(jsonMati);
-        }
-        }
+            var resultCandidates = userCandidate.Where(x => result.Any(y => y.UserId == x.Id));
 
+            var appUserDto = _mapper.Map<IEnumerable<AppUser>, List<AppUserDto>>(resultCandidates);
+   
+            var json = JsonConvert.SerializeObject(appUserDto);
+            // var jsonTateusz = JsonConvert.SerializeObject(result);
+            // var jsonMati = json + jsonTateusz;
+            return Json(json);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowCandidateInformation(string id, string username)  //View for information of the candiadate who applied to employer Joboffer
+        {
+            //CandidateViewModel candidateView = new CandidateViewModel()
+            //{
+            //    appUserDto = _mapper
+            //}
+            var User = _context.AppUserEmployeeExtensions.FirstOrDefault(i=>i.UserId==id);
+            return View(User);
+        }
+    }
     }
 

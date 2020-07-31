@@ -11,6 +11,7 @@ namespace JobApplication.Areas.Identity.Data.DTO
     public class AppUserDto
     {
 
+        public string UserName { get; set; }
         public string Id { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane")]
         public string PhoneNumber { get; set; }

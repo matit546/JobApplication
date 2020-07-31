@@ -9,6 +9,7 @@ namespace JobApplication.Areas.Identity.Data
 {
     public class AppUser : IdentityUser
     {
+
         [PersonalData]
         public string CompanyName { get; set; }
         [PersonalData]
