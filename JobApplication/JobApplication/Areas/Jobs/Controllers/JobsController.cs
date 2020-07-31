@@ -9,6 +9,7 @@ using JobApplication.Pagination;
 using JobApplication.Models;
 using Microsoft.AspNetCore.Identity;
 using JobApplication.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplication.Areas.Jobs.Controllers
 {
@@ -49,6 +50,8 @@ namespace JobApplication.Areas.Jobs.Controllers
 
             return View(jobOffer);
         }
+        [Area("Candidate")]
+        [Authorize(Roles = SD.CandidateRole)]
         [HttpPost]
         public async Task<IActionResult> Applied(OfferApplied offerApplied, int id)
         {
