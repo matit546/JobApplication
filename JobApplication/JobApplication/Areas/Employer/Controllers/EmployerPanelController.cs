@@ -325,6 +325,27 @@ namespace JobApplication.Areas.Employer.Controllers
                 TempData["ReturnUrl"] = "Hasło zostało zmienione";
                 return View();
             }
+        [HttpGet]
+        public async Task<IActionResult> CandidatesApplied()
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+
+            var jobs = _context.JobOffers.Where(x => x.UserId == user).ToList();
+
+            var offers = _context.OffersApplied.ToList();
+
+            var result = offers.Where(y => jobs.Any(z=>z.Id==y.OfferId)).ToList();
+
+            var userCandidate = _userManager.Users.ToList();
+
+            var resultCandidates = userCandidate.Where(x => result.Any(y=>y.UserId==x.Id));
+
+            var json = JsonConvert.SerializeObject(resultCandidates);
+            var jsonTateusz = JsonConvert.SerializeObject(result);
+            var jsonMati = json + jsonTateusz;
+            return Json(jsonMati);
         }
+        }
+
     }
 
