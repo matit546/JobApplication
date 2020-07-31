@@ -746,3 +746,12 @@ figcaption {
 .text-black{
     color:black;
 }
+
+.image-joboffer{
+    width:250px;
+    height:250px;
+}
+
+.text-20{
+    font-size:20px;
+}

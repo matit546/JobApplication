@@ -1,5 +1,4 @@
 ﻿@model JobApplication.Models.JobOffer
-
 @{
     ViewData["Title"] = "Details";
 }
@@ -10,6 +9,16 @@
         <div class="justify-content-center row">
             <div class="col-8 py-5">
                 <div class="filter-area px-5">
+
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 bolded text-20">
+                                    Dane:
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row py-4">
                         <div class="col-6">
@@ -96,6 +105,18 @@
                         </div>
                     </div>
 
+                    <hr />
+
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 bolded text-20">
+                                    Opis:
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row py-4">
                         <div class="col-12">
                             <div class="row">
@@ -106,12 +127,13 @@
                         </div>
                     </div>
 
+                    <hr />
 
                     <div class="row py-4">
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12">
-                                    Lokalizacja
+                                <div class="col-12 bolded text-20">
+                                    Lokalizacja:
                                 </div>
                             </div>
                         </div>
@@ -121,32 +143,36 @@
 
                 </div>
             </div>
-            <div class="col-4 py-5">
+            <div class="col-4 py-5" style="position:sticky">
                 <div class="filter-area">
                     <div class="row">
-                        @Html.DisplayFor(model => model.Title)
+                        <div class="col-12 text-center py-2 bolded text-20">
+                            @Html.DisplayFor(model => model.Title)
+                        </div>
                     </div>
                     <div class="row">
-                        Form
+                        <div class="col-12 text-center py-2">
+                            <img src="~/images/@Html.DisplayFor(model => model.PhotoCompanyOffer)" class="image-joboffer" />
+                        </div>
                     </div>
-                        <div class="row px-5">
-                           <input />
-                        </div>
-                        <div class="row px-5">
-                            <input />
-                        </div>
-                        <div class="row px-5">
-                            <input />
-                        </div>
-                        <div class="row px-5">
-                            <input />
-                        </div>
-                        <div class="row px-5">
-                            <form asp-action="Applied" asp-route-id="@Model.Id">
-                                <button type="submit" class="btn-primary">Aplikuj</button>
-                            </form>
-                        </div>
-                    @*@Html.DisplayFor(model => model.image)*@
+                    <hr/>
+                    <div class="row px-5 py-2">
+                        <input class="form-control form-input" placeholder="Twoje imię" value="@User.Identity.Name" />
+                    </div>
+                    <div class="row px-5 py-2">
+                        <input class="form-control form-input" placeholder="Twoj email" />
+                    </div>
+                    <div class="row px-5 py-2">
+                        <input class="form-control form-input" placeholder="Przedmiot" />
+                    </div>
+                    <div class="row px-5 py-2">
+                        <input class="form-control form-input" placeholder="Wiadomość" />
+                    </div>
+                    <div class="row px-5 py-2">
+                        <form asp-action="Applied" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn btn-primary">Aplikuj</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
