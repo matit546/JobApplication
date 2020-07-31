@@ -60,9 +60,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 {
                     return NotFound();
                 }
-
-                jobOffers.ForEach(x => x.PublicationTime.ToShortDateString());
-               
+ 
 
                 var json = JsonConvert.SerializeObject(jobOffers);
                 return Json(json);
@@ -215,8 +213,7 @@ namespace JobApplication.Areas.Employer.Controllers
             {
                 return Unauthorized("Nie możesz zedytować tej oferty!");
             }
-            joboffer.PaymentMax = Convert.ToUInt32(joboffer.PaymentMax);
-            joboffer.PaymentMin = Convert.ToUInt32(joboffer.PaymentMin);
+            
             return View(joboffer);
         }
 
@@ -278,7 +275,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
             if (jobofferfromDb == null || jobofferfromDb.UserId != userdb.Id)
             {
-                return Unauthorized("NIe możesz usunąć tej oferty!");
+                return Unauthorized("NIe możesz zedytować tej oferty!");
             }
             _context.JobOffers.Remove(jobofferfromDb);
             await _context.SaveChangesAsync();
