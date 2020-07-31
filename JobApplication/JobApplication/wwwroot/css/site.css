@@ -722,22 +722,22 @@ figcaption {
     }
 
     .joboffer-main:hover .TypeOfJob-Część_etatu {
-        background-color: white;
+        background-color: black;
         color: forestgreen;
     }
 
     .joboffer-main:hover .TypeOfJob-Praca_czasowa {
-        background-color: white;
+        background-color: black;
         color: cyan;
     }
 
     .joboffer-main:hover .TypeOfJob-Praktyka {
-        background-color: white;
+        background-color: black;
         color: palevioletred;
     }
 
     .joboffer-main:hover .TypeOfJob-Wolontariat {
-        background-color: white;
+        background-color: black;
         color: yellow;
     }
 
@@ -745,4 +745,13 @@ figcaption {
 
 .text-black{
     color:black;
+}
+
+.image-joboffer{
+    width:250px;
+    height:250px;
+}
+
+.text-20{
+    font-size:20px;
 }
