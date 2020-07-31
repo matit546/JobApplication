@@ -19,7 +19,7 @@ namespace JobApplication.Models
         [Required(ErrorMessage = "To pole jest wymagane")]
         public TypeOfJob TypeOfJob { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Range(1, 20000, ErrorMessage = "Wartość maksymalna to 200000")]
+        [Range(1, 200000, ErrorMessage = "Wartość maksymalna to 200000")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(15, 2)")]
         public decimal PaymentMin { get; set; }

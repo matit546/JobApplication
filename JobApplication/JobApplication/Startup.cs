@@ -133,6 +133,7 @@ namespace JobApplication
             app.UseSession();
             app.UseRouting();
 
+            app.UseRequestLocalization("en-UY", "en-US");
             app.UseResponseCompression();
 
             app.UseAuthentication();
