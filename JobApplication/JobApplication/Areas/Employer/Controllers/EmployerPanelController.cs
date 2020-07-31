@@ -152,7 +152,7 @@ namespace JobApplication.Areas.Employer.Controllers
                     updateUser.Website = appUserDto.Website;
                     updateUser.YoutubeProfile = appUserDto.YoutubeProfile;
 
-                    var result = await _userManager.UpdateAsync(updateUser);
+                var result = await _userManager.UpdateAsync(updateUser);
 
                     if (result.Succeeded)
                      {

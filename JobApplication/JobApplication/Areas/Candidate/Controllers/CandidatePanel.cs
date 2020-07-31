@@ -311,7 +311,7 @@ namespace JobApplication.Areas.Candidate.Controllers
             {
                 return NotFound("Nie znaleziono takiego pliku");
             }
-
+ 
             string filePath = "~/files/"+cvfilepath.CVFile;
             Response.Headers.Add($"Content-Disposition", "inline; filename="+cvfilepath.CVFile);
             return File(filePath, "application/pdf");

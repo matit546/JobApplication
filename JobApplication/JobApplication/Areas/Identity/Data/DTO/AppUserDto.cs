@@ -28,6 +28,7 @@ namespace JobApplication.Areas.Identity.Data.DTO
         public string Website { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
+        [DataType(DataType.Date)]
         public DateTime FoundingDate { get; set; }
         [Required(ErrorMessage = "To pole jest wymagane")]
         public CompanySize CompanySize { get; set; }
