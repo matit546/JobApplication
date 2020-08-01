@@ -350,14 +350,21 @@ namespace JobApplication.Areas.Employer.Controllers
             return Json(json);
         }
         [HttpGet]
-        public async Task<IActionResult> ShowCandidateInformation(string id, string username)  //View for information of the candiadate who applied to employer Joboffer
+        public async Task<IActionResult> ShowCandidateInformation(string id)  //View for information of the candiadate who applied to employer Joboffer
         {
-            //CandidateViewModel candidateView = new CandidateViewModel()
-            //{
-            //    appUserDto = _mapper
-            //}
-            var User = _context.AppUserEmployeeExtensions.FirstOrDefault(i=>i.UserId==id);
-            return View(User);
+            var userCandidate = _userManager.Users.FirstOrDefault(x => x.UserName== id);
+
+            CandidateViewModel candidateViewModel = new CandidateViewModel
+            {
+                appUserDto = _mapper.Map<AppUser, AppUserDto>(userCandidate),
+                AppUserEmployeeExtension = await _context.AppUserEmployeeExtensions.FirstOrDefaultAsync(x => x.UserId == userCandidate.Id),
+                AwardsEmployee = await _context.AwardsEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync(),
+                EducationEmployee =await _context.EducationEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync(),
+                ExperiencesEmployee = await _context.ExperiencesEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync(),
+                SkillsEmployee = await _context.SkillsEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync()
+            };
+
+            return View(candidateViewModel);
         }
     }
     }

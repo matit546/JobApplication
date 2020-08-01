@@ -825,7 +825,7 @@
                             appendElement.append($("<td>").html(Data[value]["UserName"]));
                             appendElement.append($("<td>").html(Data[value]["UserName"]));
                             appendElement.append($("<td>").html(Data[value]["UserName"]));   
-                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "EmployerPanel/ShowCandidateInformation/" + Data[value]["Id"]));
+                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "EmployerPanel/ShowCandidateInformation/" + Data[value]["UserName"]));
                         });
                     },
                     error: function (xhr, status, error) {

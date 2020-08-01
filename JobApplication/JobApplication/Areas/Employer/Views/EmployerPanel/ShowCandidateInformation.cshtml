@@ -1,83 +1,474 @@
-﻿@model JobApplication.Areas.Identity.Data.AppUserEmployeeExtension
+﻿@model JobApplication.Areas.Identity.Data.ViewModels.CandidateViewModel
 
 @{
     ViewData["Title"] = "ShowCandidateInformation";
 }
 
-<h1>ShowCandidateInformation</h1>
+    <div class="tab">
 
-<div>
-    <h4>AppUserEmployeeExtension</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsShowing)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsShowing)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CVFile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CVFile)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Languages)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Languages)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TypePreferes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TypePreferes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Levels)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Levels)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Localization)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Localization)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentMinProfile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentMinProfile)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExperiencesProfile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExperiencesProfile)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SkillsProfile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SkillsProfile)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-    </dl>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate1')">Podstawowe Informacje</button>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate2')">Preferencje zawodowe</button>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate3')">Edukacja</button>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate4')">Doświadczenia</button>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate5')">Umiejętności</button>
+        <button class="tablinks" onclick="OpenNavbarItem(event, 'Candidate6')">Nagrody i Sukcesy</button>
+        <a class="tablinks" asp-area="Employer" asp-controller="EmployerPanel" asp-action="Index" asp-route-name="OfertyAplikacyjne">Cofnij</a>
+    </div>
+
+<div class="userPanelPadding">
+    <div id="Candidate1" class="tabcontent">
+
+        <main role="main" class="pb-3">
+            <div class="login-Containter">
+
+
+                <img class="img-fluid rounded  backgroundimage-css" src="~/images/@Model.appUserDto.BackgroundImage" />
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">Kandydat</div>
+                            <input id="CompanyName" class="form-control form-input" disabled asp-for="appUserDto.CompanyName" />
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">EMAIL</div>
+                            <input disabled id="Email" class="form-control form-input" asp-for="appUserDto.Email" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">TELEFON</div>
+                            <input disabled id="PhoneNumber" class="form-control form-input" asp-for="appUserDto.PhoneNumber" />
+
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">DATA URODZENIA</div>
+                            <input disabled id="FoundingDate" class="form-control form-input" asp-for="appUserDto.FoundingDate" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">NAGŁÓWEK</div>
+                            <input disabled id="Headline" class="form-control form-input" asp-for="appUserDto.Headline" />
+
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="text-bottom-left-padding bolded">PŁEĆ</div>
+                            <input disabled  class="form-control form-input" asp-for="AppUserEmployeeExtension.Gender" />
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-bottom-left-padding bolded">OPIS</div>
+                            <textarea disabled asp-for="appUserDto.ShortDescription"  class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+                            <span asp-validation-for="appUserDto.ShortDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group border rounded">
+                    @if (Model.AppUserEmployeeExtension.CVFile == null)
+                    {
+                        <b> Brak pliku CV</b>
+                    }
+                    else
+                    {
+                        <a asp-action="GetPdf" class="btn btn-success" asp-route-name="@Model.AppUserEmployeeExtension.CVFile">Pobierz Plik Cv</a>
+                    }
+                </div>
+
+                <br />
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="text-bottom-left-padding bolded">List Motywacyjny</div>
+                            <textarea disabled asp-for="appUserDto.Descrption" id="Descrption" class="form-control form-input" placeholder="Wprowadz krótki opis"> </textarea>
+
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+
+                <br />
+
+
+            
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
+                            <div class="text-bottom-left-padding bolded">Adres</div>
+                            <input asp-for="appUserDto.Address" disabled id="VideoUrl" class="form-control form-input" />
+                            <br />
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="map" class="map-view"></div>
+                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU5JFGguFmEvu3-KTiIM0pyaSo01aJx9s&callback=initMap&libraries=&v=weekly"
+                                            defer></script>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-bottom-left-padding bolded">ADRES PLIKU WIDEO</div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input asp-for="appUserDto.VideoUrl" disabled id="VideoUrl" class="form-control form-input" placeholder="Nie wybrano" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+                @*<div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-bottom-left-padding bolded">GALERIA</div>
+                            <div class="row">
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <br />
+                <div class="container-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-bottom-left-padding bolded">FIRMOWY PROFIL SPOŁECZNOŚCIOWY</div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="text-bottom-left-padding bolded">FACEBOOK</div>
+                                    <input  disabled class="form-control form-input" asp-for="appUserDto.FacebookProfile" placeholder="Wprowadz profil facebooka" />
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="text-bottom-left-padding bolded">TWITTER</div>
+                                    <input disabled class="form-control form-input" asp-for="appUserDto.TwitterProfile" placeholder="Wprowadz profil twittera" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="text-bottom-left-padding bolded">YOUTUBE</div>
+                                    <input disabled class="form-control form-input" asp-for="appUserDto.YoutubeProfile" placeholder="Wprowadz profil youtube" />
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="text-bottom-left-padding bolded">VIMEO</div>
+                                    <input disabled class="form-control form-input" asp-for="appUserDto.VimeoProfile" placeholder="Wprowadz profil vimeo" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="text-bottom-left-padding bolded">LINKEDIN</div>
+                                    <input disabled class="form-control form-input" asp-for="appUserDto.LinkedinProfile" placeholder="Wprowadz profil linkedin" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<a asp-controller="Panel" class="btn btn-secondary" asp-action="ResetPassword"> ZMIEN HASLO</a>*@
+            </div>
+        </main>
+
+    </div>
+
+
+    <div id="Candidate2" class="tabcontent" style=" display:none">
+        <main role="main" class="pb-3">
+            <div class="container-padding">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-bottom-left-padding bolded">PREFERENCJE ZAWODOWE</h2>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">KATEGORIE</div>
+                                <input id="Categories" asp-for="appUserDto.Categories" class="form-control form-input" disabled />
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">TYPY*</div>
+                                <input disabled class="form-control form-input" asp-for="AppUserEmployeeExtension.TypePreferes" />
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">POZIOMY</div>
+                                <input disabled class="form-control form-input" asp-for="AppUserEmployeeExtension.Levels" />
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">LOKALIZACJA*</div>
+                                <input class="form-control form-input" disabled asp-for="AppUserEmployeeExtension.Localization" />
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">JĘZYKI </div>
+                                <input class="form-control form-input" disabled asp-for="AppUserEmployeeExtension.Languages" />
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">WYNAGRODZENIE OD</div>
+                                <input class="form-control form-input" disabled asp-for="AppUserEmployeeExtension.PaymentMinProfile" />
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="text-bottom-left-padding bolded">DOŚWIADCZENIA</div>
+                                <input class="form-control form-input" disabled asp-for="AppUserEmployeeExtension.ExperiencesProfile" />
+                            </div>
+
+
+                            <div class="col-8">
+                                <div class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI </div>
+                                <input class="form-control form-input" disabled asp-for="AppUserEmployeeExtension.SkillsProfile" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="Candidate3" class="tabcontent" style=" display:none">
+        <main role="main" class="pb-3">
+            <div class="container-padding">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-bottom-left-padding bolded">EDUKACJA</h1>
+                        <hr />
+                        <br />
+                        @if (Model.EducationEmployee.Count() > 0)
+                        {
+
+                            @foreach (var item in Model.EducationEmployee)
+                            {
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h5 class="text-bottom-left-padding bolded">TYTUŁ</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.Degree" />
+                                        </div>
+                                        <div class="col-4">
+                                            <h5 class="text-bottom-left-padding bolded">NAZWA SZKOŁY</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.SchoolName" />
+                                        </div>
+                                        <div class="col-4">
+                                            <h5 class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - ZAKOŃCZENIA</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.DateStartEnd" />
+                                        </div>
+
+                                    </div>
+                                    <br />
+
+
+                                    <h5 class="text-bottom-left-padding bolded">OPIS</h5>
+                                    <textarea disabled class="form-control form-input" asp-for="@item.Description"></textarea>
+                                    <br />
+                                    <hr />
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <b>Brak</b>
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="Candidate4" class="tabcontent" style=" display:none">
+        <main role="main" class="pb-5">
+            <div class="container-padding">
+                <div class="row">
+
+                    <h1 class="text-bottom-left-padding bolded">DOŚWIADCZENIA</h1>
+                    <hr />
+                    <br />
+                    @if (Model.ExperiencesEmployee.Count() > 0)
+                    {
+
+                        @foreach (var item in Model.ExperiencesEmployee)
+                        {
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h5 class="text-bottom-left-padding bolded">TYTUŁ</h5>
+                                        <input disabled class="form-control form-input" asp-for="@item.Degree" />
+                                    </div>
+                                    <div class="col-4">
+                                        <h5 class="text-bottom-left-padding bolded">NAZWA FIRMY</h5>
+                                        <input disabled class="form-control form-input" asp-for="@item.CompanyName" />
+                                    </div>
+                                    <div class="col-4">
+                                        <h5 class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - ZAKOŃCZENIA</h5>
+                                        <input disabled class="form-control form-input" asp-for="@item.DateStartEnd" />
+                                    </div>
+
+                                </div>
+                                <br />
+
+
+                                <h5 class="text-bottom-left-padding bolded">OPIS</h5>
+                                <textarea disabled class="form-control form-input" asp-for="@item.Description"></textarea>
+                                <br />
+                                <hr />
+                            </div>
+                             }
+
+                        }
+                       else
+                                {
+                                <b>Brak</b>
+                                }
+                            </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="Candidate5" class="tabcontent" style=" display:none">
+        <main role="main" class="pb-3">
+            <div class="container-padding">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI</h1>
+                        <hr />
+                        <br />
+                        @if (Model.SkillsEmployee.Count() > 0)
+                        {
+
+                            @foreach (var item in Model.SkillsEmployee)
+                            {
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="text-bottom-left-padding bolded">TYTUŁ</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.Degree" />
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="text-bottom-left-padding bolded">WARTOŚĆ PROCENTOWA</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.Percentage" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+                                <hr />
+                            }
+
+                        }
+                        else
+                        {
+                            <b>Brak</b>
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="Candidate6" class="tabcontent" style=" display:none">
+        <main role="main" class="pb-3">
+            <div class="container-padding">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-bottom-left-padding bolded">NAGRODY I SUKCESY</h1>
+                        <hr />
+                        <br />
+                        @if (Model.AwardsEmployee.Count() > 0)
+                        {
+
+                            @foreach (var item in Model.AwardsEmployee)
+                            {
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="text-bottom-left-padding bolded">TYTUŁ</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.Award" />
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="text-bottom-left-padding bolded">ROK</h5>
+                                            <input disabled class="form-control form-input" asp-for="@item.Year" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <h5 class="text-bottom-left-padding bolded">OPIS</h5>
+                                    <textarea disabled class="form-control form-input" asp-for="@item.Description"></textarea>
+
+                                </div>
+                                <br />
+                                <hr />
+                            }
+
+                        }
+                        else
+                        {
+                            <b>Brak</b>
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+
+  <script>
+      $('input').each(function () {
+          $(this).css("background-color", "white");
+      });
+
+      $('textarea').each(function () {
+          $(this).css("background-color", "white");
+      });
+
+      var map;  //google maps
+      function initMap() {
+          map = new google.maps.Map(document.getElementById("map"), {
+              center: { lat: -34.397, lng: 150.644 },
+              zoom: 8
+          });
+      }
+  </script>
+        }

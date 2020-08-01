@@ -454,32 +454,7 @@
                                 <h1 class="text-bottom-left-padding bolded">EDUKACJA</h1>
                                 <hr />
                                 <br />
-                                @*<input  id="EducationEmployeeDegreeID"  asp-for="EducationEmployee[0].Id" hidden />
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                            <input id="EducationEmployeeDegree" asp-for="EducationEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
-                        </div>
-
-
-                        <div class="col-4">
-                            <div class="text-bottom-left-padding bolded">NAZWA SZKOŁY</div>
-                            <input class="form-control form-input" id="EducationEmployeeSchoolName" asp-for="EducationEmployee[0].SchoolName" placeholder="Nie wybrano" />
-                        </div>
-
-
-                        <div class="col-4">
-                            <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
-                            <input class="form-control form-input" id="EducationEmployeeDateStartEnd" asp-for="EducationEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="text-bottom-left-padding bolded">OPIS</div>
-                            <textarea class="form-control form-input" id="EducationEmployeeDescription" asp-for="EducationEmployee[0].Description" placeholder="Nie wybrano"></textarea>
-                        </div>
-                    </div>*@
+                            
                                 <div class="form-group">
                                     <input id="AddButtonEducation" type="button" value="Dodaj" />
                                 </div>
@@ -570,6 +545,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
+                        
+                                    <div class="text-bottom-left-padding bolded">ADRES</div>
+                                    <input class="form-control form-input" id="Address" asp-for="appUserDto.Address" placeholder="Nie wybrano" />
+                         
                                 <div class="row">
                                     <div class="col-12">
                                         mapa
@@ -820,12 +799,13 @@
                 $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
                 $("#Website").val(Data.appUserDto["Website"]);
                 $("#VideoUrl").val(Data.appUserDto["VideoUrl"]);
-                $("#FoundingDate").val(Data.appUserDto["FoundingDate"]);
+                $("#FoundingDate").val(Data.appUserDto["FoundingDate"].substr(0,10));
                 $("#ShortDescrption").val(Data.appUserDto["ShortDescription"]);
                 $("#Descrption").val(Data.appUserDto["Descrption"]);
                 $("#Categories").val(Data.appUserDto["Categories"]);
                 $("#Headline").val(Data.appUserDto["Headline"]);
                 $("#LinkedinProfile").val(Data.appUserDto["LinkedinProfile"]);
+                $("#Address").val(Data.appUserDto["Address"]);
                 $("#TwitterProfile").val(Data.appUserDto["TwitterProfile"]);
                 $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);
                  $("#VimeoProfile").val(Data.appUserDto["VimeoProfile"]);

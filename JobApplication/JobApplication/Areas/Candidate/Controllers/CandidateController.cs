@@ -19,6 +19,10 @@ namespace JobApplication.Areas.Candidate.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)          // if user is logged in we redirect him to Employer P controller
+            {
+                return RedirectToAction("Index", "CandidatePanel", "?name=Panel");
+            }
             return View(await _context.JobOffers.ToListAsync());
         }
     }
