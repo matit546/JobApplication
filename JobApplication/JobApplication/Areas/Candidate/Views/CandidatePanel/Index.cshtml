@@ -673,8 +673,27 @@
     });
 
     function RemoveTextBox(button) {
-        $(button).parent().remove();
-
+                                            // for easier code we can just location.reload(); it prevents to send to controller a list with bad indexes
+        if (i - 1 > ii) {
+            //$(".counterid").parent().remove();
+            //i = ii;
+            location.reload();
+        }
+        if (b - 1 > bi) {
+            //$(".counterid").parent().remove();
+            //b = bi;
+            location.reload();
+        }
+        if (j - 1 > ji) {
+            //$(".counterid").parent().remove();
+            //j = ji;
+            location.reload();
+        }
+        if (ki - 1 > ki) {
+            //$(".counterid").parent().remove();
+            //k = ki;
+            location.reload();
+        }
         if (ii != i) {
             i--;
         }
@@ -687,7 +706,7 @@
         if (ki != k) {
             k--;
         }
-
+        $(button).parent().remove();
 
     }
 
@@ -780,13 +799,13 @@
 
         div.addClass("row").addClass("removeonload");
         if (r == "remove") {
-            var button = $("<input />").attr("type", "button").attr("value", "Usuń").attr("class", "btn btn-info mx-3");
+            var button = $("<input />").attr("type", "button").attr("value", "Usuń").attr("class", "btn btn-info mx-3 counterid");
             button.attr("onclick", "RemoveTextBox(this)");
             div.append(button);
         } else {
             div.append(EduEmpdegreeIdx).append($("<a />").attr("name", a + i).attr("class", "btn btn-info mx-3").html("Usuń"));
         }
-        $("#" + containerName).append(div).append(br).append(br);
+        $("#" + containerName).append(div).append(br).append(hr);
     }
 
     function ajaxfunction() {
