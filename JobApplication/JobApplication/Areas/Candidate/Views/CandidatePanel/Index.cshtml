@@ -371,7 +371,7 @@
                         <div class="text-bottom-left-padding bolded">Plik CV (TYLKO W FORMACIE PDF)</div>
                         <input name="cvFile" accept="application/pdf" type="file" class="btn btn-primary" />
                         <input hidden="hidden" asp-for="AppUserEmployeeExtension.CVFile" id="AppUserEmployeeExtensionCVFile" />
-                        <a id="checkifnull" asp-action="GetPdf">Pobierz Plik CV</a>
+                        <a id="checkifnull" class="btn btn-info" asp-action="GetPdf">Pobierz Plik CV</a>
                     </div>
                     <div class="container-padding">
                         <div class="row">
@@ -454,13 +454,15 @@
                                 <h1 class="text-bottom-left-padding bolded">EDUKACJA</h1>
                                 <hr />
                                 <br />
-                            
-                                <div class="form-group">
-                                    <input id="AddButtonEducation" type="button" value="Dodaj" />
-                                </div>
+
+
 
                                 <div id="EducationContainer">
                                     <br />
+                                </div>
+
+                                <div class="form-group">
+                                    <input id="AddButtonEducation" class="btn btn-secondary" type="button" value="Dodaj" />
                                 </div>
                             </div>
                         </div>
@@ -472,38 +474,15 @@
                             <div class="col-12">
                                 <h1 class="text-bottom-left-padding bolded">DOŚWIADCZENIA</h1>
                                 <hr />
-                                <br />
-                                @*<div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">TYTUŁ</div>
-                                <input id="ExperiencesEmployeeDegree" asp-for="ExperiencesEmployee[0].Degree" class="form-control form-input" placeholder="Nie wybrano" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">NAZWA FIRMY</div>
-                                <input class="form-control form-input" id="ExperiencesEmployeeCompanyName" asp-for="ExperiencesEmployee[0].CompanyName" placeholder="Nie wybrano" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">DATA ROZPOCZĘCIA - DATA ZAKOŃCZENIA</div>
-                                <input class="form-control form-input" id="ExperiencesEmployeeDateStartEnd" asp-for="ExperiencesEmployee[0].DateStartEnd" placeholder="Nie wybrano" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-bottom-left-padding bolded">OPIS</div>
-                                <input class="form-control form-input" id="ExperiencesEmployeeDescription" asp-for="ExperiencesEmployee[0].Description" placeholder="Nie wybrano" />
-                            </div>
-                        </div>
-                    </div>*@
-                                <div class="form-group">
-                                    <input id="AddButtonExperience" type="button" value="Dodaj" />
-                                </div>
+
+
+
 
                                 <div id="ExperienceContainer">
                                     <br />
+                                </div>
+                                <div class="form-group">
+                                    <input id="AddButtonExperience" class="btn btn-secondary" type="button" value="Dodaj" />
                                 </div>
                             </div>
                         </div>
@@ -513,12 +492,13 @@
                             <div class="col-12">
                                 <h1 class="text-bottom-left-padding bolded">UMIEJĘTNOŚCI</h1>
                                 <hr />
-                                <div class="form-group">
-                                    <input id="AddButtonSkills" type="button" value="Dodaj" />
-                                </div>
+
 
                                 <div id="SkillsContainer">
                                     <br />
+                                </div>
+                                <div class="form-group">
+                                    <input id="AddButtonSkills" class="btn btn-secondary" type="button" value="Dodaj" />
                                 </div>
                             </div>
                         </div>
@@ -535,7 +515,7 @@
                                     <br />
                                 </div>
                                 <div class="form-group">
-                                    <input id="AddButtonAwards" type="button" value="Dodaj" />
+                                    <input id="AddButtonAwards" class="btn btn-secondary" type="button" value="Dodaj" />
                                 </div>
                             </div>
                         </div>
@@ -545,13 +525,15 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-bottom-left-padding bolded">LOKALIZACJA I MAPA</div>
-                        
-                                    <div class="text-bottom-left-padding bolded">ADRES</div>
-                                    <input class="form-control form-input" id="Address" asp-for="appUserDto.Address" placeholder="Nie wybrano" />
-                         
+
+                                <div class="text-bottom-left-padding bolded">ADRES</div>
+                                <input class="form-control form-input" id="Address" asp-for="appUserDto.Address" placeholder="Nie wybrano" />
+                                <br />
                                 <div class="row">
                                     <div class="col-12">
-                                        mapa
+                                        <div id="map" class="map-view"></div>
+                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU5JFGguFmEvu3-KTiIM0pyaSo01aJx9s&callback=initMap&libraries=&v=weekly"
+                                                defer></script>
                                     </div>
                                 </div>
                             </div>
@@ -633,7 +615,6 @@
                     </div>
                     <input type="submit" value="Zaaktualizuj profil" class="btn btn-primary" />
                 </form>
-                @*<a asp-controller="Panel" class="btn btn-secondary" asp-action="ResetPassword"> ZMIEN HASLO</a>*@
             </div>
         </main>
 
@@ -650,9 +631,14 @@
     b = 0;
     j = 0;
     k = 0;
+    ii = 0;
+    bi = 0;
+    ji = 0;
+    ki = 0;
+
     $(document).ready(function () {
         $("#AddButtonEducation").click(function () {
-            CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd', 'Description', 'EducationContainer');
+            CreateFild(i, 'EducationEmployee', 'Id', 'Degree', 'SchoolName', 'DateStartEnd', 'Description', 'EducationContainer','remove');
             i++;
         });
 
@@ -662,33 +648,50 @@
         if (edited == "EditProfile") {
             ajaxfunction();
         }
-        $("#editProfile").click(function () { ajaxfunction(); });
+        $("#editProfile").click(function () {
+            $(".removeonload").each().remove();
+            ajaxfunction();
+        });
 
     });
 
     $("#AddButtonExperience").click(function () {
-        CreateFild(b, 'ExperiencesEmployee', 'Id', 'Degree', 'CompanyName', 'DateStartEnd', 'Description', 'ExperienceContainer');
+        CreateFild(b, 'ExperiencesEmployee', 'Id', 'Degree', 'CompanyName', 'DateStartEnd', 'Description', 'ExperienceContainer', 'remove');
         b++;
     });
 
     $("#AddButtonAwards").click(function () {
 
-        CreateFild(j, 'AwardsEmployee', 'Id', '', 'Award', 'Year', 'Description', 'AwardsContainer');
+        CreateFild(j, 'AwardsEmployee', 'Id', '', 'Award', 'Year', 'Description', 'AwardsContainer', 'remove');
         j++;
 
     });
 
     $("#AddButtonSkills").click(function () {
-        CreateFild(k, 'SkillsEmployee', 'Id', '', '', 'Degree', 'Percentage', 'SkillsContainer');
+        CreateFild(k, 'SkillsEmployee', 'Id', '', '', 'Degree', 'Percentage', 'SkillsContainer', 'remove');
         k++;
     });
 
     function RemoveTextBox(button) {
         $(button).parent().remove();
-        location.reload();
+
+        if (ii != i) {
+            i--;
+        }
+        if (bi != b) {
+            b--;
+        }
+        if (ji != j) {
+            j--;
+        }
+        if (ki != k) {
+            k--;
+        }
+
+
     }
 
-    function CreateFild(i, a, b, c, d, e, f, containerName) {
+    function CreateFild(i, a, b, c, d, e, f, containerName,r) {
         var div = $("<div />");
         var divcol4first = $("<div />");
         var divcol4second = $("<div />");
@@ -716,8 +719,8 @@
         if (containerName == 'SkillsContainer') {
             $(divtext2).html('TYTUŁ');
             $(divtext3).html('WARTOŚĆ (PROCENTOWA)');
-            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + e).addClass("form-control form-input");
-            var EduEmpDateBox = $("<input />").attr("type", "number").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input").attr("max", "100").attr("min", "0");
+            var EduEmpschoolNameBox = $("<input />").attr("type", "textbox").attr("name", a + "[" + i + "]." + e).addClass("form-control form-input ");
+            var EduEmpDateBox = $("<input />").attr("type", "number").attr("name", a + "[" + i + "]." + f).addClass("form-control form-input ").attr("max", "100").attr("min", "0");
             divcol4third.addClass("col-6");
             divcol4fourth.addClass("col-6");
         }
@@ -756,8 +759,8 @@
         divtext3.addClass("text-bottom-left-padding bolded");
         divtext4.addClass("text-bottom-left-padding bolded");
 
-
-        divcol4fivth.addClass("col-12");
+       
+        divcol4fivth.addClass("col-12")
         divcol4fivth.append(br);
 
         divcol4third.append(divtext2);
@@ -775,12 +778,15 @@
         div.append(divcol4fourth);
         div.append(divcol4fivth);
 
-        div.addClass("row")
-        div.append(EduEmpdegreeIdx);
-        var button = $("<input />").attr("type", "button").attr("value", "Remove");
-        button.attr("onclick", "RemoveTextBox(this)");
-
-        $("#" + containerName).append(div).append(br).append(hr);
+        div.addClass("row").addClass("removeonload");
+        if (r == "remove") {
+            var button = $("<input />").attr("type", "button").attr("value", "Usuń").attr("class", "btn btn-info mx-3");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+        } else {
+            div.append(EduEmpdegreeIdx).append($("<a />").attr("name", a + i).attr("class", "btn btn-info mx-3").html("Usuń"));
+        }
+        $("#" + containerName).append(div).append(br).append(br);
     }
 
     function ajaxfunction() {
@@ -836,6 +842,8 @@
                     $("input[name*='EducationEmployee[" + i + "].SchoolName']").val(Data.EducationEmployee[value]["SchoolName"]);
                     $("input[name*='EducationEmployee[" + i + "].DateStartEnd']").val(Data.EducationEmployee[value]["DateStartEnd"]);
                     $("textarea[name*='EducationEmployee[" + i + "].Description']").val(Data.EducationEmployee[value]["Description"]);
+                    $("a[name*='EducationEmployee" + i + "']").attr('href', "CandidatePanel/DeleteEducation/" + Data.EducationEmployee[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');");
+                    
                     i++;
                 });
 
@@ -847,6 +855,7 @@
                     $("input[name*='ExperiencesEmployee[" + b + "].CompanyName']").val(Data.ExperiencesEmployee[value]["CompanyName"]);
                     $("input[name*='ExperiencesEmployee[" + b + "].DateStartEnd']").val(Data.ExperiencesEmployee[value]["DateStartEnd"]);
                     $("textarea[name*='ExperiencesEmployee[" + b + "].Description']").val(Data.ExperiencesEmployee[value]["Description"]);
+                    $("a[name*='ExperiencesEmployee" + b + "']").attr('href', "CandidatePanel/DeleteExperiencesEmployee/" + Data.ExperiencesEmployee[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');");
                     b++;
 
                 });
@@ -858,6 +867,7 @@
                     $("input[name*='AwardsEmployee[" + j + "].Id']").val(Data.AwardsEmployee[value]["Id"]);
                     $("input[name*='AwardsEmployee[" + j + "].Year']").val(Data.AwardsEmployee[value]["Year"]);
                     $("textarea[name*='AwardsEmployee[" + j + "].Description']").val(Data.AwardsEmployee[value]["Description"]);
+                    $("a[name*='AwardsEmployee" + j + "']").attr('href', "CandidatePanel/DeleteAwardsEmployee/" + Data.AwardsEmployee[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');");
                     j++;
                 });
 
@@ -867,9 +877,13 @@
                     $("input[name*='SkillsEmployee[" + k + "].Degree']").val(Data.SkillsEmployee[value]["Degree"]);
                     $("input[name*='SkillsEmployee[" + k + "].Id']").val(Data.SkillsEmployee[value]["Id"]);
                     $("input[name*='SkillsEmployee[" + k + "].Percentage']").val(Data.SkillsEmployee[value]["Percentage"]);
+                    $("a[name*='SkillsEmployee" + k + "']").attr('href', "CandidatePanel/DeleteSkillsEmployee/" + Data.SkillsEmployee[value]["Id"]).attr('onclick', "return confirm('Czy na pewno chcesz to usunąć?');");
                     k++;
                 });
-
+                ii = i;
+                bi = b;
+                ji = j;
+                ki = k;
             }
         });
 
@@ -908,7 +922,6 @@
         }
         else if (edited == "EditProfile") {
             OpenNavbarItemOnLoad('Candidate8');
-          
         }
         else {
             OpenNavbarItemOnLoad("Candidate1");
@@ -950,7 +963,6 @@
         }
         else if (itemNumber == "Candidate8") {
             changeurl('EditProfile');
-            location.reload();
         }
         else {
             changeurl('Panel');
@@ -994,7 +1006,13 @@
             ajaxfun();
         });
     });
-
+    var map;  //google maps
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8
+        });
+    }
     function ajaxfun() {
         $("#tablebody tr").remove();
         $.ajax({

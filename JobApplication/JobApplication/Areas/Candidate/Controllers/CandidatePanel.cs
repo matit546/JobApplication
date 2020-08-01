@@ -316,6 +316,115 @@ namespace JobApplication.Areas.Candidate.Controllers
             Response.Headers.Add($"Content-Disposition", "inline; filename="+cvfilepath.CVFile);
             return File(filePath, "application/pdf");
         }
+
+
+        public async Task<IActionResult> DeleteExperiencesEmployee(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var existitem = await _context.ExperiencesEmployees.FirstOrDefaultAsync(i => i.Id == id);
+            if (existitem == null)
+            {
+                return NotFound();
+            }
+            var userApp = _userManager.GetUserId(HttpContext.User);
+
+            if(userApp!= existitem.UserId)
+            {
+                return Unauthorized("Nie mozesz tego usunąć");
+
+            }
+
+            _context.Remove(existitem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "CandidatePanel", "?name=EditProfile");
+
+        }
+
+        public async Task<IActionResult> DeleteEducation(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var existitem = await _context.EducationEmployees.FirstOrDefaultAsync(i => i.Id == id);
+            if (existitem == null)
+            {
+                return NotFound();
+            }
+            var userApp = _userManager.GetUserId(HttpContext.User);
+
+            if (userApp != existitem.UserId)
+            {
+                return Unauthorized("Nie mozesz tego usunąć");
+
+            }
+
+            _context.Remove(existitem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "CandidatePanel", "?name=EditProfile");
+
+        }
+
+        public async Task<IActionResult> DeleteAwardsEmployee(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var existitem = await _context.AwardsEmployees.FirstOrDefaultAsync(i => i.Id == id);
+            if (existitem == null)
+            {
+                return NotFound();
+            }
+            var userApp = _userManager.GetUserId(HttpContext.User);
+
+            if (userApp != existitem.UserId)
+            {
+                return Unauthorized("Nie mozesz tego usunąć");
+
+            }
+
+            _context.Remove(existitem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "CandidatePanel", "?name=EditProfile");
+
+        }
+        public async Task<IActionResult> DeleteSkillsEmployee(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var existitem = await _context.SkillsEmployees.FirstOrDefaultAsync(i => i.Id == id);
+            if (existitem == null)
+            {
+                return NotFound();
+            }
+            var userApp = _userManager.GetUserId(HttpContext.User);
+
+            if (userApp != existitem.UserId)
+            {
+                return Unauthorized("Nie mozesz tego usunąć");
+
+            }
+
+            _context.Remove(existitem);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "CandidatePanel", "?name=EditProfile");
+
+        }
+
     }
   
 }

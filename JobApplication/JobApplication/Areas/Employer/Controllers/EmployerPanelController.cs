@@ -366,6 +366,31 @@ namespace JobApplication.Areas.Employer.Controllers
 
             return View(candidateViewModel);
         }
+
+        [HttpGet]
+        public ActionResult GetCv(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var cvfilepath = _context.AppUserEmployeeExtensions.FirstOrDefault(i => i.CVFile == id);
+            if (cvfilepath == null)
+            {
+                return NotFound("brak cv");
+            }
+            var uploadPath = _iWebHost.WebRootPath + @"\files\" + cvfilepath.CVFile;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\files", cvfilepath.CVFile);
+
+            if (!System.IO.File.Exists(path))
+            {
+                return NotFound("Nie znaleziono takiego pliku");
+            }
+
+            string filePath = "~/files/" + cvfilepath.CVFile;
+            Response.Headers.Add($"Content-Disposition", "inline; filename=" + cvfilepath.CVFile);
+            return File(filePath, "application/pdf");
+        }
     }
     }
 
