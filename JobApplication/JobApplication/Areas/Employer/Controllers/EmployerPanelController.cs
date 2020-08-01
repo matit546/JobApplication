@@ -363,7 +363,10 @@ namespace JobApplication.Areas.Employer.Controllers
                 ExperiencesEmployee = await _context.ExperiencesEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync(),
                 SkillsEmployee = await _context.SkillsEmployees.Where(x => x.UserId == userCandidate.Id).ToListAsync()
             };
-
+            if (candidateViewModel.AppUserEmployeeExtension == null)
+            {
+                candidateViewModel.AppUserEmployeeExtension = new AppUserEmployeeExtension();
+            }
             return View(candidateViewModel);
         }
 
