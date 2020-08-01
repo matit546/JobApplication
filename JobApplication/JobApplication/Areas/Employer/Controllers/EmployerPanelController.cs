@@ -275,7 +275,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
             if (jobofferfromDb == null || jobofferfromDb.UserId != userdb.Id)
             {
-                return Unauthorized("NIe możesz zedytować tej oferty!");
+                return Unauthorized("NIe możesz usunąć tej oferty!");
             }
             _context.JobOffers.Remove(jobofferfromDb);
             await _context.SaveChangesAsync();
@@ -368,7 +368,7 @@ namespace JobApplication.Areas.Employer.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetCv(string id)
+        public ActionResult GetCv(string id)        //action for view in ShowCandidateInformation it shows cv of user who applied to offer
         {
             if (id == null)
             {

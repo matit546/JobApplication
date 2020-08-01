@@ -673,40 +673,61 @@
     });
 
     function RemoveTextBox(button) {
-                                            // for easier code we can just location.reload(); it prevents to send to controller a list with bad indexes
-        if (i - 1 > ii) {
-            //$(".counterid").parent().remove();
-            //i = ii;
-            location.reload();
+
+      
+        if (button.className.includes("SkillsContainer")) {
+            var c = button.id;
+            c++;
+            if (c < k) {
+                alert("Proszę usunąć najpierw ostatni element");
+                return;
+            }
+            if (c == k) {
+                k--;
+                $(button).parent().remove();
+            }
         }
-        if (b - 1 > bi) {
-            //$(".counterid").parent().remove();
-            //b = bi;
-            location.reload();
+
+        if (button.className.includes("AwardsContainer")) {
+            var c = button.id;
+            c++;
+            if (c < j) {
+                alert("Proszę usunąć najpierw ostatni element");
+                return;
+            }
+            if (c == j) {
+                j--;
+                $(button).parent().remove();
+            }
         }
-        if (j - 1 > ji) {
-            //$(".counterid").parent().remove();
-            //j = ji;
-            location.reload();
+        if (button.className.includes("ExperienceContainer")) {
+            var c = button.id;
+            c++;
+            if (c < b) {
+                alert("Proszę usunąć najpierw ostatni element");
+                return;
+            }
+            if (c == b) {
+                b--;
+                $(button).parent().remove();
+            }
         }
-        if (ki - 1 > ki) {
-            //$(".counterid").parent().remove();
-            //k = ki;
-            location.reload();
+        if (button.className.includes("EducationContainer")) {
+
+            var c = button.id;
+            c++;     
+            if (c < i) {
+                
+                alert("Proszę usunąć najpierw ostatni element");
+                return;
+            }
+
+            if (c == i) {
+                i--;
+                $(button).parent().remove();
+            }
         }
-        if (ii != i) {
-            i--;
-        }
-        if (bi != b) {
-            b--;
-        }
-        if (ji != j) {
-            j--;
-        }
-        if (ki != k) {
-            k--;
-        }
-        $(button).parent().remove();
+
 
     }
 
@@ -799,8 +820,8 @@
 
         div.addClass("row").addClass("removeonload");
         if (r == "remove") {
-            var button = $("<input />").attr("type", "button").attr("value", "Usuń").attr("class", "btn btn-info mx-3 counterid");
-            button.attr("onclick", "RemoveTextBox(this)");
+            var button = $("<input />").attr("type", "button").attr("value", "Usuń").attr("class", "btn btn-info mx-3 "+containerName+"");
+            button.attr("onclick", "RemoveTextBox(this)").attr("id",i);
             div.append(button);
         } else {
             div.append(EduEmpdegreeIdx).append($("<a />").attr("name", a + i).attr("class", "btn btn-info mx-3").html("Usuń"));
