@@ -10,6 +10,7 @@ namespace JobApplication.Areas.Identity.Data.DTO
         public string Candidate { get; set; }
         public string DownloadCV { get; set; }
         public string Source { get; set; }
+        public int SourceId { get; set; }
         public string Status { get; set; }
     }
 }

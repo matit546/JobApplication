@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AutoMapper;
 using JobApplication.Areas.Identity.Data;
@@ -68,7 +69,7 @@ namespace JobApplication.Areas.Employer.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetApllications()         //Get Job offers Current User and return JSON
+        public IActionResult GetApllications()         //Get Job offers Current User and return JSON
         {
             var user = _userManager.GetUserId(HttpContext.User);
 
@@ -250,7 +251,7 @@ namespace JobApplication.Areas.Employer.Controllers
             {
                 jobofferfromDb.Category = jobOffer.Category;
                 jobofferfromDb.ChooseTheCurrency = jobOffer.ChooseTheCurrency;
-                jobofferfromDb.CompanyNameOffer = jobOffer.CompanyNameOffer;
+                jobofferfromDb.CompanyNameOffer = userdb.CompanyName;
                 jobofferfromDb.Deadline = jobOffer.Deadline;
                 jobofferfromDb.Description = jobOffer.Description;
                 jobofferfromDb.Email = jobOffer.Email;
@@ -345,7 +346,7 @@ namespace JobApplication.Areas.Employer.Controllers
         {
             var user = _userManager.GetUserId(HttpContext.User);
 
-            var jobs = _context.JobOffers.Where(x => x.UserId == user).ToList();
+            var jobs = await _context.JobOffers.Where(x => x.UserId == user).ToListAsync();
 
             var offers = _context.OffersApplied.ToList();
 
@@ -353,15 +354,31 @@ namespace JobApplication.Areas.Employer.Controllers
 
             var userCandidate = _userManager.Users.ToList();
 
-           // var jobstoShow = jobs.Where(x => result.Any(z => z.OfferId == x.Id));
-
             var resultCandidates = userCandidate.Where(x => result.Any(y => y.UserId == x.Id));
-
             var appUserDto = _mapper.Map<IEnumerable<AppUser>, List<AppUserDto>>(resultCandidates);
+            AppUserEmployeeExtension cvfiles = new AppUserEmployeeExtension();
+            List<EmployerHelperDTO> helperDTOs = new List<EmployerHelperDTO>();
+            EmployerHelperDTO employerHelper;
+            for(int i=0; i< result.Count(); i++)
+            {
+                employerHelper = new EmployerHelperDTO();
+                employerHelper.Source = result[i].JobOffer.CompanyNameOffer;
+                employerHelper.Candidate = appUserDto[i].UserName; ;
+                employerHelper.SourceId = result[i].JobOffer.Id;
+                cvfiles = _context.AppUserEmployeeExtensions.FirstOrDefault(x => x.UserId == appUserDto[i].Id);
+                if (cvfiles == null)
+                {
+                    employerHelper.DownloadCV = "";
+                }
+                else
+                {
+                    employerHelper.DownloadCV = cvfiles.CVFile;
+                }
+                helperDTOs.Add(employerHelper);          
+            }
+
    
-            var json = JsonConvert.SerializeObject(appUserDto);
-            // var jsonTateusz = JsonConvert.SerializeObject(result);
-            // var jsonMati = json + jsonTateusz;
+            var json = JsonConvert.SerializeObject(helperDTOs);
             return Json(json);
         }
         [HttpGet]

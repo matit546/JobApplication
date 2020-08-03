@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
@@ -89,6 +90,8 @@ namespace JobApplication.Areas.Candidate.Controllers
                 //    }
                 //    i++;
                 //}
+
+
                 if (candidateViewModel.EducationEmployee != null)
                 {
                     foreach (var item in candidateViewModel.EducationEmployee)
@@ -100,6 +103,8 @@ namespace JobApplication.Areas.Candidate.Controllers
                         }
                         else
                         {
+                          //  var updateitem = _context.EducationEmployees.Where(x => x.UserId == updateUser.Id); //check if user can update this item
+
                             _context.Update(item);
                         }
                         await _context.SaveChangesAsync();
@@ -134,6 +139,7 @@ namespace JobApplication.Areas.Candidate.Controllers
                         }
                         else
                         {
+
                             _context.Update(item);
                         }
                         await _context.SaveChangesAsync();
@@ -161,7 +167,7 @@ namespace JobApplication.Areas.Candidate.Controllers
                 {
                     if (!(cvFile.ContentType == "application/pdf"))
                     {
-                        return NotFound("TO nie jest plik PDF");
+                        return BadRequest("TO nie jest plik PDF");
                     }
                     if (candidateViewModel.AppUserEmployeeExtension.CVFile != null)
                     {
@@ -276,6 +282,9 @@ namespace JobApplication.Areas.Candidate.Controllers
 
 
         }
+
+       
+
         [HttpGet]
         public async Task<IActionResult> AppliedOffers()
         {

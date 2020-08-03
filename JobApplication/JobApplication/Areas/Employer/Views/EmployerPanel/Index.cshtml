@@ -378,10 +378,10 @@
                 <table class="table table-sm table-striped table-bordered m-2">
                     <thead>
                         <tr>
-                            <th>TYTYŁ</th>
-                            <th>APLIKACJE</th>
-                            <th>UTWORZONO</th>
                             <th>KANDYDAT</th>
+                            <th>POBIERZ CV</th>
+                            <th>ŹRÓDŁO</th>
+                            <th>STATUS</th>
                             <th>AKCJA</th>
                         </tr>
                     </thead>
@@ -774,11 +774,15 @@
                         $.each(Data, function (value) {
                             $("#tablebodyappliaction").append($("<tr>"));
                             appendElement = $("#tablebodyappliaction tr").last();
-                            appendElement.append($("<td>").html(Data[value]["UserName"]));
-                            appendElement.append($("<td>").html(Data[value]["UserName"]));
-                            appendElement.append($("<td>").html(Data[value]["UserName"]));
-                            appendElement.append($("<td>").html(Data[value]["UserName"]));
-                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "EmployerPanel/ShowCandidateInformation/" + Data[value]["UserName"]));
+                            appendElement.append($("<td>").html(Data[value]["Candidate"]));
+                            if (Data[value]["DownloadCV"] == "") {
+                                appendElement.append($("<td>").html("brak"));
+                            } else {
+                                appendElement.append(($("<td/>")).append(($("<a/>")).attr("class", "btn btn-info mx-1").html("pobierz CV").attr("href", "EmployerPanel/GetCv/" + Data[value]["DownloadCV"])));
+                            }
+                            appendElement.append(($("<td/>")).append(($("<a/>")).attr("class", "btn btn-info mx-1").html(Data[value]["Source"]).attr("href", "Jobs/Details/" + Data[value]["SourceId"] + "/" + Data[value]["Source"])));
+                            appendElement.append($("<td>").html(Data[value]["Status"]));
+                            appendElement.append(($("<td/>")).append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info  mx-1")).attr("href", "EmployerPanel/ShowCandidateInformation/" + Data[value]["Candidate"])));
                         });
                     },
                     error: function (xhr, status, error) {
@@ -965,7 +969,7 @@
             success: function (data) {
                 var Data = $.parseJSON(data);
                 $("#Aplikowaneoferty").html(Data.length);
-=
+
             },
             error: function (xhr, status, error) {
                 console.log(xhr)
