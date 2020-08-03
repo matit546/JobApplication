@@ -765,3 +765,7 @@ figcaption {
 .cursor-pointer{
     cursor:pointer;
 }
+
+.big-number{
+    font-size:60px;
+}

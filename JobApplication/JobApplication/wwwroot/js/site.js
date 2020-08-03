@@ -105,6 +105,8 @@ function OpenNavbarItem(evt, itemNumber) {
     evt.currentTarget.className += " active";
 
     if (itemNumber == "Employer1") {
+        AjaxCount();
+        AjaxApplicationCount();
         changeurl('Panel');
     }
     else if (itemNumber == "Employer2") {
