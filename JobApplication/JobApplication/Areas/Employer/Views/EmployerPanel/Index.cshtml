@@ -34,9 +34,7 @@
     </form>
 </div>
 
-@*<div class="userPanelPadding">
-    <main role="main" class="pb-3">
-        <div class="login-Containter">*@
+
 <div class="userPanelPadding">
     <div id="Employer1" class="tabcontent" style=" display:none">
         <main role="main" class="pb-3">
@@ -78,6 +76,9 @@
                             <div class="userblock-3">
                                 <div class="box sandybrown">
                                     <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        <div class="big-number" id="Wszystkieoferty">
+                                            0
+                                        </div>
                                         Wszystkie Oferty
                                     </div>
                                 </div>
@@ -85,6 +86,9 @@
                             <div class="userblock-3">
                                 <div class="box darkseagreen">
                                     <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        <div class="big-number" id="Opublikowaneoferty">
+                                            0
+                                        </div>
                                         Opublikowane Oferty
                                     </div>
                                 </div>
@@ -92,6 +96,9 @@
                             <div class="userblock-3">
                                 <div class="box cadetblue">
                                     <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        <div class="big-number" id="Wygasleoferty">
+                                            0
+                                        </div>
                                         Wygasłe oferty
                                     </div>
                                 </div>
@@ -99,6 +106,9 @@
                             <div class="userblock-3">
                                 <div class="box blanchedalmond">
                                     <div class="boxitem cursor-pointer ofertypracy" onclick="OpenNavbarItem(event, 'Employer3')">
+                                        <div class="big-number" id="Oczekujaceoferty">
+                                            0
+                                        </div>
                                         Oczekujące oferty
                                     </div>
                                 </div>
@@ -114,7 +124,10 @@
                             <div class="userblock-6">
                                 <div class="box slategray">
                                     <div class="boxitem">
-                                        cos tu
+                                        <div class="big-number" id="Aplikowaneoferty">
+                                            0
+                                        </div>
+                                        Aplikowane Oferty
                                     </div>
                                 </div>
                             </div>
@@ -131,67 +144,7 @@
             </div>
         </main>
     </div>
-    @*<form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="jobOffer.Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeOfJob" class="control-label"></label>
-                <input asp-for="TypeOfJob" class="form-control" />
-                <span asp-validation-for="TypeOfJob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentMin" class="control-label"></label>
-                <input asp-for="PaymentMin" class="form-control" />
-                <span asp-validation-for="PaymentMin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentMax" class="control-label"></label>
-                <input asp-for="PaymentMax" class="form-control" />
-                <span asp-validation-for="PaymentMax" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PublicationTime" class="control-label"></label>
-                <input asp-for="PublicationTime" class="form-control" />
-                <span asp-validation-for="PublicationTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
-                <input asp-for="Skills" class="form-control" />
-                <span asp-validation-for="Skills" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Deadline" class="control-label"></label>
-                <input asp-for="Deadline" class="form-control" />
-                <span asp-validation-for="Deadline" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ChooseTheCurrency" class="control-label"></label>
-                <input asp-for="ChooseTheCurrency" class="form-control" />
-                <span asp-validation-for="ChooseTheCurrency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>*@
+  
     <div id="Employer2" class="tabcontent" style=" display:none">
         <main role="main" class="pb-3">
             <div class="login-Containter">
@@ -500,6 +453,7 @@
             </div>
         </main>
     </div>
+
     <div id="Employer8" class="tabcontent" style=" display:none">
 
         <main role="main" class="pb-3">
@@ -713,7 +667,6 @@
 
     </div>
 
-
 </div>
 
 
@@ -814,7 +767,7 @@
                     url: "/EmployerPanel/CandidatesApplied",
                     type: "get",
                     success: function (data) {
-                        var Data = $.parseJSON(data);                    
+                        var Data = $.parseJSON(data);
                         if (Data == "") {
                             alert("Brak aplikowanych ofert");
                         }
@@ -824,7 +777,7 @@
                             appendElement.append($("<td>").html(Data[value]["UserName"]));
                             appendElement.append($("<td>").html(Data[value]["UserName"]));
                             appendElement.append($("<td>").html(Data[value]["UserName"]));
-                            appendElement.append($("<td>").html(Data[value]["UserName"]));   
+                            appendElement.append($("<td>").html(Data[value]["UserName"]));
                             appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "EmployerPanel/ShowCandidateInformation/" + Data[value]["UserName"]));
                         });
                     },
@@ -857,8 +810,6 @@
                             appendElement.append($("<td>").html(Data[value]["Title"]));
                             appendElement.append($("<td>").html(Data[value]["TypeOfJob"]));
                             appendElement.append($("<td>").html(Data[value]["PublicationTime"].substr(0, 10)));
-                            appendElement.append($("<td>").html(Data[value]["Deadline"].substr(0, 10)));
-                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "Jobs/Details/" + Data[value]["Id"] + "/" + Data[value]["Title"]))
                             if (Year > parseInt(Data[value]["Deadline"].substr(0, 4))) {
                                 appendElement.append($("<td>").html("Przedawniony").attr("style", "color:red"));
                             }
@@ -871,6 +822,8 @@
                             else {
                                 appendElement.append($("<td>").html("Aktualny").attr("style", "color:green"));
                             }
+                            appendElement.append(($("<a/>")).attr("class", "btn btn-info mx-1").append($('<i/>').attr("class", "fas fa-info")).attr("href", "Jobs/Details/" + Data[value]["Id"] + "/" + Data[value]["Title"]))
+                            appendElement.append($("<td>").html("Opublikowane").attr("style", "color:green"));
                             if (Data[value]["IsFeatured"] == true) {
                                 appendElement.append($("<td>").html("🗸"));
                             }
@@ -887,12 +840,62 @@
                 });
             }
 
+
+    function AjaxCount() {
+
+        $.ajax({
+            url: "/EmployerPanel/GetJobOffers",
+            type: "get",
+            success: function (data) {
+                var Data = $.parseJSON(data);
+                var Year = @int.Parse(DateTime.Now.Year.ToString());
+                var Month = @int.Parse(DateTime.Now.Month.ToString());
+                var Day = @int.Parse(DateTime.Now.Day.ToString());
+                var LiczbaWygaslychOfert = 0;
+                if (Data == "") {
+                    alert("0");
+                }
+                else {
+                    $("#Wszystkieoferty").html(length(Data));
+                    $("#Opublikowaneoferty").html(length(Data));
+
+                    $.each(Data, function (value) {
+                        if (Year > parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                            LiczbaWygaslychOfert++;
+                        }
+                        else if (Month > Data[value]["Deadline"].substr(5, 2) && Year >= parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                            LiczbaWygaslychOfert++;
+                        }
+                        else if ((Day > parseInt(Data[value]["Deadline"].substr(8, 2)) && Month >= Data[value]["Deadline"].substr(5, 2)) && Year >= parseInt(Data[value]["Deadline"].substr(0, 4))) {
+                            LiczbaWygaslychOfert++;
+                        }
+                        else {
+
+                        }
+                    });
+
+                    $("#Wygasleoferty").html(LiczbaWygaslychOfert);
+                    $("#Oczekujaceoferty").html(0);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr)
+            }
+        });
+    }
+
+    function length(obj) {
+        return Object.keys(obj).length;
+    }
+
         function LoadTabindex() {
             var pageURL = $(location).attr("href");
 
             var edited = pageURL.substr(pageURL.indexOf("=") + 1);
             if (edited == "Panel") {
                 OpenNavbarItemOnLoad('Employer1');
+                AjaxCount();
+                AjaxApplicationCount();
             }
             else if (edited == "DodajOferte") {
                 OpenNavbarItemOnLoad('Employer2');
@@ -935,7 +938,6 @@
             document.getElementById(itemNumber).style.display = "block";
 
 
-
         }
 
 
@@ -951,6 +953,27 @@
                 center: { lat: -34.397, lng: 150.644 },
                 zoom: 8
             });
-        }
+    }
+
+
+
+    function AjaxApplicationCount() {
+
+        $.ajax({
+            url: "/EmployerPanel/GetApllications",
+            type: "get",
+            success: function (data) {
+                var Data = $.parseJSON(data);
+                $("#Aplikowaneoferty").html(Data.length);
+=
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr)
+            }
+        });
+    }
+
+
+
 </script>
 }

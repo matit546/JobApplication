@@ -67,6 +67,21 @@ namespace JobApplication.Areas.Employer.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> GetApllications()         //Get Job offers Current User and return JSON
+        {
+            var user = _userManager.GetUserId(HttpContext.User);
+
+            var jobs = _context.JobOffers.Where(x => x.UserId == user).ToList();
+
+            var offers = _context.OffersApplied.ToList();
+
+            var result = offers.Where(y => jobs.Any(z => z.Id == y.OfferId)).ToList();
+
+            var json = JsonConvert.SerializeObject(result);
+            return Json(json);
+        }
+
         //Get User Data
         [HttpGet]
 
