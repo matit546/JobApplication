@@ -367,7 +367,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 employerHelper.Candidate = appUserDto[i].UserName; ;
                 employerHelper.SourceId = result[i].JobOffer.Id;
                 cvfiles = _context.AppUserEmployeeExtensions.FirstOrDefault(x => x.UserId == appUserDto[i].Id);
-                if (cvfiles == null)
+                if (cvfiles == null || cvfiles.CVFile==null)
                 {
                     employerHelper.DownloadCV = "";
                 }
