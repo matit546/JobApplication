@@ -185,7 +185,7 @@ namespace JobApplication.Areas.Employer.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = SD.EmployerRole)]
         public async Task<IActionResult> CreateNewJobOffer([Bind("Title,Location,TypeOfJob,PaymentMin,PaymentMax,PublicationTime,Category," +
-                "Skills,Deadline,Description,ChooseTheCurrency,Email,Languages,CompanyNameOffer,WorkingTime")] JobOffer jobOffer) //Add new Job Offer
+                "Skills,Deadline,Description,ChooseTheCurrency,Email,Languages,CompanyNameOffer,WorkingTime,Gender")] JobOffer jobOffer) //Add new Job Offer
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             if (ModelState.IsValid)
@@ -264,6 +264,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 jobofferfromDb.WorkingTime = jobOffer.WorkingTime;
                 jobofferfromDb.PhotoCompanyOffer = userdb.BackgroundImage;
                 jobofferfromDb.Skills = jobOffer.Skills;
+                jobofferfromDb.Gender = jobOffer.Gender;
 
                 _context.Update(jobofferfromDb);
                 await _context.SaveChangesAsync();
@@ -366,7 +367,7 @@ namespace JobApplication.Areas.Employer.Controllers
                 employerHelper.Candidate = appUserDto[i].UserName; ;
                 employerHelper.SourceId = result[i].JobOffer.Id;
                 cvfiles = _context.AppUserEmployeeExtensions.FirstOrDefault(x => x.UserId == appUserDto[i].Id);
-                if (cvfiles == null)
+                if (cvfiles == null || cvfiles.CVFile==null)
                 {
                     employerHelper.DownloadCV = "";
                 }
